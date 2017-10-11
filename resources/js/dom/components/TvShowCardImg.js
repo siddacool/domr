@@ -7,7 +7,7 @@ const demoImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAACNCAIAAADOy
 export default class extends ActiveComponent {
   constructor(img = demoImg, className = 'tv-show-card--img') {
     super(className);
-    this.img = img;
+    this.img = img.replace('http:', 'https:');
     this.className = className;
   }
 

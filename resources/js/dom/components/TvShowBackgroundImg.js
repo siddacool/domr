@@ -5,7 +5,7 @@ const Component = Domr.Component;
 export default class extends Component {
   constructor(img, className = '') {
     super();
-    this.img = img;
+    this.img = img.replace('http:', 'https:');
     this.className = className;
   }
 

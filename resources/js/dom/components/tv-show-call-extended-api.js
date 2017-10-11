@@ -3,7 +3,7 @@ import TvShowExtendedInfo from './TvShowExtendedInfo';
 function callApi(id, target) {
   const xmlhttp = new XMLHttpRequest();
   const tvShowId = encodeURI(id);
-  const api = `http://api.tvmaze.com/shows/${tvShowId}?embed=cast`;
+  const api = `https://api.tvmaze.com/shows/${tvShowId}?embed=cast`;
   xmlhttp.open('GET', api, true);
   xmlhttp.onreadystatechange = () => {
     if (xmlhttp.readyState === 4) {

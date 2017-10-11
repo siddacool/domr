@@ -3,7 +3,7 @@ import TvShowCard from './TvShowCard';
 function callApi(show, target) {
   const xmlhttp = new XMLHttpRequest();
   const tvShow = encodeURI(show);
-  const api = `http://api.tvmaze.com/search/shows?q=${tvShow}`;
+  const api = `https://api.tvmaze.com/search/shows?q=${tvShow}`;
   xmlhttp.open('GET', api, true);
   xmlhttp.onreadystatechange = () => {
     if (xmlhttp.readyState === 4) {
