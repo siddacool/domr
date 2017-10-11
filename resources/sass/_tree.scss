@@ -1,0 +1,102 @@
+$tree-folder-color: #fffcdd;
+
+.tree {
+  &-top-list-holder {
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 1rem;
+
+    @include desktop {
+      margin: 2rem;
+      max-width: 400px;
+    }
+  }
+
+  &-container {
+    ul {
+      list-style: none;
+    }
+
+    li {
+      padding: .5rem 0 .5rem 1.5rem;
+      position: relative;
+
+      &::before {
+        content: '|--';
+        left: 0;
+        position: absolute;
+      }
+    }
+
+    .tree-item--folder {
+      &-overflow {
+        background-color: rgba(32, 174, 239, .03);
+        border: 1px solid #e8e6e6;
+        padding-bottom: 2rem;
+        padding-left: 0;
+
+        &::before {
+          display: none;
+        }
+
+        .tree-folder {
+          display: flex;
+          justify-content: flex-end;
+        }
+
+        strong {
+          margin-right: auto;
+        }
+      }
+    }
+  }
+
+  &-folder {
+    background-color: $tree-folder-color;
+    border: 1px dashed transparent;
+    display: inline-block;
+    padding: .3rem;
+
+    &.expanded {
+      border-color: #adadad;
+
+      + ul {
+        display: block;
+
+        &:empty {
+          display: none;
+        }
+      }
+
+      .plus {
+        display: none;
+      }
+
+      .minus {
+        display: initial;
+      }
+    }
+
+    + ul {
+      display: none;
+
+      &:empty {
+        display: none;
+      }
+    }
+
+    .minus {
+      display: none;
+    }
+  }
+
+  &-new-list {
+    margin-left: 1.5rem;
+    margin-top: .5rem;
+  }
+
+  &-delete {
+    align-items: center;
+    display: inline-flex;
+  }
+}

@@ -1,0 +1,11 @@
+.checklist {
+  &-text {
+    &--strike {
+      text-decoration: line-through;
+    }
+
+    &[contenteditable = 'true'] {
+        outline: 1px solid;
+    }
+  }
+}

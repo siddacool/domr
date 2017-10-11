@@ -1,0 +1,53 @@
+$wee-badge-color: #0747a6;
+$wee-badge-default-color: $aui-n500;
+$wee-badge-default-bg-color: $aui-n30;
+$wee-badge-primary-bg-color: $aui-b400;
+$wee-badge-important-bg-color: $aui-r300;
+$wee-badge-added-color: $aui-g500;
+$wee-badge-added-bg-color: $aui-g50;
+$wee-badge-removed-color: $aui-r500;
+$wee-badge-removed-bg-color: #ffebe6;
+
+.wee-badge {
+  border-radius: 2em;
+  color: $wee-badge-color;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: -.005rem;
+  line-height: 1;
+  min-width: 1px;
+  padding: .25rem .5rem;
+  text-align: center;
+
+  &--default {
+    background-color: $wee-badge-default-bg-color;
+    color: $wee-badge-default-color;
+  }
+
+  &--primary {
+    background-color: $wee-badge-primary-bg-color;
+    color: #fff;
+  }
+
+  &--important {
+    background-color: $wee-badge-important-bg-color;
+    color: #fff;
+  }
+
+  &--added {
+    background-color: $wee-badge-added-bg-color;
+    color: $wee-badge-added-color;
+  }
+
+  &--removed {
+    background-color: $wee-badge-removed-bg-color;
+    color: $wee-badge-removed-color;
+  }
+
+  &--large {
+    font-size: 16px;
+    margin-bottom: 5px;
+    padding: .3rem .6rem;
+  }
+}
