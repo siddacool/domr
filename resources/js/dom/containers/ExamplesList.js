@@ -6,7 +6,7 @@ function makeList(list) {
   if (!list.isDefault) {
     return `
       <li>
-        <a href="/#${list.path}" >${list.name}</a>
+        <a href="#${list.path}" >${list.name}</a>
       </li>
     `;
   }
