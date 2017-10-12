@@ -1,0 +1,77 @@
+$wee-tag-color: $aui-n700;
+$wee-tag-bg-color: $aui-n20;
+$wee-tag-hover-bg-color: $aui-n30;
+$wee-tag-link-color: $aui-b400;
+$wee-tag-remove-color: $aui-r500;
+$wee-tag-remove-bg-color: #ffebe6;
+
+.wee-tag {
+  background-color: $wee-tag-bg-color;
+  border-radius: 3px;
+  cursor: default;
+  display: inline-block;
+  font-size: px(14);
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -.005em;
+  margin: 4px;
+  padding: 2px 4px;
+
+  &:hover {
+    background-color: $wee-tag-hover-bg-color;
+  }
+
+  > span {
+    color: $wee-tag-color;
+    display: block;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    a {
+      display: inline-block;
+      text-decoration-skip: ink;
+    }
+  }
+
+  &--link {
+    cursor: pointer;
+
+    &:hover {
+      a {
+        color: $wee-tag-link-color;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &--rounded {
+    border-radius: 10px;
+  }
+
+  &--remove {
+    padding-right: 25px;
+    position: relative;
+
+    &:hover {
+      background-color: $wee-tag-remove-bg-color;
+
+      > span {
+        color: $wee-tag-remove-color;
+      }
+
+      &::after {
+        content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#{$wee-tag-remove-color}" viewBox="0 0 20 20"><path d="M13.4 12c0.4 0.4 0.4 1 0 1.4 -0.4 0.4-1 0.4-1.4 0l0 0 -2.1-2.1 -2.1 2.1c-0.4 0.4-1 0.4-1.4 0 0 0 0 0 0 0 -0.4-0.4-0.4-1 0-1.4l2.1-2.1 -2.1-2.1C5.9 7.3 5.9 6.7 6.3 6.3c0.4-0.4 1-0.4 1.4 0l2.1 2.1 2.1-2.1c0.4-0.4 1-0.4 1.4 0 0.4 0.4 0.4 1 0 1.4l-2.1 2.1L13.4 12 13.4 12z"/></svg>');
+      }
+    }
+
+    &::after {
+      content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#{$wee-tag-color}" viewBox="0 0 20 20"><path d="M13.4 12c0.4 0.4 0.4 1 0 1.4 -0.4 0.4-1 0.4-1.4 0l0 0 -2.1-2.1 -2.1 2.1c-0.4 0.4-1 0.4-1.4 0 0 0 0 0 0 0 -0.4-0.4-0.4-1 0-1.4l2.1-2.1 -2.1-2.1C5.9 7.3 5.9 6.7 6.3 6.3c0.4-0.4 1-0.4 1.4 0l2.1 2.1 2.1-2.1c0.4-0.4 1-0.4 1.4 0 0.4 0.4 0.4 1 0 1.4l-2.1 2.1L13.4 12 13.4 12z"/></svg>');
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 2px;
+    }
+  }
+}

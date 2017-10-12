@@ -1,0 +1,107 @@
+$wee-lozenge-color: $aui-n500;
+$wee-lozenge-bg-color: $aui-n20;
+$wee-lozenge-safe-color: $aui-g500;
+$wee-lozenge-safe-bg-color: $aui-g50;
+$wee-lozenge-warning-color: $aui-n600;
+$wee-lozenge-warning-bg-color: #fffae6;
+$wee-lozenge-danger-color: $aui-r500;
+$wee-lozenge-danger-bg-color: #ffebe6;
+$wee-lozenge-info-color: $aui-b500;
+$wee-lozenge-info-bg-color: $aui-b50;
+$wee-lozenge-new-color: $aui-p500;
+$wee-lozenge-new-bg-color: $aui-p50;
+
+$wee-lozenge-bold-color: $aui-n700;
+$wee-lozenge-bold-bg-color: #dfe1e6;
+$wee-lozenge-bold-safe-color: #fff;
+$wee-lozenge-bold-safe-bg-color: $aui-g500;
+$wee-lozenge-bold-warning-color: $aui-n600;
+$wee-lozenge-bold-warning-bg-color: $aui-y500;
+$wee-lozenge-bold-danger-color: #fff;
+$wee-lozenge-bold-danger-bg-color: $aui-r500;
+$wee-lozenge-bold-info-color: #fff;
+$wee-lozenge-bold-info-bg-color: $aui-b500;
+$wee-lozenge-bold-new-color: #fff;
+$wee-lozenge-bold-new-bg-color: $aui-p500;
+
+.wee-lozenge {
+  border-radius: 3px;
+  color: $wee-lozenge-color;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  margin: 2px 4px;
+  padding: 2px 4px;
+  text-transform: uppercase;
+  vertical-align: baseline;
+  white-space: nowrap;
+
+  > span {
+    display: block;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &--default {
+    background-color: $wee-lozenge-bg-color;
+    color: $wee-lozenge-color;
+  }
+
+  &--safe {
+    background-color: $wee-lozenge-safe-bg-color;
+    color: $wee-lozenge-safe-color;
+  }
+
+  &--warning {
+    background-color: $wee-lozenge-warning-bg-color;
+    color: $wee-lozenge-warning-color;
+  }
+
+  &--danger {
+    background-color: $wee-lozenge-danger-bg-color;
+    color: $wee-lozenge-danger-color;
+  }
+
+  &--info {
+    background-color: $wee-lozenge-info-bg-color;
+    color: $wee-lozenge-info-color;
+  }
+
+  &--new {
+    background-color: $wee-lozenge-new-bg-color;
+    color: $wee-lozenge-new-color;
+  }
+
+  &--bold {
+    &--default {
+      background-color: $wee-lozenge-bold-bg-color;
+      color: $wee-lozenge-bold-color;
+    }
+
+    &--safe {
+      background-color: $wee-lozenge-bold-safe-bg-color;
+      color: $wee-lozenge-bold-safe-color;
+    }
+
+    &--warning {
+      background-color: $wee-lozenge-bold-warning-bg-color;
+      color: $wee-lozenge-bold-warning-color;
+    }
+
+    &--danger {
+      background-color: $wee-lozenge-bold-danger-bg-color;
+      color: $wee-lozenge-bold-danger-color;
+    }
+
+    &--info {
+      background-color: $wee-lozenge-bold-info-bg-color;
+      color: $wee-lozenge-bold-info-color;
+    }
+
+    &--new {
+      background-color: $wee-lozenge-bold-new-bg-color;
+      color: $wee-lozenge-bold-new-color;
+    }
+  }
+}

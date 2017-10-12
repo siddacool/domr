@@ -18,8 +18,14 @@ export default class extends ActiveComponent {
   events() {
     const target = this.target();
     const cardHolder = document.getElementById('tv-show-card-holder');
+    const timeInterval = 1000;
+    let typeTimer;
+
     target.addEventListener('input', () => {
-      callApi(target.value, cardHolder);
+      clearTimeout(typeTimer);
+      typeTimer = setTimeout(() => {
+        callApi(target.value, cardHolder);
+      }, timeInterval);
     });
   }
 }
