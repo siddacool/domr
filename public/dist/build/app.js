@@ -187,23 +187,23 @@ var _class = function () {
   function _class() {
     var _this = this;
 
-    var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'component';
+    var domrid = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'component';
     var random = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
     _classCallCheck(this, _class);
 
     this.makeId = function () {
-      var thisId = id;
+      var thisId = domrid;
       if (random) {
-        thisId = id + '-' + (0, _randomizer2.default)(7);
+        thisId = domrid + '-' + (0, _randomizer2.default)(7);
       }
       return thisId;
     };
-    this.id = this.makeId();
+    this.domrid = this.makeId();
     this.parentDefault = defaults.parent;
     this.domContent = defaults.dom;
     this.lookup = function () {
-      return (0, _lookup2.default)(_this.id);
+      return (0, _lookup2.default)(_this.domrid);
     };
     this.createElement = _createElement2.default;
   }
@@ -711,7 +711,7 @@ exports.default = callApi;
 
 __webpack_require__(13);
 
-__webpack_require__(57);
+__webpack_require__(60);
 
 /***/ }),
 /* 13 */
@@ -885,10 +885,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var _class = function (_Component) {
   _inherits(_class, _Component);
 
-  function _class(id) {
+  function _class(domrid) {
     _classCallCheck(this, _class);
 
-    var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, id, true));
+    var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, domrid, true));
 
     _this.target = _this.lookup;
     return _this;
@@ -901,7 +901,7 @@ var _class = function (_Component) {
 
       var target = this.target();
       target.addEventListener('click', function () {
-        console.log('Default Event for ' + _this2.id);
+        console.log('Default Event for ' + _this2.domrid);
       });
     }
   }, {
@@ -918,7 +918,7 @@ var _class = function (_Component) {
   }, {
     key: 'renderNodes',
     value: function renderNodes() {
-      return this.createElement(this.dom(), this.id);
+      return this.createElement(this.dom(), this.domrid);
     }
   }]);
 
@@ -2495,7 +2495,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function () {
-  var tvShow = new _TvShow2.default('Doctor Who');
+  var tvShow = new _TvShow2.default();
   var wrapper = document.getElementById('wrapper');
 
   tvShow.addTo(wrapper);
@@ -2528,7 +2528,7 @@ var _SearchTvShow = __webpack_require__(48);
 
 var _SearchTvShow2 = _interopRequireDefault(_SearchTvShow);
 
-var _TvShowCardsHolder = __webpack_require__(56);
+var _TvShowCardsHolder = __webpack_require__(59);
 
 var _TvShowCardsHolder2 = _interopRequireDefault(_TvShowCardsHolder);
 
@@ -2545,9 +2545,7 @@ var Container = _Domr2.default.Component;
 var _class = function (_Container) {
   _inherits(_class, _Container);
 
-  function _class() {
-    var defaultShow = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'dexter';
-
+  function _class(defaultShow) {
     _classCallCheck(this, _class);
 
     var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, 'tv-show-container'));
@@ -2625,8 +2623,14 @@ var _class = function (_ActiveComponent) {
     value: function events() {
       var target = this.target();
       var cardHolder = document.getElementById('tv-show-card-holder');
+      var timeInterval = 1000;
+      var typeTimer = void 0;
+
       target.addEventListener('input', function () {
-        (0, _tvShowsCallApi2.default)(target.value, cardHolder);
+        clearTimeout(typeTimer);
+        typeTimer = setTimeout(function () {
+          (0, _tvShowsCallApi2.default)(target.value, cardHolder);
+        }, timeInterval);
       });
     }
   }]);
@@ -2677,7 +2681,7 @@ function Network(network) {
 
 function makeGrenre(genreArr) {
   return '\n    ' + genreArr.map(function (genre) {
-    return '\n      <span class=\'tv-show-card--genre wee-badge wee-badge--primary\'>' + genre + '</span>\n    ';
+    return '\n      <span class=\'tv-show-card--genre wee-badge wee-badge--default\'>' + genre + '</span>\n    ';
   }).join('') + '\n  ';
 }
 
@@ -2703,10 +2707,10 @@ var _class = function (_ActiveComponent) {
   function _class(show) {
     _classCallCheck(this, _class);
 
-    var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this));
+    var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, 'tv-show-card'));
 
     _this.show = show.show;
-    _this.id = _this.show.id;
+    _this.tvid = _this.show.id;
     _this.name = _this.show.name;
     _this.network = _this.show.network;
     _this.genres = _this.show.genres;
@@ -2719,7 +2723,7 @@ var _class = function (_ActiveComponent) {
   _createClass(_class, [{
     key: 'dom',
     value: function dom() {
-      return '\n      <a class="tv-show-card" data-id="' + this.id + '">\n        <div class="tv-show-card-side tv-show-card-side--a">\n          ' + Image(this.image) + '\n        </div>\n        <div class="tv-show-card-side tv-show-card-side--b">\n          <div class="tv-show-card--name">\n            <h3>' + this.name + '</h3>\n          </div>\n          ' + Network(this.network) + '\n          ' + Genres(this.genres) + '\n        </div>\n      </a>\n    ';
+      return '\n      <a class="tv-show-card" data-id="' + this.tvid + '">\n        <div class="tv-show-card-side tv-show-card-side--a">\n          ' + Image(this.image) + '\n        </div>\n        <div class="tv-show-card-side tv-show-card-side--b">\n          <div class="tv-show-card--name">\n            <h3>' + this.name + '</h3>\n          </div>\n          ' + Network(this.network) + '\n          ' + Genres(this.genres) + '\n        </div>\n      </a>\n    ';
     }
   }, {
     key: 'events',
@@ -2733,7 +2737,6 @@ var _class = function (_ActiveComponent) {
         var tvShowExtented = new _TvShowExtented2.default(thisId);
 
         tvShowExtented.addTo(wrapper);
-        console.log(thisId);
       });
     }
   }]);
@@ -2935,6 +2938,10 @@ var _TvShowBackgroundImg = __webpack_require__(55);
 
 var _TvShowBackgroundImg2 = _interopRequireDefault(_TvShowBackgroundImg);
 
+var _TvShowLatestEpisode = __webpack_require__(56);
+
+var _TvShowLatestEpisode2 = _interopRequireDefault(_TvShowLatestEpisode);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2949,44 +2956,64 @@ function Network(network) {
   return '\n    ' + (network ? '<span class="tv-show-card--network">' + network.name + '</span>' : '') + '\n  ';
 }
 
+function Status(status) {
+  var showStatus = status;
+  return '\n    ' + (showStatus === 'Ended' ? '<span class="wee-lozenge wee-lozenge--bold--danger"> <span>' + status + '</span></span>' : '') + '\n  ';
+}
+
+function makeEpisode(episodeId) {
+  var tvShowLatestEpisode = new _TvShowLatestEpisode2.default(episodeId);
+
+  return '\n    ' + (episodeId ? '' + tvShowLatestEpisode.render() : '') + '\n  ';
+}
+
+function LastEpisode(previousepisode) {
+  var epId = void 0;
+
+  if (previousepisode) {
+    epId = previousepisode.href;
+  }
+
+  return '\n    <div class="tv-show-card--status-holder">\n      ' + makeEpisode(epId) + '\n    </div>\n  ';
+}
+
 function makeGrenre(genreArr) {
   return '\n    ' + genreArr.map(function (genre) {
-    return '\n      <span class=\'tv-show-card--genre wee-badge wee-badge--primary\'>' + genre + '</span>\n    ';
+    return '\n      <span class=\'tv-show-card--genre wee-badge wee-badge--default\'>' + genre + '</span>\n    ';
   }).join('') + '\n  ';
 }
 
 function Genres(genre) {
-  return '\n    ' + (genre.length ? '\n      <div class="tv-show-card--genres-holder">\n        ' + makeGrenre(genre) + '\n      </div>\n    ' : '') + '\n  ';
+  return '\n    ' + (genre.length !== 0 ? '\n      <div class="tv-show-extended--genres-holder">\n        ' + makeGrenre(genre) + '\n      </div>\n    ' : '') + '\n  ';
 }
 
 function Summary(summary) {
-  return '\n    ' + (summary.length ? '\n      <div class="tv-show-card--summary">\n        ' + summary + '\n      </div>\n    ' : '') + '\n  ';
+  return '\n    ' + (summary !== null ? '\n      <div class="tv-show-card--summary">\n        ' + summary + '\n      </div>\n    ' : '') + '\n  ';
 }
 
 function Imdb(imdb) {
-  return '\n    <a class="tv-show-card-official--imdb wee-badge wee-badge--default wee-badge--large" href="http://www.imdb.com/title/' + imdb + '">\n      Imdb\n    </a>\n  ';
-}
-
-function Offical(official) {
-  return '\n    <a class="tv-show-card-official--link wee-badge wee-badge--added wee-badge--large" href="' + official + '">\n      Offical Site\n    </a>\n  ';
+  return '\n    <a class="tv-show-card-official-link tv-show-card-official-link--imdb" href="http://www.imdb.com/title/' + imdb + '">\n      Imdb\n    </a>\n  ';
 }
 
 function OfficalLinks(show) {
-  var official = show.officialSite;
   var externals = show.externals;
 
-  return '\n    <div class="tv-show-official-holder">\n      ' + (externals.imdb ? '' + Imdb(externals.imdb) : '') + '\n      ' + Offical(official) + '\n    </div>\n  ';
+  return '\n    <div class="tv-show-official-holder">\n      ' + (externals.imdb ? '' + Imdb(externals.imdb) : '') + '\n    </div>\n  ';
 }
 
-function makePersonImg(img, className) {
-  var personImg = new _TvShowBackgroundImg2.default(img, className);
+function makePersonImg(person, className) {
+  var face = '';
+  if (person.image) {
+    face = person.image.medium;
+  }
+  var personImg = new _TvShowBackgroundImg2.default(face, className);
 
   return '' + personImg.render();
 }
 
 function Cast(casts) {
   return '\n    ' + casts.map(function (cast) {
-    return '\n      <tr>\n        <td>\n          ' + makePersonImg(cast.person.image.medium, 'tv-show-extended-image') + '\n        </td>\n        <td>\n          ' + cast.person.name + '\n        </td>\n        <td style="color:#bcbcbc;"><em>' + cast.character.name + '<em></td>\n      </tr>\n    ';
+    return '\n      <tr>\n        <td>\n          ' + makePersonImg(cast.person, 'tv-show-extended-image') + '\n        </td>\n        <td>\n          ' + cast.person.name + '\n        </td>\n        <td style="color:#bcbcbc;"><em>' + cast.character.name + '<em></td>\n      </tr>\n    ';
   }).join('') + '\n  ';
 }
 
@@ -3005,6 +3032,8 @@ var _class = function (_Component) {
     _this.summary = _this.show.summary;
     _this.network = _this.show.network;
     _this.cast = _this.show._embedded.cast;
+    _this.status = _this.show.status;
+    _this.previousepisode = _this.show._links.previousepisode;
     return _this;
   }
 
@@ -3018,7 +3047,8 @@ var _class = function (_Component) {
       }
       var SideA = new _TvShowBackgroundImg2.default(image, 'tv-show-extended-side tv-show-extended-side--a');
 
-      return '\n      <div class="tv-show-extended-info" id="tv-show-extended-info">\n        ' + SideA.render() + '\n        <div class="tv-show-extended-side tv-show-extended-side--b">\n          ' + Close.render() + '\n          <div class="tv-show-extended--name">\n            <h1>' + this.name + '</h1>\n            ' + Network(this.network) + '\n          </div>\n          <div class="tv-show-extended--scrollable">\n              ' + Genres(this.genre) + '\n              ' + OfficalLinks(this.show) + '\n              ' + Summary(this.summary) + '\n              <div class="tv-show-extended--cast">\n                <table>\n                  ' + Cast(this.cast) + '\n                </table>\n              </div>\n          </div>\n        </div>\n      </div>\n    ';
+      console.log(this.status);
+      return '\n      <div class="tv-show-extended-info" id="tv-show-extended-info">\n        ' + SideA.render() + '\n        <div class="tv-show-extended-side tv-show-extended-side--b">\n          ' + Close.render() + '\n          <div class="tv-show-extended--name">\n            <h1>' + this.name + ' ' + Status(this.status) + '</h1>\n            ' + Network(this.network) + '\n          </div>\n          <div class="tv-show-extended--scrollable">\n              ' + Genres(this.genre) + '\n              ' + LastEpisode(this.previousepisode) + '\n              ' + Summary(this.summary) + '\n              ' + OfficalLinks(this.show) + '\n              <div class="tv-show-extended--cast">\n                <table>\n                  <p><strong>Cast:</strong></p>\n                  ' + Cast(this.cast) + '\n                </table>\n              </div>\n          </div>\n        </div>\n      </div>\n    ';
     }
   }]);
 
@@ -3158,6 +3188,167 @@ var _Domr = __webpack_require__(0);
 
 var _Domr2 = _interopRequireDefault(_Domr);
 
+var _tvShowsCallEpisodeApi = __webpack_require__(57);
+
+var _tvShowsCallEpisodeApi2 = _interopRequireDefault(_tvShowsCallEpisodeApi);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ActiveComponent = _Domr2.default.ActiveComponent;
+
+var _class = function (_ActiveComponent) {
+  _inherits(_class, _ActiveComponent);
+
+  function _class(episodeId) {
+    _classCallCheck(this, _class);
+
+    var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, 'tv-show-latest-episode'));
+
+    _this.http = episodeId.replace('http:', 'https:');
+    _this.episodeId = _this.http;
+    return _this;
+  }
+
+  _createClass(_class, [{
+    key: 'dom',
+    value: function dom() {
+      return '\n      <div class="tv-show-latest-episode-holder">\n      </div>\n    ';
+    }
+  }, {
+    key: 'events',
+    value: function events() {
+      var target = this.target();
+      (0, _tvShowsCallEpisodeApi2.default)(this.episodeId, target);
+    }
+  }]);
+
+  return _class;
+}(ActiveComponent);
+
+exports.default = _class;
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _TvShowEpisode = __webpack_require__(58);
+
+var _TvShowEpisode2 = _interopRequireDefault(_TvShowEpisode);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function callApi(show, target) {
+  var xmlhttp = new XMLHttpRequest();
+  var api = '' + show;
+  xmlhttp.open('GET', api, true);
+  xmlhttp.onreadystatechange = function () {
+    if (xmlhttp.readyState === 4) {
+      if (xmlhttp.status === 200) {
+        var obj = JSON.parse(xmlhttp.responseText);
+        var tvShowLatestEpisodeHolder = target;
+        var tvShowEpisode = new _TvShowEpisode2.default(obj);
+
+        tvShowEpisode.addTo(tvShowLatestEpisodeHolder);
+      }
+    }
+  };
+  xmlhttp.send(null);
+}
+
+exports.default = callApi;
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _Domr = __webpack_require__(0);
+
+var _Domr2 = _interopRequireDefault(_Domr);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Component = _Domr2.default.Component;
+
+function Time(timestamp) {
+  var d = new Date(timestamp);
+  var localDate = d.toLocaleDateString();
+
+  return '<span class="tv-show-ep-time wee-lozenge wee-lozenge--info">' + localDate + '</span>';
+}
+
+var _class = function (_Component) {
+  _inherits(_class, _Component);
+
+  function _class(show) {
+    _classCallCheck(this, _class);
+
+    var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this));
+
+    _this.show = show;
+    _this.season = _this.show.season;
+    _this.episode = _this.show.number;
+    _this.name = _this.show.name;
+    _this.timestamp = _this.show.airstamp;
+    return _this;
+  }
+
+  _createClass(_class, [{
+    key: 'dom',
+    value: function dom() {
+      return '\n      <div>\n        <span class="tv-show-ep-season wee-badge wee-badge--primary"> S' + this.season + ' E' + this.episode + '</span>\n        ' + Time(this.timestamp) + '\n        <span class="">' + this.name + '</span>\n      </div>\n    ';
+    }
+  }]);
+
+  return _class;
+}(Component);
+
+exports.default = _class;
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _Domr = __webpack_require__(0);
+
+var _Domr2 = _interopRequireDefault(_Domr);
+
 var _tvShowsCallApi = __webpack_require__(11);
 
 var _tvShowsCallApi2 = _interopRequireDefault(_tvShowsCallApi);
@@ -3205,7 +3396,7 @@ var _class = function (_ActiveComponent) {
 exports.default = _class;
 
 /***/ }),
-/* 57 */
+/* 60 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
