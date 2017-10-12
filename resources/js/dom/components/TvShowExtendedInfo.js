@@ -1,6 +1,7 @@
 import Domr from '../Domr';
 import TvShowExtendedInfoClose from './TvShowExtendedInfoClose';
 import TvShowBackgroundImg from './TvShowBackgroundImg';
+import TvShowLatestEpisode from './TvShowLatestEpisode';
 
 const Component = Domr.Component;
 
@@ -10,10 +11,39 @@ function Network(network) {
   `;
 }
 
+function Status(status) {
+  const showStatus = status;
+  return `
+    ${showStatus === 'Ended' ? `<span class="wee-lozenge wee-lozenge--bold--danger"> <span>${status}</span></span>` : ''}
+  `;
+}
+
+function makeEpisode(episodeId) {
+  const tvShowLatestEpisode = new TvShowLatestEpisode(episodeId);
+
+  return `
+    ${episodeId ? `${tvShowLatestEpisode.render()}` : ''}
+  `;
+}
+
+function LastEpisode(previousepisode) {
+  let epId;
+
+  if (previousepisode) {
+    epId = previousepisode.href;
+  }
+
+  return `
+    <div class="tv-show-card--status-holder">
+      ${makeEpisode(epId)}
+    </div>
+  `;
+}
+
 function makeGrenre(genreArr) {
   return `
     ${genreArr.map(genre => `
-      <span class='tv-show-card--genre wee-badge wee-badge--primary'>${genre}</span>
+      <span class='tv-show-card--genre wee-badge wee-badge--default'>${genre}</span>
     `).join('')}
   `;
 }
@@ -40,28 +70,18 @@ function Summary(summary) {
 
 function Imdb(imdb) {
   return `
-    <a class="tv-show-card-official--imdb wee-badge wee-badge--default wee-badge--large" href="http://www.imdb.com/title/${imdb}">
+    <a class="tv-show-card-official-link tv-show-card-official-link--imdb" href="http://www.imdb.com/title/${imdb}">
       Imdb
     </a>
   `;
 }
 
-function Offical(official) {
-  return `
-    <a class="tv-show-card-official--link wee-badge wee-badge--added wee-badge--large" href="${official}">
-      Offical Site
-    </a>
-  `;
-}
-
 function OfficalLinks(show) {
-  const official = show.officialSite;
   const externals = show.externals;
 
   return `
     <div class="tv-show-official-holder">
       ${externals.imdb ? `${Imdb(externals.imdb)}` : ''}
-      ${Offical(official)}
     </div>
   `;
 }
@@ -77,7 +97,6 @@ function makePersonImg(person, className) {
 }
 
 function Cast(casts) {
-
   return `
     ${casts.map(cast => `
       <tr>
@@ -103,6 +122,8 @@ export default class extends Component {
     this.summary = this.show.summary;
     this.network = this.show.network;
     this.cast = this.show._embedded.cast;
+    this.status = this.show.status;
+    this.previousepisode = this.show._links.previousepisode;
   }
 
   dom() {
@@ -113,21 +134,24 @@ export default class extends Component {
     }
     const SideA = new TvShowBackgroundImg(image, 'tv-show-extended-side tv-show-extended-side--a');
 
+    console.log(this.status);
     return `
       <div class="tv-show-extended-info" id="tv-show-extended-info">
         ${SideA.render()}
         <div class="tv-show-extended-side tv-show-extended-side--b">
           ${Close.render()}
           <div class="tv-show-extended--name">
-            <h1>${this.name}</h1>
+            <h1>${this.name} ${Status(this.status)}</h1>
             ${Network(this.network)}
           </div>
           <div class="tv-show-extended--scrollable">
               ${Genres(this.genre)}
-              ${OfficalLinks(this.show)}
+              ${LastEpisode(this.previousepisode)}
               ${Summary(this.summary)}
+              ${OfficalLinks(this.show)}
               <div class="tv-show-extended--cast">
                 <table>
+                  <p><strong>Cast:</strong></p>
                   ${Cast(this.cast)}
                 </table>
               </div>

@@ -210,19 +210,30 @@
     padding-top: 0;
   }
 
-  &-official-holder,
-  &-card--summary {
-    border-bottom: 1px solid #bcbcbc;
+  &-card--summary,
+  &-card--status-holder {
     padding: 1rem .4rem;
   }
 
-  &-extended--genres-holder {
+  &-card--status-holder {
+    background-color: aliceblue;
+  }
+
+  &-extended--genres-holder,
+  &-official-holder {
+    padding-bottom: 1rem;
     padding-left: .4rem;
     padding-right: .4rem;
   }
 
   &-extended--cast {
     padding-top: 1rem;
+
+    p {
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: .5rem .4rem;
+    }
   }
 
   &-extended-image {
@@ -231,5 +242,29 @@
     display: inline-block;
     height: 3rem;
     width: 3rem;
+  }
+
+  &-card-official-link {
+    background-color: #e8cd1d;
+    border-radius: 3px;
+    font-weight: 700;
+    padding: .5rem .4rem;
+    text-decoration: underline;
+
+    @include desktop {
+      margin: 0 2px;
+    }
+  }
+
+  &-card--status {
+    font-weight: bold;
+
+    &-running {
+      color: #1ada1a;
+    }
+
+    &-ended {
+      color: red;
+    }
   }
 }

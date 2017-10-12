@@ -13,7 +13,7 @@ function Network(network) {
 function makeGrenre(genreArr) {
   return `
     ${genreArr.map(genre => `
-      <span class='tv-show-card--genre wee-badge wee-badge--primary'>${genre}</span>
+      <span class='tv-show-card--genre wee-badge wee-badge--default'>${genre}</span>
     `).join('')}
   `;
 }
