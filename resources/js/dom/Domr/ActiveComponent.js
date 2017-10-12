@@ -1,15 +1,15 @@
 import Component from './Component';
 
 export default class extends Component {
-  constructor(id) {
-    super(id, true);
+  constructor(domrid) {
+    super(domrid, true);
     this.target = this.lookup;
   }
 
   events() {
     const target = this.target();
     target.addEventListener('click', () => {
-      console.log(`Default Event for ${this.id}`);
+      console.log(`Default Event for ${this.domrid}`);
     });
   }
 
@@ -22,6 +22,6 @@ export default class extends Component {
   }
 
   renderNodes() {
-    return this.createElement(this.dom(), this.id);
+    return this.createElement(this.dom(), this.domrid);
   }
 }

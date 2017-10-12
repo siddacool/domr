@@ -12,19 +12,19 @@ const defaults = {
 };
 
 export default class {
-  constructor(id = 'component', random = false) {
+  constructor(domrid = 'component', random = false) {
     this.makeId = () => {
-      let thisId = id;
+      let thisId = domrid;
       if (random) {
-        thisId = `${id}-${randomizer(7)}`;
+        thisId = `${domrid}-${randomizer(7)}`;
       }
       return thisId;
     };
-    this.id = this.makeId();
+    this.domrid = this.makeId();
     this.parentDefault = defaults.parent;
     this.domContent = defaults.dom;
     this.lookup = () => {
-      return lookup(this.id);
+      return lookup(this.domrid);
     };
     this.createElement = createElement;
   }
