@@ -20,7 +20,7 @@ function makeGrenre(genreArr) {
 
 function Genres(genre) {
   return `
-    ${genre.length ? `
+    ${genre.length !== 0 ? `
       <div class="tv-show-card--genres-holder">
         ${makeGrenre(genre)}
       </div>
@@ -30,7 +30,7 @@ function Genres(genre) {
 
 function Summary(summary) {
   return `
-    ${summary.length ? `
+    ${summary !== null ? `
       <div class="tv-show-card--summary">
         ${summary}
       </div>
@@ -66,18 +66,23 @@ function OfficalLinks(show) {
   `;
 }
 
-function makePersonImg(img, className) {
-  const personImg = new TvShowBackgroundImg(img, className);
+function makePersonImg(person, className) {
+  let face = '';
+  if (person.image) {
+    face = person.image.medium;
+  }
+  const personImg = new TvShowBackgroundImg(face, className);
 
   return `${personImg.render()}`;
 }
 
 function Cast(casts) {
+
   return `
     ${casts.map(cast => `
       <tr>
         <td>
-          ${makePersonImg(cast.person.image.medium, 'tv-show-extended-image')}
+          ${makePersonImg(cast.person, 'tv-show-extended-image')}
         </td>
         <td>
           ${cast.person.name}
