@@ -44,9 +44,9 @@ function Image(img) {
 
 export default class extends ActiveComponent {
   constructor(show) {
-    super();
+    super('tv-show-card');
     this.show = show.show;
-    this.id = this.show.id;
+    this.tvid = this.show.id;
     this.name = this.show.name;
     this.network = this.show.network;
     this.genres = this.show.genres;
@@ -57,7 +57,7 @@ export default class extends ActiveComponent {
 
   dom() {
     return `
-      <a class="tv-show-card" data-id="${this.id}">
+      <a class="tv-show-card" data-id="${this.tvid}">
         <div class="tv-show-card-side tv-show-card-side--a">
           ${Image(this.image)}
         </div>
@@ -82,7 +82,6 @@ export default class extends ActiveComponent {
       const tvShowExtented = new TvShowExtented(thisId);
 
       tvShowExtented.addTo(wrapper);
-      console.log(thisId);
     });
   }
 }
