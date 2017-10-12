@@ -21,7 +21,7 @@ function makeGrenre(genreArr) {
 function Genres(genre) {
   return `
     ${genre.length !== 0 ? `
-      <div class="tv-show-card--genres-holder">
+      <div class="tv-show-extended--genres-holder">
         ${makeGrenre(genre)}
       </div>
     ` : ''}

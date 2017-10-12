@@ -5,7 +5,7 @@ import TvShowCardsHolder from '../components/TvShowCardsHolder';
 const Container = Domr.Component;
 
 export default class extends Container {
-  constructor(defaultShow = 'dexter') {
+  constructor(defaultShow) {
     super('tv-show-container');
     this.show = defaultShow;
   }
