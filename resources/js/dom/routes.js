@@ -5,8 +5,17 @@ import DynamicRouteName from './views/DynamicRouteName';
 import Counter from './views/Counter';
 import TreeView from './views/TreeView';
 import TvSearchView from './views/TvSearchView';
+import DynamicRouteLocation from './Domr/DynamicRouteLocation';
+import Test from './views/Test';
+import pathMaker from './path-maker';
 
 const nameDemo = dynamicRouteLoc('name') || 'arya_stark';
+const bla = DynamicRouteLocation('/name/', '/boo/') || 'arya_stark';
+const boo = DynamicRouteLocation('/boo/', '?stat=') || 'arya_stark';
+const stat = DynamicRouteLocation('?stat=') || 'arya_stark';
+
+console.log(bla);
+/*pathMaker();*/
 
 const routes = [
   {
@@ -23,14 +32,25 @@ const routes = [
   },
   {
     name: 'Dynamic Route',
-    path: `/name/${nameDemo}`,
+    path: `/name/${bla}/boo/${boo}`,
     view: DynamicRouteName,
-    pageTitle: `Hello ${nameDemo}`,
+    pageTitle: `Hello ${bla}`,
+  },
+  {
+    name: 'Dynamic Route',
+    path: `/name/${bla}/boo/${boo}?stat=${stat}`,
+    view: DynamicRouteName,
+    pageTitle: `meh ${bla} meh`,
   },
   {
     name: 'Counter',
     path: '/counter',
     view: Counter,
+  },
+  {
+    name: 'Test',
+    path: '/test/{test}',
+    view: pathMaker('/test/{test}/app/{app}'),
   },
   {
     name: 'Tree',
