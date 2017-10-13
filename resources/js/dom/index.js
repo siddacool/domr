@@ -1,7 +1,11 @@
-import CustomRouter from './CustomRouter';
+import Domr from './Domr';
 import routes from './routes';
 
-const router = new CustomRouter();
+const Router = Domr.Router;
 
-router.set(routes);
+const router = new Router(routes, {
+  routeData: true,
+});
+
+router.set();
 
