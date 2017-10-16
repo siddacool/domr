@@ -1,6 +1,6 @@
-function checkForFunction(view) {
+function checkForFunction(view, data = '') {
   if (typeof view === 'function') {
-    view();
+    view(data);
   } else {
     view;
   }

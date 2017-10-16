@@ -1,12 +1,11 @@
-import dynamicRouteLoc from '../utils/dynamic-route-loc';
+import setPageTitle from '../utils/set-page-title';
 import SayMyName from '../containers/SayMyName';
 
-const myNameIs = dynamicRouteLoc('name');
-
-export default function () {
-  const sayMyName = new SayMyName(myNameIs);
+export default function (data) {
+  const sayMyName = new SayMyName(data.metadata.name);
   const wrapper = document.getElementById('wrapper');
 
   sayMyName.addTo(wrapper);
+  setPageTitle(data);
 }
 

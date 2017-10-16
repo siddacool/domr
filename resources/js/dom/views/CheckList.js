@@ -1,3 +1,4 @@
+import setPageTitle from '../utils/set-page-title';
 import ContainerCheckbox from '../containers/ContainerCheckbox';
 import saveToLocalStorage from '../utils/save-to-local-storage';
 
@@ -28,9 +29,10 @@ if (savedList) {
   saveToLocalStorage(listItems);
 }
 
-export default function () {
+export default function (data) {
   const containerCheckbox = new ContainerCheckbox('container-checkbox-random-list', listItems);
   const wrapper = document.getElementById('wrapper');
 
   containerCheckbox.addTo(wrapper);
+  setPageTitle(data);
 }

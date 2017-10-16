@@ -1,20 +1,18 @@
-import dynamicRouteLoc from './utils/dynamic-route-loc';
 import Examples from './views/Examples';
 import CheckList from './views/CheckList';
 import DynamicRouteName from './views/DynamicRouteName';
 import Counter from './views/Counter';
 import TreeView from './views/TreeView';
 import TvSearchView from './views/TvSearchView';
-
-const nameDemo = dynamicRouteLoc('name') || 'arya_stark';
+import Test from './views/Test';
 
 const routes = [
   {
     name: 'index',
     path: '/',
     view: Examples,
-    isDefault: true,
     pageTitle: 'Domr Examples',
+    isDefault: true,
   },
   {
     name: 'list',
@@ -22,15 +20,23 @@ const routes = [
     view: CheckList,
   },
   {
-    name: 'Dynamic Route',
-    path: `/name/${nameDemo}`,
-    view: DynamicRouteName,
-    pageTitle: `Hello ${nameDemo}`,
-  },
-  {
     name: 'Counter',
     path: '/counter',
     view: Counter,
+  },
+  {
+    name: 'Dynamic Route',
+    path: '/name/:name',
+    psudoPath: '/name/arya',
+    view: DynamicRouteName,
+    isDynamic: true,
+  },
+  {
+    name: 'Test',
+    path: '/?min=:min&max=:max',
+    psudoPath: '/?min=50&max=60',
+    view: Test,
+    isDynamic: true,
   },
   {
     name: 'Tree',
