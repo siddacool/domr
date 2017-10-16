@@ -20,24 +20,53 @@ export default class {
     this.routes = routes;
     this.routeData = config.routeData || false;
     this.hash = location.hash.replace('#', '');
+    this.href = location.href;
+    this.loc = `${location.origin}${location.pathname}`;
     this.cloneObject = cloneObject;
     this.addView = addView;
     this.reloadOnHashChange = reloadOnHashChange;
   }
 
   set() {
-    const routes = this.routes;
-    const route = routes.find(o => o.path === this.hash);
-    const routeDefault = routes.find(o => o.isDefault === true);
+    let toDefault = true;
+    this.routes.forEach((route) => {
+      const variableNames = [];
+      const routePathMod = `${route.path.replace(/([:*])(\w+)/g, (full, dots, name) => {
+        variableNames.push(name);
+        return '([^/]+)';
+      })}(?:/|$)`;
+      const routePathModRegEx = this.hash.match(new RegExp(routePathMod));
+      const View = (r) => {
+        if (this.routeData) {
+          const data = this.cloneObject(r, ['view']);
+          this.addView(r.view, data);
+        } else {
+          this.addView(r.view);
+        }
+      };
 
-    if (route) {
-      if (this.routeData) {
-        const data = this.cloneObject(route, ['view']);
-        this.addView(route.view, data);
-      } else {
-        this.addView(route.view);
+      if (this.hash === '/' && route.path === '/') {
+        View(route);
+        toDefault = false;
+      } else if (routePathModRegEx && route.path !== '/') {
+        const params = routePathModRegEx
+        .slice(1, routePathModRegEx.length)
+        .reduce((params, value, index) => {
+          if (params === null) params = {};
+          params[variableNames[index]] = value;
+          return params;
+        }, null);
+
+        route.metadata = params || '';
+
+        View(route);
+        toDefault = false;
       }
-    } else {
+    });
+
+    if (toDefault) {
+      const routeDefault = this.routes.find(o => o.isDefault === true);
+
       if (routeDefault) {
         location.hash = `#${routeDefault.path}`;
       } else {
