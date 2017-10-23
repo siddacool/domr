@@ -19,9 +19,8 @@ export default class {
   constructor(routes = defaults.routes, config) {
     this.routes = routes;
     this.routeData = config.routeData || false;
+    this.redirectDefault = config.redirectDefault || false;
     this.hash = location.hash.replace('#', '');
-    this.href = location.href;
-    this.loc = `${location.origin}${location.pathname}`;
     this.cloneObject = cloneObject;
     this.addView = addView;
     this.reloadOnHashChange = reloadOnHashChange;
@@ -30,9 +29,9 @@ export default class {
   set() {
     let toDefault = true;
     this.routes.forEach((route) => {
-      const variableNames = [];
+      const routeDataVal = [];
       const routePathMod = `${route.path.replace(/([:*])(\w+)/g, (full, dots, name) => {
-        variableNames.push(name);
+        routeDataVal.push(name);
         return '([^/]+)';
       })}(?:/|$)`;
       const routePathModRegEx = this.hash.match(new RegExp(routePathMod));
@@ -53,7 +52,7 @@ export default class {
         .slice(1, routePathModRegEx.length)
         .reduce((params, value, index) => {
           if (params === null) params = {};
-          params[variableNames[index]] = value;
+          params[routeDataVal[index]] = value;
           return params;
         }, null);
 
@@ -67,7 +66,7 @@ export default class {
     if (toDefault) {
       const routeDefault = this.routes.find(o => o.isDefault === true);
 
-      if (routeDefault) {
+      if (this.redirectDefault && routeDefault) {
         location.hash = `#${routeDefault.path}`;
       } else {
         console.error('Page Not Found');
