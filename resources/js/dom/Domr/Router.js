@@ -1,5 +1,8 @@
+import Logger from './Logger';
 import checkForFunction from './helpers/check-for-function';
 import cloneObject from './helpers/clone-object';
+
+const logger = new Logger();
 
 const defaults = {
   routes: [],
@@ -98,7 +101,7 @@ export default class {
       if (this.redirectDefault && routeDefault) {
         location.hash = `#${routeDefault.path}`;
       } else {
-        console.error('Page Not Found');
+        logger.error('Page Not Found');
       }
     }
 
