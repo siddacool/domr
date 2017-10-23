@@ -86,12 +86,17 @@ var _Router = __webpack_require__(18);
 
 var _Router2 = _interopRequireDefault(_Router);
 
+var _Logger = __webpack_require__(65);
+
+var _Logger2 = _interopRequireDefault(_Logger);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Domr = {
   Component: _Component2.default,
   ActiveComponent: _ActiveComponent2.default,
-  Router: _Router2.default
+  Router: _Router2.default,
+  Logger: _Logger2.default
 };
 
 exports.default = Domr;
@@ -896,6 +901,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _Logger = __webpack_require__(65);
+
+var _Logger2 = _interopRequireDefault(_Logger);
+
 var _checkForFunction = __webpack_require__(19);
 
 var _checkForFunction2 = _interopRequireDefault(_checkForFunction);
@@ -907,6 +916,8 @@ var _cloneObject2 = _interopRequireDefault(_cloneObject);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var logger = new _Logger2.default();
 
 var defaults = {
   routes: []
@@ -1014,7 +1025,7 @@ var _class = function () {
         if (this.redirectDefault && routeDefault) {
           location.hash = '#' + routeDefault.path;
         } else {
-          console.error('Page Not Found');
+          logger.error('Page Not Found');
         }
       }
 
@@ -3470,14 +3481,105 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = function (data) {
   var wrapper = document.getElementById('wrapper');
   wrapper.innerHTML = '<h2>Check browser console</h2>';
-  console.log(data);
+  logger.info(data, '');
 };
+
+var _Domr = __webpack_require__(0);
+
+var _Domr2 = _interopRequireDefault(_Domr);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var logger = new _Domr2.default.Logger('Dynamic Routes 2');
 
 /***/ }),
 /* 60 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function makeConsole(moduleName, msg, config, style, styleMsg, type) {
+  var log = void 0;
+  switch (type) {
+    case 'warn':
+      log = console.warn;
+      break;
+    case 'error':
+      log = console.error;
+      break;
+    default:
+      log = console.log;
+  }
+
+  if (config === '') {
+    log('%c' + moduleName, style);
+    console.log(msg);
+    console.log('');
+  } else {
+    log('%c' + moduleName + '%c ' + msg, style, styleMsg);
+  }
+}
+
+var _class = function () {
+  function _class() {
+    var moduleName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
+    _classCallCheck(this, _class);
+
+    this.moduleName = moduleName !== '' ? '[' + moduleName + ']' : '';
+    this.moduleNameStyles = 'color: #565656; font-weight: bold; font-size: 13.5px;';
+  }
+
+  _createClass(_class, [{
+    key: 'log',
+    value: function log(msg, config) {
+      makeConsole(this.moduleName, msg, config, this.moduleNameStyles, 'color: #333;');
+    }
+  }, {
+    key: 'info',
+    value: function info(msg, config) {
+      makeConsole(this.moduleName, msg, config, this.moduleNameStyles + ' color: #0066ff; background-color: #daeafb;', 'color: #0066ff;');
+    }
+  }, {
+    key: 'safe',
+    value: function safe(msg, config) {
+      makeConsole(this.moduleName, msg, config, this.moduleNameStyles + ' color: #39a045; background-color: #dafbe4;', 'color: #39a045;');
+    }
+  }, {
+    key: 'warn',
+    value: function warn(msg, config) {
+      makeConsole(this.moduleName, msg, config, this.moduleNameStyles + ' color: #d28e13;', 'color: #d28e13;', 'warn');
+    }
+  }, {
+    key: 'error',
+    value: function error(msg, config) {
+      makeConsole(this.moduleName, msg, config, this.moduleNameStyles + ' color: red;', 'color: red;', 'error');
+    }
+  }]);
+
+  return _class;
+}();
+
+exports.default = _class;
 
 /***/ })
 /******/ ]);
