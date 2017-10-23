@@ -3,11 +3,10 @@ import SayMyName from '../containers/SayMyName';
 
 export default function (data) {
   const house = data.metadata.house;
-  const serachHash = location.hash.split('?');
-  const person = serachHash[1];
-  const sayMyName = new SayMyName(house, person);
+  const query = data.query;
+  const sayMyName = new SayMyName(house, query.name, query.alias);
   const wrapper = document.getElementById('wrapper');
-  console.log(data.metadata);
+  console.log(query);
   sayMyName.addTo(wrapper);
   setPageTitle(data);
 }

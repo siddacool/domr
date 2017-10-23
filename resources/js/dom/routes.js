@@ -31,9 +31,9 @@ const routes = [
     view: DynamicRouteName,
   },
   {
-    name: 'Test',
-    path: '/?min=:min&max=:max',
-    psudoPath: '/?min=50&max=60',
+    name: 'Dynamic Route 2',
+    path: '/speed/*',
+    psudoPath: '/speed/?min=50&max=60',
     view: Test,
   },
   {

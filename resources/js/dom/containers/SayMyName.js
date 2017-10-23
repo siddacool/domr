@@ -21,13 +21,11 @@ function personSpliter(person) {
 }
 
 export default class extends Container {
-  constructor(house = 'arya stark', person) {
+  constructor(house = 'arya stark', name = '', alias = '') {
     super('say-my-name');
     this.house = house.replace(/_/g, ' ');
-    this.person = person.replace(/\//g, '');
-    this.personSplit = personSpliter(this.person);
-    this.name = this.personSplit.name || '';
-    this.alias = this.personSplit.alias || '';
+    this.name = name.replace(/_/g, ' ');
+    this.alias = alias.replace(/_/g, ' ');
   }
 
   dom() {

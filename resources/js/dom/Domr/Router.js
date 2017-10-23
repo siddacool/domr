@@ -11,7 +11,36 @@ function reloadOnHashChange() {
   });
 }
 
+function searchQuery(hash) {
+  const hashFilter = hash.split('?');
+  const queryString = hashFilter[1];
+
+  if (queryString && queryString !== '') {
+    const obj = {};
+    const query = queryString.replace(/\//g, '').split('&');
+
+    for (let i = 0; i < query.length; i++) {
+      const part = query[i];
+      const splitPart = part.split('=');
+      const field = splitPart[0];
+      const value = splitPart[1];
+
+      obj[field] = value;
+    }
+    return obj;
+  } else {
+    return '';
+  }
+}
+
 function addView(view, data) {
+  let query = '';
+
+  if (location.hash.includes('?')) {
+    query = searchQuery(location.hash);
+  }
+
+  data.query = query;
   checkForFunction(view, data);
 }
 
