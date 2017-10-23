@@ -29,8 +29,6 @@ export default class extends ActiveComponent {
       const dataLevel = Number(ul.parentElement.getAttribute('data-level')) + 1;
       const treeFolder = new TreeFolder(text, folderContent, isOpen, isFocus, dataLevel);
 
-      console.log(dataLevel);
-
       treeFolder.addBefore(li);
       ul.removeChild(li);
     });
