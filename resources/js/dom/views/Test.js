@@ -1,5 +1,9 @@
+import Domr from '../Domr/';
+
+const logger = new Domr.Logger('Dynamic Routes 2');
+
 export default function (data) {
   const wrapper = document.getElementById('wrapper');
   wrapper.innerHTML = '<h2>Check browser console</h2>';
-  console.log(data);
+  logger.info(data, '');
 }
