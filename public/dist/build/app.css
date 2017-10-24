@@ -539,7 +539,6 @@ label svg {
   display: flex;
   height: 100vh;
   left: 0;
-  padding: 1rem;
   position: fixed;
   top: 0;
   width: 100vw;
@@ -575,7 +574,7 @@ label svg {
 }
 
 .tv-show-extended-side--a {
-  height: 30vh;
+  height: 35vh;
 }
 
 @media only screen and (min-width: 1025px) {
@@ -585,7 +584,7 @@ label svg {
 }
 
 .tv-show-extended-side--b {
-  height: 70vh;
+  height: 65vh;
 }
 
 @media only screen and (min-width: 1025px) {
@@ -605,9 +604,16 @@ label svg {
   -webkit-justify-content: center;
           justify-content: center;
   position: absolute;
-  right: -6px;
-  top: -11px;
+  right: 7px;
+  top: 7px;
   width: 2.5rem;
+}
+
+@media only screen and (min-width: 1025px) {
+  .tv-show-extended-delete {
+    right: -6px;
+    top: -11px;
+  }
 }
 
 .tv-show-extended-delete .icon {
@@ -617,8 +623,14 @@ label svg {
 }
 
 .tv-show-extended--name {
-  height: 70px;
+  height: 60px;
   padding: .4rem;
+}
+
+@media only screen and (min-width: 1025px) {
+  .tv-show-extended--name {
+    height: 70px;
+  }
 }
 
 .tv-show-extended--name h1 {
@@ -633,9 +645,15 @@ label svg {
 }
 
 .tv-show-extended--scrollable {
-  height: calc(100% - 111px);
+  height: calc(100% - 60px);
   overflow: auto;
   padding-top: 0;
+}
+
+@media only screen and (min-width: 1025px) {
+  .tv-show-extended--scrollable {
+    height: calc(100% - 111px);
+  }
 }
 
 .tv-show-card--summary, .tv-show-card--status-holder {
