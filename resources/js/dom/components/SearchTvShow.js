@@ -1,5 +1,6 @@
 import Domr from '../Domr';
 import callApi from './tv-shows-call-api';
+import locSearchChange from '../utils/loc-search-change';
 
 const ActiveComponent = Domr.ActiveComponent;
 
@@ -26,6 +27,17 @@ export default class extends ActiveComponent {
       typeTimer = setTimeout(() => {
         callApi(target.value, cardHolder);
       }, timeInterval);
+    });
+
+    target.addEventListener('keydown', (e) => {
+      const code = (e.keyCode ? e.keyCode : e.which);
+      const value = target.value.replace(/ /g, '_');
+
+      if (code === 13) {
+        locSearchChange({
+          search: value,
+        });
+      }
     });
   }
 }

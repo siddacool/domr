@@ -4,9 +4,10 @@ import callApi from './tv-shows-call-api';
 const ActiveComponent = Domr.ActiveComponent;
 
 export default class extends ActiveComponent {
-  constructor(defaultShow = '') {
+  constructor(defaultShow = '', id) {
     super('tv-show-card-holder');
     this.show = defaultShow;
+    this.id = id;
   }
 
   dom() {
@@ -17,6 +18,6 @@ export default class extends ActiveComponent {
 
   events() {
     const target = this.target();
-    callApi(this.show, target);
+    callApi(this.show, target, this.id);
   }
 }

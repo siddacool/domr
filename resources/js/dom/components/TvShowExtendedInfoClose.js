@@ -19,10 +19,7 @@ export default class extends ActiveComponent {
     const target = this.target();
     target.addEventListener('click', (e) => {
       e.preventDefault();
-      const parent = target.parentElement.parentElement.parentElement;
-      const grandParent = parent.parentElement;
-
-      grandParent.removeChild(parent);
+      history.back();
     });
   }
 }

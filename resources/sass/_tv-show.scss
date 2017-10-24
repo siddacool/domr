@@ -126,7 +126,6 @@
     display: flex;
     height: 100vh;
     left: 0;
-    padding: 1rem;
     position: fixed;
     top: 0;
     width: 100vw;
@@ -155,7 +154,7 @@
     }
 
     &--a {
-      height: 30vh;
+      height: 35vh;
 
       @include desktop {
         height: initial;
@@ -163,7 +162,7 @@
     }
 
     &--b {
-      height: 70vh;
+      height: 65vh;
 
       @include desktop {
         height: initial;
@@ -179,9 +178,14 @@
     height: 2.5rem;
     justify-content: center;
     position: absolute;
-    right: -6px;
-    top: -11px;
+    right: 7px;
+    top: 7px;
     width: 2.5rem;
+
+    @include desktop {
+      right: -6px;
+      top: -11px;
+    }
 
     .icon {
       fill: #fff;
@@ -191,8 +195,12 @@
   }
 
   &-extended--name {
-    height: 70px;
+    height: 60px;
     padding: .4rem;
+
+    @include desktop {
+      height: 70px;
+    }
 
     h1 {
       font-size: 1.2rem;
@@ -205,9 +213,13 @@
   }
 
   &-extended--scrollable {
-    height: calc(100% - 111px);
+    height: calc(100% - 60px);
     overflow: auto;
     padding-top: 0;
+
+    @include desktop {
+      height: calc(100% - 111px);
+    }
   }
 
   &-card--summary,
