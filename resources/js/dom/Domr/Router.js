@@ -3,10 +3,19 @@ import checkForFunction from './helpers/check-for-function';
 import cloneObject from './helpers/clone-object';
 
 const logger = new Logger();
-
 const defaults = {
   routes: [],
 };
+
+function getLocation(hash) {
+  let originHash = hash.replace('#', '');
+
+  if (originHash.endsWith('/') && !hash.endsWith('#/')) {
+    originHash = originHash.slice(0, -1);
+  }
+
+  return originHash;
+}
 
 function reloadOnHashChange() {
   addEventListener('hashchange', () => {
@@ -52,7 +61,7 @@ export default class {
     this.routes = routes;
     this.routeData = config.routeData || false;
     this.redirectDefault = config.redirectDefault || false;
-    this.hash = location.hash.replace('#', '');
+    this.hash = getLocation(location.hash);
     this.cloneObject = cloneObject;
     this.addView = addView;
     this.reloadOnHashChange = reloadOnHashChange;
