@@ -8,13 +8,19 @@ const defaults = {
 };
 
 function getLocation(hash) {
-  let originHash = hash.replace('#', '');
+  let originHash = hash;
 
-  if (originHash.endsWith('/') && !hash.endsWith('#/')) {
+  if (originHash.includes('?')) {
+    const split = originHash.split('?');
+
+    originHash = split[0];
+  }
+
+  if (originHash.endsWith('/') && !originHash.endsWith('#/')) {
     originHash = originHash.slice(0, -1);
   }
 
-  return originHash;
+  return originHash.replace('#', '');
 }
 
 function reloadOnHashChange() {
@@ -69,9 +75,17 @@ export default class {
 
   set() {
     let toDefault = true;
+
     this.routes.forEach((route) => {
+      let path;
+      if (route.path.endsWith('/') && route.path !== '/') {
+        path = route.path.slice(0, -1);
+      } else {
+        path = route.path;
+      }
+
       const routeDataVal = [];
-      const routePathMod = `${route.path.replace(/([:*])(\w+)/g, (full, dots, name) => {
+      const routePathMod = `${path.replace(/([:*])(\w+)/g, (full, dots, name) => {
         routeDataVal.push(name);
         return '([^/]+)';
       })}(?:/|$)`;
@@ -85,10 +99,10 @@ export default class {
         }
       };
 
-      if (this.hash === '/' && route.path === '/') {
+      if (this.hash === '/' && path === '/') {
         View(route);
         toDefault = false;
-      } else if (routePathModRegEx && route.path !== '/') {
+      } else if (routePathModRegEx && path !== '/') {
         const params = routePathModRegEx
         .slice(1, routePathModRegEx.length)
         .reduce((params, value, index) => {
