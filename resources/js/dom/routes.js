@@ -26,14 +26,14 @@ const routes = [
   },
   {
     name: 'Dynamic Route',
-    path: 'got/:house/',
-    psudoPath: 'got/stark/?name=arya&alias=no_one/',
+    path: '/got/:house/',
+    psudoPath: '/got/stark/?name=arya&alias=no_one/',
     view: DynamicRouteName,
   },
   {
     name: 'Dynamic Route 2',
-    path: '/speed/',
-    psudoPath: '/speed/?min=50&max=60',
+    path: '/droute2/',
+    psudoPath: '/droute2/?min=50&max=60',
     view: Test,
   },
   {

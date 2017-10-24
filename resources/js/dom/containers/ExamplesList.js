@@ -3,7 +3,7 @@ import Domr from '../Domr';
 const Container = Domr.Component;
 
 function makeList(list) {
-  if (!list.isDefault) {
+  if (!list.isDefault && list.name) {
     return `
       <li>
         <a href="#${list.psudoPath ? `${list.psudoPath}` : `${list.path}`}" >${list.name}</a>

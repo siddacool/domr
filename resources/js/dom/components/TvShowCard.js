@@ -1,6 +1,6 @@
 import Domr from '../Domr';
+import locSearchChange from '../utils/loc-search-change';
 import TvShowCardImg from './TvShowCardImg';
-import TvShowExtented from './TvShowExtented';
 
 const ActiveComponent = Domr.ActiveComponent;
 
@@ -78,10 +78,10 @@ export default class extends ActiveComponent {
     target.addEventListener('click', (e) => {
       e.preventDefault();
       const thisId = target.getAttribute('data-id');
-      const wrapper = document.getElementById('wrapper');
-      const tvShowExtented = new TvShowExtented(thisId);
 
-      tvShowExtented.addTo(wrapper);
+      locSearchChange({
+        id: thisId,
+      });
     });
   }
 }
