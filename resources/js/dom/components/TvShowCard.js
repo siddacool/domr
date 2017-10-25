@@ -1,8 +1,8 @@
 import Domr from '../Domr';
-import locSearchChange from '../utils/loc-search-change';
 import TvShowCardImg from './TvShowCardImg';
 
 const ActiveComponent = Domr.ActiveComponent;
+const hashLocation = Domr.utils.hashLocation;
 
 function Network(network) {
   return `
@@ -79,7 +79,7 @@ export default class extends ActiveComponent {
       e.preventDefault();
       const thisId = target.getAttribute('data-id');
 
-      locSearchChange({
+      hashLocation.set('query', {
         id: thisId,
       });
     });
