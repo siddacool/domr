@@ -1,27 +1,12 @@
 import Logger from './Logger';
 import checkForFunction from './helpers/check-for-function';
 import cloneObject from './helpers/clone-object';
+import hashLocation from './helpers/hash-location';
 
 const logger = new Logger();
 const defaults = {
   routes: [],
 };
-
-function getLocation(hash) {
-  let originHash = hash;
-
-  if (originHash.includes('?')) {
-    const split = originHash.split('?');
-
-    originHash = split[0];
-  }
-
-  if (originHash.endsWith('/') && !originHash.endsWith('#/')) {
-    originHash = originHash.slice(0, -1);
-  }
-
-  return originHash.replace('#', '');
-}
 
 function reloadOnHashChange() {
   addEventListener('hashchange', () => {
@@ -29,36 +14,8 @@ function reloadOnHashChange() {
   });
 }
 
-function searchQuery(hash) {
-  const hashFilter = hash.split('?');
-  const queryString = hashFilter[1];
-
-  if (queryString && queryString !== '') {
-    const obj = {};
-    const query = queryString.replace(/\//g, '').split('&');
-
-    for (let i = 0; i < query.length; i++) {
-      const part = query[i];
-      const splitPart = part.split('=');
-      const field = splitPart[0];
-      const value = splitPart[1];
-
-      obj[field] = value;
-    }
-    return obj;
-  } else {
-    return '';
-  }
-}
-
 function addView(view, data) {
-  let query = '';
-
-  if (location.hash.includes('?')) {
-    query = searchQuery(location.hash);
-  }
-
-  data.query = query;
+  data.query = hashLocation.query;
   checkForFunction(view, data);
 }
 
@@ -67,7 +24,7 @@ export default class {
     this.routes = routes;
     this.routeData = config.routeData || false;
     this.redirectDefault = config.redirectDefault || false;
-    this.hash = getLocation(location.hash);
+    this.hash = hashLocation.path;
     this.cloneObject = cloneObject;
     this.addView = addView;
     this.reloadOnHashChange = reloadOnHashChange;
