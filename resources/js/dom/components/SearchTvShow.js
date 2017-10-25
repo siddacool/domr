@@ -1,8 +1,8 @@
 import Domr from '../Domr';
 import callApi from './tv-shows-call-api';
-import locSearchChange from '../utils/loc-search-change';
 
 const ActiveComponent = Domr.ActiveComponent;
+const setSearchQuery = Domr.utils.setSearchQuery;
 
 export default class extends ActiveComponent {
   constructor(defaultShow = '') {
@@ -31,11 +31,11 @@ export default class extends ActiveComponent {
 
     target.addEventListener('keydown', (e) => {
       const code = (e.keyCode ? e.keyCode : e.which);
-      const value = target.value.replace(/ /g, '_');
+      const search = target.value.replace(/ /g, '_');
 
       if (code === 13) {
-        locSearchChange({
-          search: value,
+        setSearchQuery({
+          search,
         });
       }
     });

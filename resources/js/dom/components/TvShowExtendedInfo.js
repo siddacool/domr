@@ -134,7 +134,6 @@ export default class extends Component {
     }
     const SideA = new TvShowBackgroundImg(image, 'tv-show-extended-side tv-show-extended-side--a');
 
-    console.log(this.status);
     return `
       <div class="tv-show-extended-info" id="tv-show-extended-info">
         ${SideA.render()}
