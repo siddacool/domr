@@ -2,7 +2,7 @@ import Domr from '../Domr';
 import callApi from './tv-shows-call-api';
 
 const ActiveComponent = Domr.ActiveComponent;
-const setSearchQuery = Domr.utils.setSearchQuery;
+const hashLocation = Domr.utils.hashLocation;
 
 export default class extends ActiveComponent {
   constructor(defaultShow = '') {
@@ -34,7 +34,7 @@ export default class extends ActiveComponent {
       const search = target.value.replace(/ /g, '_');
 
       if (code === 13) {
-        setSearchQuery({
+        hashLocation.set('query', {
           search,
         });
       }

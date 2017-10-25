@@ -2,7 +2,7 @@ import Domr from '../Domr';
 import TvShowCardImg from './TvShowCardImg';
 
 const ActiveComponent = Domr.ActiveComponent;
-const setSearchQuery = Domr.utils.setSearchQuery;
+const hashLocation = Domr.utils.hashLocation;
 
 function Network(network) {
   return `
@@ -79,7 +79,7 @@ export default class extends ActiveComponent {
       e.preventDefault();
       const thisId = target.getAttribute('data-id');
 
-      setSearchQuery({
+      hashLocation.set('query', {
         id: thisId,
       });
     });

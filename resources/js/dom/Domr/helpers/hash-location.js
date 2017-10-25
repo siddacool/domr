@@ -1,4 +1,9 @@
-function getLoc(hash) {
+import hashLocationSet from './hash-location-set';
+import Logger from '../Logger';
+
+const logger = new Logger();
+
+function loc(hash) {
   const originalHash = hash;
   let path = originalHash;
   let search = '';
@@ -40,6 +45,19 @@ function getLoc(hash) {
   };
 }
 
-const hashLocation = getLoc(location.hash);
+const hashLocation = loc(location.hash);
+const hashLocationGet = (field) => {
+  const hash = hashLocation;
+  const thisField = hash[field];
+
+  if (thisField) {
+    return hash[field];
+  } else {
+    logger.error('incorrect get location params');
+  }
+};
+
+hashLocation.set = hashLocationSet;
+hashLocation.get = hashLocationGet;
 
 export default hashLocation;
