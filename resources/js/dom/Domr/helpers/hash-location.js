@@ -51,7 +51,7 @@ const hashLocationGet = (field) => {
   const thisField = hash[field];
 
   if (thisField) {
-    return hash[field];
+    return thisField;
   } else {
     logger.error('incorrect get location params');
   }
