@@ -1,0 +1,18 @@
+.say-my-name {
+  strong {
+    text-transform: capitalize;
+  }
+
+  &-text {
+    display: inline-block;
+    min-height: 25px;
+    min-width: 30px;
+    vertical-align: bottom;
+  }
+
+  &-save {
+    background-color: #fff;
+    display: inline-block;
+    padding: .5rem;
+  }
+}
