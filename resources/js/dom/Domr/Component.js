@@ -1,6 +1,9 @@
 import createElement from './helpers/create-element';
 import lookup from './helpers/lookup';
 import randomizer from './helpers/randomizer';
+import Logger from './Logger';
+
+const logger = new Logger();
 
 const defaults = {
   parent: document.getElementById('wrapper'),
@@ -56,7 +59,7 @@ export default class {
       sibling.insertAdjacentHTML('beforebegin', this.renderNodes());
       this.fireEventAfterTimeout();
     } else {
-      console.log('sibling not found');
+      logger.error('sibling not found');
     }
   }
 
@@ -65,7 +68,23 @@ export default class {
       sibling.insertAdjacentHTML('afterend', this.renderNodes());
       this.fireEventAfterTimeout();
     } else {
-      console.log('sibling not found');
+      logger.error('sibling not found');
+    }
+  }
+
+  replaceWith(sibling) {
+    if (sibling) {
+      const parent = sibling.parentElement;
+
+      if (parent) {
+        sibling.insertAdjacentHTML('afterend', this.renderNodes());
+        parent.removeChild(sibling);
+        this.fireEventAfterTimeout();
+      } else {
+        logger.warn('sibling has no parentElement');
+      }
+    } else {
+      logger.error('sibling not found');
     }
   }
 
