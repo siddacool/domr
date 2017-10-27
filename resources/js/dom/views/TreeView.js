@@ -6,7 +6,7 @@ export default function (data) {
   const tree = new Tree(treeArr);
   const wrapper = document.getElementById('wrapper');
 
-  tree.addTo(wrapper);
+  tree.replaceContentOf(wrapper);
   setPageTitle(data);
 }
 

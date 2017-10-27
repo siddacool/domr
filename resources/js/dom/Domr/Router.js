@@ -8,17 +8,6 @@ const defaults = {
   routes: [],
 };
 
-function reloadOnHashChange() {
-  addEventListener('hashchange', () => {
-    location.reload();
-  });
-}
-
-function addView(view, data) {
-  data.query = hashLocation.query;
-  checkForFunction(view, data);
-}
-
 export default class {
   constructor(routes = defaults.routes, config) {
     this.routes = routes;
@@ -26,11 +15,20 @@ export default class {
     this.redirectDefault = config.redirectDefault || false;
     this.hash = hashLocation.path;
     this.cloneObject = cloneObject;
-    this.addView = addView;
-    this.reloadOnHashChange = reloadOnHashChange;
   }
 
-  set() {
+  addView(view, data) {
+    data.query = hashLocation.query;
+    checkForFunction(view, data);
+  }
+
+  reloadOnHashChange() {
+    addEventListener('hashchange', () => {
+      location.reload();
+    });
+  }
+
+  start() {
     let toDefault = true;
 
     this.routes.forEach((route) => {

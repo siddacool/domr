@@ -8,5 +8,5 @@ const router = new Router(routes, {
   redirectDefault: true,
 });
 
-router.set();
+router.start();
 

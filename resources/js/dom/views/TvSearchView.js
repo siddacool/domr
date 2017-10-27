@@ -17,7 +17,7 @@ export default function (data) {
   const tvShow = new TvShow(search, showId);
   const wrapper = document.getElementById('wrapper');
 
-  tvShow.addTo(wrapper);
+  tvShow.replaceContentOf(wrapper);
   setPageTitle(data);
 }
 

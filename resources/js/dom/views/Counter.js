@@ -7,7 +7,7 @@ export default function (data) {
   const counterSet = new CounterSet(counterVal);
   const wrapper = document.getElementById('wrapper');
 
-  counterSet.addTo(wrapper);
+  counterSet.replaceContentOf(wrapper);
   setPageTitle(data);
 }
 

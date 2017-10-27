@@ -69,6 +69,11 @@ export default class {
     }
   }
 
+  replaceContentOf(parent = this.parentDefault) {
+    parent.innerHTML = this.renderNodes();
+    this.fireEventAfterTimeout();
+  }
+
   render() {
     this.fireEventAfterTimeout();
     return this.renderNodes();
