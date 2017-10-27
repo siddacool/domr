@@ -2,6 +2,7 @@ import Logger from './Logger';
 import checkForFunction from './helpers/check-for-function';
 import cloneObject from './helpers/clone-object';
 import hashLocation from './helpers/hash-location';
+import hashLocationDynamic from './helpers/hash-location-dynamic';
 
 const logger = new Logger();
 const defaults = {
@@ -13,23 +14,26 @@ export default class {
     this.routes = routes;
     this.routeData = config.routeData || false;
     this.redirectDefault = config.redirectDefault || false;
-    this.hash = hashLocation.path;
     this.cloneObject = cloneObject;
   }
 
   addView(view, data) {
-    data.query = hashLocation.query;
+    const loc = hashLocationDynamic();
+    data.query = loc.query;
     checkForFunction(view, data);
   }
 
   reloadOnHashChange() {
     addEventListener('hashchange', () => {
-      location.reload();
+      const loc = hashLocationDynamic();
+
+      this.start(loc);
     });
   }
 
-  start() {
+  start(hash) {
     let toDefault = true;
+    const loc = hash || hashLocationDynamic();
 
     this.routes.forEach((route) => {
       let path;
@@ -44,7 +48,7 @@ export default class {
         routeDataVal.push(name);
         return '([^/]+)';
       })}(?:/|$)`;
-      const routePathModRegEx = this.hash.match(new RegExp(routePathMod));
+      const routePathModRegEx = loc.path.match(new RegExp(routePathMod));
       const View = (r) => {
         if (this.routeData) {
           const data = this.cloneObject(r, ['view']);
@@ -54,7 +58,7 @@ export default class {
         }
       };
 
-      if (this.hash === '/' && path === '/') {
+      if (loc.path === '/' && path === '/') {
         View(route);
         toDefault = false;
       } else if (routePathModRegEx && path !== '/') {
