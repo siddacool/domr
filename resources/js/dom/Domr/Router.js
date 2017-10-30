@@ -13,6 +13,7 @@ export default class {
   constructor(routes = defaults.routes, config) {
     this.routes = routes;
     this.redirectDefault = config.redirectDefault || false;
+    this.refreshOnHashChange = config.refreshOnHashChange || false;
     this.cloneObject = cloneObject;
   }
 
@@ -22,8 +23,12 @@ export default class {
 
   reloadOnHashChange() {
     addEventListener('hashchange', (e) => {
-      this.start();
-      e.stopImmediatePropagation();
+      if (this.refreshOnHashChange) {
+        location.reload();
+      } else {
+        this.start();
+        e.stopImmediatePropagation();
+      }
     });
   }
 
