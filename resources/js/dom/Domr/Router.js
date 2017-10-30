@@ -42,7 +42,12 @@ export default class {
 
   start() {
     const loc = hashLocation();
-    let toDefault = true;
+    const locPath = loc.path;
+    let candidate;
+
+    if (locPath === '') {
+      location.hash = '#/';
+    }
 
     this.routes.forEach((route) => {
       let path = route.path;
@@ -55,15 +60,9 @@ export default class {
         routeDataVal.push(name);
         return '([^/]+)';
       })}(?:/|$)`;
-      const routePathModRegEx = loc.path.match(new RegExp(routePathMod));
-      const View = (r) => {
-        this.addView(r);
-      };
+      const routePathModRegEx = locPath.match(new RegExp(routePathMod));
 
-      if (loc.path === '/' && path === '/') {
-        View(route);
-        toDefault = false;
-      } else if (routePathModRegEx && path !== '/') {
+      if (routePathModRegEx) {
         const params = routePathModRegEx
         .slice(1, routePathModRegEx.length)
         .reduce((params, value, index) => {
@@ -74,23 +73,18 @@ export default class {
 
         route.metadata = params || '';
         route.query = loc.query;
-
-        View(route);
-        toDefault = false;
+        candidate = route;
       }
     });
 
-    if (toDefault) {
+    if (candidate) {
+      this.addView(candidate);
+    } else {
       const routeDefault = this.routes.find(o => o.isDefault === true);
-
-      if (loc.path === '') {
-        location.hash = '#/';
+      if (this.redirectDefault && routeDefault) {
+        this.addView(routeDefault);
       } else {
-        if (this.redirectDefault && routeDefault) {
-          location.hash = `#${routeDefault.path}`;
-        } else {
-          logger.error('Page Not Found');
-        }
+        logger.error('Page Not Found');
       }
     }
 
