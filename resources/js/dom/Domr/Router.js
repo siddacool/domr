@@ -23,21 +23,15 @@ export default class {
 
   reloadOnHashChange() {
     addEventListener('hashchange', (e) => {
-      const loc = hashLocationDynamic();
-
-      this.start(loc);
+      this.start();
       e.stopImmediatePropagation();
     });
   }
 
-  start(hash) {
-    const loc = hash || hashLocationDynamic();
+  start() {
+    const loc = hashLocationDynamic();
     const routeDefault = this.routes.find(o => o.isDefault === true);
     let candidate;
-
-    if (routeDefault) {
-      candidate = routeDefault;
-    }
 
     this.routes.forEach((route) => {
       let path;
@@ -88,7 +82,11 @@ export default class {
     if (candidate) {
       this.addView(candidate);
     } else {
-      logger.error('Page Not Found');
+      if (this.redirectDefault && routeDefault) {
+        location.hash = `#${routeDefault.path}`;
+      } else {
+        logger.error('Page Not Found');
+      }
     }
 
     this.reloadOnHashChange();
