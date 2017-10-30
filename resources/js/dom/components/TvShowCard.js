@@ -78,8 +78,9 @@ export default class extends ActiveComponent {
     target.addEventListener('click', (e) => {
       e.preventDefault();
       const thisId = target.getAttribute('data-id');
+      const loc = hashLocation();
 
-      hashLocation.set('query', {
+      loc.set('query', {
         id: thisId,
       });
     });

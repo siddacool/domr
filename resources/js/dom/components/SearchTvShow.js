@@ -30,14 +30,18 @@ export default class extends ActiveComponent {
     });
 
     target.addEventListener('keydown', (e) => {
-      const code = (e.keyCode ? e.keyCode : e.which);
-      const search = target.value.replace(/ /g, '_');
+      clearTimeout(typeTimer);
+      typeTimer = setTimeout(() => {
+        const code = (e.keyCode ? e.keyCode : e.which);
+        const search = target.value.replace(/ /g, '_');
+        const loc = hashLocation();
 
-      if (code === 13) {
-        hashLocation.set('query', {
-          search,
-        });
-      }
+        if (code === 13) {
+          loc.set('query', {
+            search,
+          });
+        }
+      }, timeInterval);
     });
   }
 }
