@@ -1,8 +1,13 @@
-function checkForFunction(view, data = '') {
-  if (typeof view === 'function') {
-    view(data);
-  } else {
-    view;
+function checkForFunction(candidate) {
+  const view = candidate.view;
+  const routeData = candidate;
+
+  if (candidate && view) {
+    if (typeof view === 'function') {
+      view(routeData);
+    } else {
+      view;
+    }
   }
 }
 

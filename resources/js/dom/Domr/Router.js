@@ -17,23 +17,27 @@ export default class {
     this.cloneObject = cloneObject;
   }
 
-  addView(view, data) {
-    const loc = hashLocationDynamic();
-    data.query = loc.query;
-    checkForFunction(view, data);
+  addView(candidate) {
+    checkForFunction(candidate);
   }
 
   reloadOnHashChange() {
-    addEventListener('hashchange', () => {
+    addEventListener('hashchange', (e) => {
       const loc = hashLocationDynamic();
 
       this.start(loc);
+      e.stopImmediatePropagation();
     });
   }
 
   start(hash) {
-    let toDefault = true;
     const loc = hash || hashLocationDynamic();
+    const routeDefault = this.routes.find(o => o.isDefault === true);
+    let candidate;
+
+    if (routeDefault) {
+      candidate = routeDefault;
+    }
 
     this.routes.forEach((route) => {
       let path;
@@ -49,7 +53,7 @@ export default class {
         return '([^/]+)';
       })}(?:/|$)`;
       const routePathModRegEx = loc.path.match(new RegExp(routePathMod));
-      const View = (r) => {
+/*      const View = (r) => {
         if (this.routeData) {
           const data = this.cloneObject(r, ['view']);
           this.addView(r.view, data);
@@ -74,17 +78,17 @@ export default class {
 
         View(route);
         toDefault = false;
+      }*/
+
+      if (routePathModRegEx) {
+        candidate = route;
       }
     });
 
-    if (toDefault) {
-      const routeDefault = this.routes.find(o => o.isDefault === true);
-
-      if (this.redirectDefault && routeDefault) {
-        location.hash = `#${routeDefault.path}`;
-      } else {
-        logger.error('Page Not Found');
-      }
+    if (candidate) {
+      this.addView(candidate);
+    } else {
+      logger.error('Page Not Found');
     }
 
     this.reloadOnHashChange();
