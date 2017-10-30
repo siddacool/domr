@@ -21,7 +21,7 @@ export default class extends Component {
       if (this.lookup()) {
         this.events();
       }
-    }, 50);
+    }, 1);
   }
 
   renderNodes() {

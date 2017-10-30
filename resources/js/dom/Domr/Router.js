@@ -1,6 +1,5 @@
 import Logger from './Logger';
-import checkForFunction from './helpers/check-for-function';
-import cloneObject from './helpers/clone-object';
+import addView from './helpers/add-view';
 import hashLocation from './helpers/hash-location';
 
 const logger = new Logger();
@@ -11,14 +10,10 @@ const defaults = {
 export default class {
   constructor(routes = defaults.routes, config) {
     this.routes = routes;
+    this.addView = addView;
     this.redirectDefault = config.redirectDefault || false;
     this.refreshPage = config.refreshPage || false;
     this.clearLog = config.clearLog || false;
-    this.cloneObject = cloneObject;
-  }
-
-  addView(candidate) {
-    checkForFunction(candidate);
   }
 
   reloadOnHashChange() {
@@ -50,11 +45,9 @@ export default class {
     let toDefault = true;
 
     this.routes.forEach((route) => {
-      let path;
-      if (route.path.endsWith('/') && route.path !== '/') {
-        path = route.path.slice(0, -1);
-      } else {
-        path = route.path;
+      let path = route.path;
+      if (path.endsWith('/') && path !== '/') {
+        path = path.slice(0, -1);
       }
 
       const routeDataVal = [];
