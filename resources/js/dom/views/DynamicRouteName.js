@@ -6,7 +6,7 @@ export default function (data) {
   const query = data.query;
   const sayMyName = new SayMyName(house, query.name, query.alias);
   const wrapper = document.getElementById('wrapper');
-  console.log(query);
+
   sayMyName.replaceContentOf(wrapper);
   setPageTitle(data);
 }

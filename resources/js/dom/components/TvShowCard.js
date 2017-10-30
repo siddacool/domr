@@ -2,7 +2,7 @@ import Domr from '../Domr';
 import TvShowCardImg from './TvShowCardImg';
 
 const ActiveComponent = Domr.ActiveComponent;
-const hashLocationDynamic = Domr.utils.hashLocationDynamic;
+const hashLocation = Domr.utils.hashLocation;
 
 function Network(network) {
   return `
@@ -78,7 +78,7 @@ export default class extends ActiveComponent {
     target.addEventListener('click', (e) => {
       e.preventDefault();
       const thisId = target.getAttribute('data-id');
-      const loc = hashLocationDynamic();
+      const loc = hashLocation();
 
       loc.set('query', {
         id: thisId,

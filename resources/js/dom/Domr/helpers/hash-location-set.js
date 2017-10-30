@@ -1,4 +1,4 @@
-import hashLocationDynamic from './hash-location-dynamic';
+import hashLocation from './hash-location';
 import Logger from '../Logger';
 
 const logger = new Logger();
@@ -13,7 +13,7 @@ function setHash(option) {
 }
 
 function setPath(option) {
-  const loc = hashLocationDynamic();
+  const loc = hashLocation();
   const searchQuery = loc.search;
   let path = option;
 
@@ -35,7 +35,7 @@ function setPath(option) {
 
 function setSearch(option) {
   let search = option;
-  const loc = hashLocationDynamic();
+  const loc = hashLocation();
   let path = loc.path;
 
   if (path.endsWith('/')) {

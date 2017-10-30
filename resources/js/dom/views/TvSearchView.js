@@ -19,6 +19,5 @@ export default function (data) {
 
   tvShow.replaceContentOf(wrapper);
   setPageTitle(data);
-  console.log(data);
 }
 

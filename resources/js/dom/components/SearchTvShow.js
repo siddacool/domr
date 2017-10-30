@@ -2,7 +2,7 @@ import Domr from '../Domr';
 import callApi from './tv-shows-call-api';
 
 const ActiveComponent = Domr.ActiveComponent;
-const hashLocationDynamic = Domr.utils.hashLocationDynamic;
+const hashLocation = Domr.utils.hashLocation;
 
 export default class extends ActiveComponent {
   constructor(defaultShow = '') {
@@ -32,7 +32,7 @@ export default class extends ActiveComponent {
     target.addEventListener('keydown', (e) => {
       const code = (e.keyCode ? e.keyCode : e.which);
       const search = target.value.replace(/ /g, '_');
-      const loc = hashLocationDynamic();
+      const loc = hashLocation();
 
       if (code === 13) {
         loc.set('query', {

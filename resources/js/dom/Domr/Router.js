@@ -2,7 +2,6 @@ import Logger from './Logger';
 import checkForFunction from './helpers/check-for-function';
 import cloneObject from './helpers/clone-object';
 import hashLocation from './helpers/hash-location';
-import hashLocationDynamic from './helpers/hash-location-dynamic';
 
 const logger = new Logger();
 const defaults = {
@@ -33,7 +32,7 @@ export default class {
   }
 
   start() {
-    const loc = hashLocationDynamic();
+    const loc = hashLocation();
     let toDefault = true;
 
     this.routes.forEach((route) => {

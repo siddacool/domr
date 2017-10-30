@@ -1,10 +1,10 @@
-import hashLocationDynamic from './hash-location-dynamic';
+import hashLocation from './hash-location';
 import Logger from '../Logger';
 
 const logger = new Logger();
 
 function hashLocationGet(field) {
-  const loc = hashLocationDynamic();
+  const loc = hashLocation();
   const thisField = loc[field];
 
   if (thisField) {
