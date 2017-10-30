@@ -12,7 +12,8 @@ export default class {
   constructor(routes = defaults.routes, config) {
     this.routes = routes;
     this.redirectDefault = config.redirectDefault || false;
-    this.refreshOnHashChange = config.refreshOnHashChange || false;
+    this.refreshPage = config.refreshPage || false;
+    this.clearLog = config.clearLog || false;
     this.cloneObject = cloneObject;
   }
 
@@ -22,7 +23,20 @@ export default class {
 
   reloadOnHashChange() {
     addEventListener('hashchange', (e) => {
-      if (this.refreshOnHashChange) {
+      if (this.clearLog) {
+        console.API;
+        if (typeof console._commandLineAPI !== 'undefined') {
+            console.API = console._commandLineAPI;
+        } else if (typeof console._inspectorCommandLineAPI !== 'undefined') {
+            console.API = console._inspectorCommandLineAPI;
+        } else if (typeof console.clear !== 'undefined') {
+            console.API = console;
+        }
+
+        console.API.clear();
+      }
+
+      if (this.refreshPage) {
         location.reload();
       } else {
         this.start();

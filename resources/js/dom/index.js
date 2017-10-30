@@ -5,6 +5,7 @@ const Router = Domr.Router;
 
 const router = new Router(routes, {
   redirectDefault: true,
+  clearLog: true,
 });
 
 router.start();
