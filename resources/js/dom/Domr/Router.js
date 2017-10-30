@@ -1,6 +1,5 @@
 import Logger from './Logger';
-import checkForFunction from './helpers/check-for-function';
-import cloneObject from './helpers/clone-object';
+import addView from './helpers/add-view';
 import hashLocation from './helpers/hash-location';
 
 const logger = new Logger();
@@ -8,37 +7,47 @@ const defaults = {
   routes: [],
 };
 
-function reloadOnHashChange() {
-  addEventListener('hashchange', () => {
-    location.reload();
-  });
-}
-
-function addView(view, data) {
-  data.query = hashLocation.query;
-  checkForFunction(view, data);
-}
-
 export default class {
   constructor(routes = defaults.routes, config) {
     this.routes = routes;
-    this.routeData = config.routeData || false;
-    this.redirectDefault = config.redirectDefault || false;
-    this.hash = hashLocation.path;
-    this.cloneObject = cloneObject;
     this.addView = addView;
-    this.reloadOnHashChange = reloadOnHashChange;
+    this.redirectDefault = config.redirectDefault || false;
+    this.refreshPage = config.refreshPage || false;
+    this.clearLog = config.clearLog || false;
   }
 
-  set() {
+  reloadOnHashChange() {
+    addEventListener('hashchange', (e) => {
+      if (this.clearLog) {
+        console.API;
+        if (typeof console._commandLineAPI !== 'undefined') {
+            console.API = console._commandLineAPI;
+        } else if (typeof console._inspectorCommandLineAPI !== 'undefined') {
+            console.API = console._inspectorCommandLineAPI;
+        } else if (typeof console.clear !== 'undefined') {
+            console.API = console;
+        }
+
+        console.API.clear();
+      }
+
+      if (this.refreshPage) {
+        location.reload();
+      } else {
+        this.start();
+        e.stopImmediatePropagation();
+      }
+    });
+  }
+
+  start() {
+    const loc = hashLocation();
     let toDefault = true;
 
     this.routes.forEach((route) => {
-      let path;
-      if (route.path.endsWith('/') && route.path !== '/') {
-        path = route.path.slice(0, -1);
-      } else {
-        path = route.path;
+      let path = route.path;
+      if (path.endsWith('/') && path !== '/') {
+        path = path.slice(0, -1);
       }
 
       const routeDataVal = [];
@@ -46,17 +55,12 @@ export default class {
         routeDataVal.push(name);
         return '([^/]+)';
       })}(?:/|$)`;
-      const routePathModRegEx = this.hash.match(new RegExp(routePathMod));
+      const routePathModRegEx = loc.path.match(new RegExp(routePathMod));
       const View = (r) => {
-        if (this.routeData) {
-          const data = this.cloneObject(r, ['view']);
-          this.addView(r.view, data);
-        } else {
-          this.addView(r.view);
-        }
+        this.addView(r);
       };
 
-      if (this.hash === '/' && path === '/') {
+      if (loc.path === '/' && path === '/') {
         View(route);
         toDefault = false;
       } else if (routePathModRegEx && path !== '/') {
@@ -69,6 +73,7 @@ export default class {
         }, null);
 
         route.metadata = params || '';
+        route.query = loc.query;
 
         View(route);
         toDefault = false;
@@ -78,10 +83,14 @@ export default class {
     if (toDefault) {
       const routeDefault = this.routes.find(o => o.isDefault === true);
 
-      if (this.redirectDefault && routeDefault) {
-        location.hash = `#${routeDefault.path}`;
+      if (loc.path === '') {
+        location.hash = '#/';
       } else {
-        logger.error('Page Not Found');
+        if (this.redirectDefault && routeDefault) {
+          location.hash = `#${routeDefault.path}`;
+        } else {
+          logger.error('Page Not Found');
+        }
       }
     }
 

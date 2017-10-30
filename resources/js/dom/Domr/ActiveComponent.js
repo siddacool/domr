@@ -1,4 +1,7 @@
 import Component from './Component';
+import Logger from './Logger';
+
+const logger = new Logger();
 
 export default class extends Component {
   constructor(domrid) {
@@ -9,7 +12,7 @@ export default class extends Component {
   events() {
     const target = this.target();
     target.addEventListener('click', () => {
-      console.log(`Default Event for ${this.domrid}`);
+      logger.log(`Default Event for ${this.domrid}`);
     });
   }
 
@@ -18,7 +21,7 @@ export default class extends Component {
       if (this.lookup()) {
         this.events();
       }
-    }, 50);
+    }, 1);
   }
 
   renderNodes() {

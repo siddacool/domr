@@ -6,7 +6,7 @@ export default function (data) {
   const examplesList = new ExamplesList(routesList);
   const wrapper = document.getElementById('wrapper');
 
-  examplesList.addTo(wrapper);
+  examplesList.replaceContentOf(wrapper);
   setPageTitle(data);
 }
 

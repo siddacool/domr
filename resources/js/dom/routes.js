@@ -5,14 +5,13 @@ import Counter from './views/Counter';
 import TreeView from './views/TreeView';
 import TvSearchView from './views/TvSearchView';
 import Test from './views/Test';
+import Error404 from './views/Error404';
 
 const routes = [
   {
-    name: 'index',
     path: '/',
     view: Examples,
     pageTitle: 'Domr Examples',
-    isDefault: true,
   },
   {
     name: 'list',
@@ -25,13 +24,13 @@ const routes = [
     view: Counter,
   },
   {
-    name: 'Dynamic Route',
+    name: 'Say My Name',
     path: '/got/:house/',
-    psudoPath: '/got/stark/?name=arya&alias=no_one/',
+    psudoPath: '/got/stark/?name=arya&alias=no_one',
     view: DynamicRouteName,
   },
   {
-    name: 'Dynamic Route 2',
+    name: 'Dynamic Routes',
     path: '/droute2/',
     psudoPath: '/droute2/?min=50&max=60',
     view: Test,
@@ -45,6 +44,11 @@ const routes = [
     name: 'Tv Shows AJAX Search',
     path: '/tvshows/',
     view: TvSearchView,
+  },
+  {
+    path: '/404',
+    view: Error404,
+    isDefault: true,
   },
 ];
 

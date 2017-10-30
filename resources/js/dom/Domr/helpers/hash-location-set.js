@@ -13,9 +13,20 @@ function setHash(option) {
 }
 
 function setPath(option) {
+  const loc = hashLocation();
+  const searchQuery = loc.search;
   let path = option;
+
   if (path.startsWith('#')) {
     path = path.slice(0, -1);
+  }
+
+  if (searchQuery) {
+    if (!path.endsWith('/')) {
+      path = `${path}/`;
+    }
+
+    path = `${path}?${searchQuery}`;
   }
 
   path = setHash(path);
@@ -24,7 +35,7 @@ function setPath(option) {
 
 function setSearch(option) {
   let search = option;
-  const loc = hashLocation;
+  const loc = hashLocation();
   let path = loc.path;
 
   if (path.endsWith('/')) {

@@ -33,6 +33,6 @@ export default function (data) {
   const containerCheckbox = new ContainerCheckbox('container-checkbox-random-list', listItems);
   const wrapper = document.getElementById('wrapper');
 
-  containerCheckbox.addTo(wrapper);
+  containerCheckbox.replaceContentOf(wrapper);
   setPageTitle(data);
 }

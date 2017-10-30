@@ -1,15 +1,16 @@
-function makeConsole(moduleName, msg, config, style, styleMsg, type) {
-  let log;
-  switch (type) {
-    case 'warn':
-      log = console.warn;
-      break;
-    case 'error':
-      log = console.error;
-      break;
-    default:
-      log = console.log;
+function consoleType(type) {
+  const clog = console[type];
+  let clogType = console.log;
+
+  if (clog) {
+    clogType = clog;
   }
+
+  return clogType;
+}
+
+function makeConsole(moduleName, msg, config, style, styleMsg, type) {
+  const log = consoleType(type);
 
   if (config === '') {
     log(
