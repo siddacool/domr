@@ -1,6 +1,4 @@
-import Domr from '../Domr';
-
-const ActiveComponent = Domr.ActiveComponent;
+import { ActiveComponent } from '../Domr';
 
 export default class extends ActiveComponent {
   constructor() {

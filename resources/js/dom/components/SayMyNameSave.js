@@ -1,7 +1,6 @@
-import Domr from '../Domr';
+import { ActiveComponent, utils } from '../Domr';
 
-const ActiveComponent = Domr.ActiveComponent;
-const hashLocation = Domr.utils.hashLocation;
+const hashLocation = utils.hashLocation;
 
 export default class extends ActiveComponent {
   constructor() {
@@ -23,8 +22,9 @@ export default class extends ActiveComponent {
       const name = document.querySelector('.say-my-name-text--name').textContent.replace(/\s+/g, '_') || '_';
       const house = document.querySelector('.say-my-name-text--house').textContent.replace(/\s+/g, '_') || '_';
       const alias = document.querySelector('.say-my-name-text--alias').textContent.replace(/\s+/g, '_') || '_';
+      const loc = hashLocation();
 
-      hashLocation.set('hash', `/got/${house}/?name=${name}&alias=${alias}/`);
+      loc.set('hash', `/got/${house}/?name=${name}&alias=${alias}/`);
     });
   }
 }

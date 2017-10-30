@@ -1,9 +1,7 @@
-import Domr from '../Domr';
+import { Component } from '../Domr';
 import ChecklistText from './ChecklistText';
 import ChecklistCheck from './ChecklistCheck';
 import ChecklistDeleteItem from './ChecklistDeleteItem';
-
-const Component = Domr.Component;
 
 export default class extends Component {
   constructor(text = '', isChecked) {

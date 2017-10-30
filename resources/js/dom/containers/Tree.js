@@ -1,8 +1,6 @@
-import Domr from '../Domr';
+import { Component } from '../Domr';
 import TreeLi from '../components/TreeLi';
 import TreeFolder from '../components/TreeFolder';
-
-const Container = Domr.Component;
 
 function makeList(itm) {
   const treeLi = new TreeLi(itm.text);
@@ -26,7 +24,7 @@ function loopList(itm, level) {
   `;
 }
 
-export default class extends Container {
+export default class extends Component {
   constructor(list = '') {
     super();
     this.list = list;

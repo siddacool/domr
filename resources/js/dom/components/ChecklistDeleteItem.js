@@ -1,7 +1,5 @@
-import Domr from '../Domr';
+import { ActiveComponent } from '../Domr';
 import saveListSnapshot from '../utils/save-list-snapshot';
-
-const ActiveComponent = Domr.ActiveComponent;
 
 export default class extends ActiveComponent {
   constructor() {

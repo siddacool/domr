@@ -1,7 +1,5 @@
-import Domr from '../Domr';
+import { Component } from '../Domr';
 import CheckListLi from './CheckListLi';
-
-const Component = Domr.Component;
 
 function makeList(itm) {
   const checkListLi = new CheckListLi(itm.msg, itm.isChecked);

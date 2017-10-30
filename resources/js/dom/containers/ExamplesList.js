@@ -1,6 +1,4 @@
-import Domr from '../Domr';
-
-const Container = Domr.Component;
+import { Component } from '../Domr';
 
 function makeList(list) {
   if (!list.isDefault && list.name) {
@@ -14,7 +12,7 @@ function makeList(list) {
   return '';
 }
 
-export default class extends Container {
+export default class extends Component {
   constructor(links = '') {
     super();
     this.links = links;

@@ -1,8 +1,6 @@
-import Domr from '../Domr';
+import { Component } from '../Domr';
 import TreeDelete from './TreeDelete';
 import TreeMakeFolder from './TreeMakeFolder';
-
-const Component = Domr.Component;
 
 export default class extends Component {
   constructor(text = '') {

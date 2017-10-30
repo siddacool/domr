@@ -1,8 +1,7 @@
-import Domr from '../Domr';
+import { ActiveComponent, utils } from '../Domr';
 import callApi from './tv-shows-call-api';
 
-const ActiveComponent = Domr.ActiveComponent;
-const hashLocation = Domr.utils.hashLocation;
+const hashLocation = utils.hashLocation;
 
 export default class extends ActiveComponent {
   constructor(defaultShow = '') {

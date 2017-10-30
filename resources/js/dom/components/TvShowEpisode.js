@@ -1,6 +1,4 @@
-import Domr from '../Domr';
-
-const Component = Domr.Component;
+import { Component } from '../Domr';
 
 function Time(timestamp) {
   const d = new Date(timestamp);

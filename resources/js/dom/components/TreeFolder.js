@@ -1,10 +1,7 @@
-import Domr from '../Domr';
+import { Component } from '../Domr';
 import TreeFolderExpand from './TreeFolderExpand';
 import TreeDelete from './TreeDelete';
 import TreeNewLi from './TreeNewLi';
-
-const Component = Domr.Component;
-
 
 export default class extends Component {
   constructor(text = '', ulContent = '', isOpen = false, focusOnFolderMaker = false, level = 0) {
