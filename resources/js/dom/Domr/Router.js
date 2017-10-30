@@ -12,7 +12,6 @@ const defaults = {
 export default class {
   constructor(routes = defaults.routes, config) {
     this.routes = routes;
-    this.routeData = config.routeData || false;
     this.redirectDefault = config.redirectDefault || false;
     this.cloneObject = cloneObject;
   }
@@ -30,8 +29,7 @@ export default class {
 
   start() {
     const loc = hashLocationDynamic();
-    const routeDefault = this.routes.find(o => o.isDefault === true);
-    let candidate;
+    let toDefault = true;
 
     this.routes.forEach((route) => {
       let path;
@@ -47,13 +45,8 @@ export default class {
         return '([^/]+)';
       })}(?:/|$)`;
       const routePathModRegEx = loc.path.match(new RegExp(routePathMod));
-/*      const View = (r) => {
-        if (this.routeData) {
-          const data = this.cloneObject(r, ['view']);
-          this.addView(r.view, data);
-        } else {
-          this.addView(r.view);
-        }
+      const View = (r) => {
+        this.addView(r);
       };
 
       if (loc.path === '/' && path === '/') {
@@ -69,19 +62,16 @@ export default class {
         }, null);
 
         route.metadata = params || '';
+        route.query = loc.query;
 
         View(route);
         toDefault = false;
-      }*/
-
-      if (routePathModRegEx) {
-        candidate = route;
       }
     });
 
-    if (candidate) {
-      this.addView(candidate);
-    } else {
+    if (toDefault) {
+      const routeDefault = this.routes.find(o => o.isDefault === true);
+
       if (this.redirectDefault && routeDefault) {
         location.hash = `#${routeDefault.path}`;
       } else {
