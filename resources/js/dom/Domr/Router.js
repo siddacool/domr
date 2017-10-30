@@ -76,10 +76,14 @@ export default class {
     if (toDefault) {
       const routeDefault = this.routes.find(o => o.isDefault === true);
 
-      if (this.redirectDefault && routeDefault) {
-        location.hash = `#${routeDefault.path}`;
+      if (loc.path === '') {
+        location.hash = '#/';
       } else {
-        logger.error('Page Not Found');
+        if (this.redirectDefault && routeDefault) {
+          location.hash = `#${routeDefault.path}`;
+        } else {
+          logger.error('Page Not Found');
+        }
       }
     }
 

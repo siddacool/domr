@@ -5,14 +5,13 @@ import Counter from './views/Counter';
 import TreeView from './views/TreeView';
 import TvSearchView from './views/TvSearchView';
 import Test from './views/Test';
+import Error404 from './views/Error404';
 
 const routes = [
   {
-    name: 'index',
     path: '/',
     view: Examples,
     pageTitle: 'Domr Examples',
-    isDefault: true,
   },
   {
     name: 'list',
@@ -45,6 +44,11 @@ const routes = [
     name: 'Tv Shows AJAX Search',
     path: '/tvshows/',
     view: TvSearchView,
+  },
+  {
+    path: '/404',
+    view: Error404,
+    isDefault: true,
   },
 ];
 
