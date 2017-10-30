@@ -1,9 +1,7 @@
-import Domr from '../Domr';
+import { Component } from '../Domr';
 import TvShowExtendedInfoClose from './TvShowExtendedInfoClose';
 import TvShowBackgroundImg from './TvShowBackgroundImg';
 import TvShowLatestEpisode from './TvShowLatestEpisode';
-
-const Component = Domr.Component;
 
 function Network(network) {
   return `

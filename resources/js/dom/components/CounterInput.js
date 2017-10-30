@@ -1,7 +1,5 @@
-import Domr from '../Domr';
+import { ActiveComponent } from '../Domr';
 import changeColor from '../utils/change-color-based-on-value';
-
-const ActiveComponent = Domr.ActiveComponent;
 
 export default class extends ActiveComponent {
   constructor(value) {

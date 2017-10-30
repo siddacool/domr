@@ -1,6 +1,6 @@
-import Domr from '../Domr/';
+import { Logger } from '../Domr';
 
-const logger = new Domr.Logger('Dynamic Routes 2');
+const logger = new Logger('Dynamic Routes 2');
 
 export default function (data) {
   const wrapper = document.getElementById('wrapper');

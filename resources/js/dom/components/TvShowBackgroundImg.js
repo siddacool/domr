@@ -1,6 +1,4 @@
-import Domr from '../Domr';
-
-const Component = Domr.Component;
+import { Component } from '../Domr';
 
 export default class extends Component {
   constructor(img, className = '') {

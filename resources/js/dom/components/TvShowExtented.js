@@ -1,7 +1,5 @@
-import Domr from '../Domr';
+import { ActiveComponent } from '../Domr';
 import callApi from './tv-show-call-extended-api';
-
-const ActiveComponent = Domr.ActiveComponent;
 
 export default class extends ActiveComponent {
   constructor(showId) {

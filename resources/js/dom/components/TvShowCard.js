@@ -1,8 +1,7 @@
-import Domr from '../Domr';
+import { ActiveComponent, utils } from '../Domr';
 import TvShowCardImg from './TvShowCardImg';
 
-const ActiveComponent = Domr.ActiveComponent;
-const hashLocation = Domr.utils.hashLocation;
+const hashLocation = utils.hashLocation;
 
 function Network(network) {
   return `

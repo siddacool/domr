@@ -1,7 +1,6 @@
-import Domr from '../Domr';
+import { ActiveComponent, utils } from '../Domr';
 
-const ActiveComponent = Domr.ActiveComponent;
-const hashLocation = Domr.utils.hashLocation;
+const hashLocation = utils.hashLocation;
 
 export default class extends ActiveComponent {
   constructor() {

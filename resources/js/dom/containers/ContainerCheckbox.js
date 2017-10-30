@@ -1,10 +1,8 @@
-import Domr from '../Domr';
+import { Component } from '../Domr';
 import CheckListUl from '../components/CheckListUl';
 import AddNewListItem from '../components/AddNewListItem';
 
-const Container = Domr.Component;
-
-export default class extends Container {
+export default class extends Component {
   constructor(id = 'container-checkbox-1', list) {
     super(id);
     this.list = list;

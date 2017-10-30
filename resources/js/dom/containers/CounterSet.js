@@ -1,7 +1,5 @@
-import Domr from '../Domr';
+import { Component } from '../Domr';
 import CounterElm from '../components/CounterElm';
-
-const Container = Domr.Component;
 
 function makeCounters(val) {
   const counterElm = new CounterElm(val);
@@ -9,7 +7,7 @@ function makeCounters(val) {
   return `${counterElm.render()}`;
 }
 
-export default class extends Container {
+export default class extends Component {
   constructor(counterVal = '') {
     super();
     this.counterVal = counterVal;

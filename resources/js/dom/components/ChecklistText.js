@@ -1,7 +1,6 @@
-import Domr from '../Domr';
+import { ActiveComponent } from '../Domr';
 import saveListSnapshot from '../utils/save-list-snapshot';
 
-const ActiveComponent = Domr.ActiveComponent;
 const clearContentEditable = () => {
   const checklistText = document.querySelectorAll('.checklist-text');
 

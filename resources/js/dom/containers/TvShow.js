@@ -1,11 +1,9 @@
-import Domr from '../Domr';
+import { Component } from '../Domr';
 import SearchTvShow from '../components/SearchTvShow';
 import TvShowCardsHolder from '../components/TvShowCardsHolder';
 import TvShowExtented from '../components/TvShowExtented';
 
-const Container = Domr.Component;
-
-export default class extends Container {
+export default class extends Component {
   constructor(defaultShow, id) {
     super('tv-show-container');
     this.show = defaultShow;

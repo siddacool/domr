@@ -1,10 +1,7 @@
-import Domr from '../Domr';
-import changeColor from '../utils/change-color-based-on-value';
+import { Component } from '../Domr';
 import CounterBtnIncrement from './CounterBtnIncrement';
 import CounterBtnDecrement from './CounterBtnDecrement';
 import CounterInput from './CounterInput';
-
-const Component = Domr.Component;
 
 export default class extends Component {
   constructor(startValue = '1') {

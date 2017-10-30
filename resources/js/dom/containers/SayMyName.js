@@ -1,9 +1,7 @@
-import Domr from '../Domr';
+import { Component } from '../Domr';
 import SayMyNameText from '../components/SayMyNameText';
 
-const Container = Domr.Component;
-
-export default class extends Container {
+export default class extends Component {
   constructor(house = 'arya stark', name = '', alias = '') {
     super('say-my-name');
     this.house = house.replace(/_/g, ' ');
