@@ -293,10 +293,6 @@ label svg {
   outline: 1px solid;
 }
 
-.say-my-name strong {
-  text-transform: capitalize;
-}
-
 .tree-top-list-holder {
   background-color: #fff;
   border-radius: 3px;
@@ -712,4 +708,21 @@ label svg {
 
 .tv-show-card--status-ended {
   color: red;
+}
+
+.say-my-name strong {
+  text-transform: capitalize;
+}
+
+.say-my-name-text {
+  display: inline-block;
+  min-height: 25px;
+  min-width: 30px;
+  vertical-align: bottom;
+}
+
+.say-my-name-save {
+  background-color: #fff;
+  display: inline-block;
+  padding: .5rem;
 }
