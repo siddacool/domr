@@ -2,7 +2,6 @@ const path = require('path');
 const AssetsPlugin = require('assets-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const MinifyPlugin = require('babel-minify-webpack-plugin');
 const env = require('./env');
 const clc = require('cli-color');
