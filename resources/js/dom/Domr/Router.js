@@ -5,15 +5,20 @@ import hashLocation from './helpers/hash-location';
 const logger = new Logger();
 const defaults = {
   routes: [],
+  config: {
+    redirectDefault: false,
+    refreshPage: false,
+    clearLog: false,
+  },
 };
 
 export default class {
-  constructor(routes = defaults.routes, config) {
+  constructor(routes = defaults.routes, config = defaults.config) {
     this.routes = routes;
-    this.addView = addView;
     this.redirectDefault = config.redirectDefault || false;
     this.refreshPage = config.refreshPage || false;
     this.clearLog = config.clearLog || false;
+    this.addView = addView;
   }
 
   reloadOnHashChange() {
