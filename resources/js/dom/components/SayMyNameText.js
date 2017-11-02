@@ -1,4 +1,4 @@
-import { ActiveComponent } from '../Domr';
+import { ActiveComponent } from 'domr-a';
 import SayMyNameSave from './SayMyNameSave';
 
 export default class extends ActiveComponent {

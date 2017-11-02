@@ -1,4 +1,4 @@
-import { Component } from '../Domr';
+import { Component } from 'domr-a';
 import CounterBtnIncrement from './CounterBtnIncrement';
 import CounterBtnDecrement from './CounterBtnDecrement';
 import CounterInput from './CounterInput';

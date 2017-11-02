@@ -1,4 +1,4 @@
-import { Component } from '../Domr';
+import { Component } from 'domr-a';
 import TreeLi from '../components/TreeLi';
 import TreeFolder from '../components/TreeFolder';
 

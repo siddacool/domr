@@ -1,4 +1,4 @@
-import { Component } from '../Domr';
+import { Component } from 'domr-a';
 import TvShowExtendedInfoClose from './TvShowExtendedInfoClose';
 import TvShowBackgroundImg from './TvShowBackgroundImg';
 import TvShowLatestEpisode from './TvShowLatestEpisode';

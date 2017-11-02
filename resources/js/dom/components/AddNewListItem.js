@@ -1,4 +1,4 @@
-import { ActiveComponent } from '../Domr';
+import { ActiveComponent } from 'domr-a';
 import CheckListLi from './CheckListLi';
 import saveListSnapshot from '../utils/save-list-snapshot';
 

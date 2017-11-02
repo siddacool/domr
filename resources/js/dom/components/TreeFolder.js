@@ -1,4 +1,4 @@
-import { Component } from '../Domr';
+import { Component } from 'domr-a';
 import TreeFolderExpand from './TreeFolderExpand';
 import TreeDelete from './TreeDelete';
 import TreeNewLi from './TreeNewLi';

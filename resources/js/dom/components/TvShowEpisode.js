@@ -1,4 +1,4 @@
-import { Component } from '../Domr';
+import { Component } from 'domr-a';
 
 function Time(timestamp) {
   const d = new Date(timestamp);

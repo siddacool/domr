@@ -3,6 +3,7 @@ const AssetsPlugin = require('assets-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const MinifyPlugin = require('babel-minify-webpack-plugin');
 const env = require('./env');
 const clc = require('cli-color');
 
@@ -27,7 +28,7 @@ const plugins = [
 ];
 
 if (buildForProduction) {
-  plugins.push(new UglifyJSPlugin());
+  plugins.push(new MinifyPlugin());
   console.log(clc.redBright.bgGreenBright('This is a Production Version'));
   console.log(clc.red('Check env.js'));
 }
@@ -49,7 +50,11 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env'],
+            presets: [
+              ['env', {
+                exclude: ['transform-es2015-classes'],
+              }],
+            ],
           },
         },
       },

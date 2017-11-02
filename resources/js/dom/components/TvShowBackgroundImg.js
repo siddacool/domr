@@ -1,4 +1,4 @@
-import { Component } from '../Domr';
+import { Component } from 'domr-a';
 
 export default class extends Component {
   constructor(img, className = '') {

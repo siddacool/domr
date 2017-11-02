@@ -1,4 +1,4 @@
-import { ActiveComponent } from '../Domr';
+import { ActiveComponent } from 'domr-a';
 import changeColor from '../utils/change-color-based-on-value';
 
 export default class extends ActiveComponent {

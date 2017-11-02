@@ -1,4 +1,4 @@
-import { Component } from '../Domr';
+import { Component } from 'domr-a';
 import CheckListLi from './CheckListLi';
 
 function makeList(itm) {

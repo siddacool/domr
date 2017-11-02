@@ -1,4 +1,4 @@
-import { ActiveComponent, utils } from '../Domr';
+import { ActiveComponent, utils } from 'domr-a';
 import callApi from './tv-shows-call-api';
 
 const hashLocation = utils.hashLocation;

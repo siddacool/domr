@@ -1,4 +1,4 @@
-import { Component } from '../Domr';
+import { Component } from 'domr-a';
 import TreeDelete from './TreeDelete';
 import TreeMakeFolder from './TreeMakeFolder';
 
