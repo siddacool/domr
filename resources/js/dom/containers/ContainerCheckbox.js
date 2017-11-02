@@ -1,4 +1,4 @@
-import { Component } from '../Domr';
+import { Component } from 'domr-a';
 import CheckListUl from '../components/CheckListUl';
 import AddNewListItem from '../components/AddNewListItem';
 

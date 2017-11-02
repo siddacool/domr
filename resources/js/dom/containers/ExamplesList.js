@@ -1,4 +1,4 @@
-import { Component } from '../Domr';
+import { Component } from 'domr-a';
 
 function makeList(list) {
   if (!list.isDefault && list.name) {

@@ -1,9 +1,8 @@
-import { Router } from './Domr';
+import { Router } from 'domr-a';
 import routes from './routes';
 
 const router = new Router(routes, {
   redirectDefault: true,
-  clearLog: true,
 });
 
 router.start();

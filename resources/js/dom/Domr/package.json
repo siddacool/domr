@@ -1,0 +1,27 @@
+{
+  "name": "domr-a",
+  "version": "0.1.0",
+  "description": "a Component Based JavaScript Micro-Framework equipped with a static Router",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siddacool/domr.git"
+  },
+  "keywords": [
+    "framework",
+    "js",
+    "javascript framework",
+    "components",
+    "router",
+    "hash router"
+  ],
+  "author": "Siddhesh Mangela",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/siddacool/domr/issues"
+  },
+  "homepage": "https://github.com/siddacool/domr/wiki"
+}

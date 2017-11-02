@@ -1,4 +1,4 @@
-import { ActiveComponent } from '../Domr';
+import { ActiveComponent } from 'domr-a';
 import callApi from './tv-shows-call-api';
 
 export default class extends ActiveComponent {

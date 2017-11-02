@@ -1,4 +1,4 @@
-import { ActiveComponent, utils } from '../Domr';
+import { ActiveComponent, utils } from 'domr-a';
 import TvShowCardImg from './TvShowCardImg';
 
 const hashLocation = utils.hashLocation;
