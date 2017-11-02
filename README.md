@@ -4,6 +4,9 @@ Component Based JavaScript Micro-Framework equipped with a static Router.
 Made for modern web, it is powered by ES6 iteration of JavaScript and has a very little footprint.
 
 
+**Detailed Setup Can Be Found On following Link**
+https://github.com/siddacool/domr/wiki
+
 ## Getting Started
 
 Install Domr from npm.
@@ -127,4 +130,24 @@ https://github.com/siddacool/domr/wiki/Component#adding-components-to-dom
 ### Utils
 
 https://github.com/siddacool/domr/wiki/Utils
+
+### Important Webpack Setup
+
+* domr doesn't work properly with jsUglify so we are recommending to install [babel-minify-webpack-plugin](https://www.npmjs.com/package/babel-minify-webpack-plugin)
+for minification.
+
+* If you are using babel-env preset, then it is required to exclude `transform-es2015-classes` plugin
+
+```javascript
+presets: ['env']
+
+// will become
+
+presets: [
+ ['env', {
+    exclude: ['transform-es2015-classes'],
+ }]
+]
+
+```  
 
