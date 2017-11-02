@@ -1,6 +1,4 @@
-# You Should Be Watching
-
-Curated list of TV shows which you should be watching
+# Domr Examples
 
 Startup Guide
 
