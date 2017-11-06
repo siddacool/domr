@@ -1,5 +1,6 @@
 import { ActiveComponent } from 'domr-a';
-import callApi from './tv-shows-call-api';
+import makeTvShowCards from './makeTvShowCards';
+import loadApi from '../utils/load-api';
 
 export default class extends ActiveComponent {
   constructor(defaultShow = '', id) {
@@ -16,6 +17,7 @@ export default class extends ActiveComponent {
 
   events() {
     const target = this.target();
-    callApi(this.show, target, this.id);
+    const api = `https://api.tvmaze.com/search/shows?q=${this.show}`;
+    loadApi(api, target, makeTvShowCards);
   }
 }

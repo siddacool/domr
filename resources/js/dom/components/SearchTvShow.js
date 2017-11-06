@@ -1,5 +1,6 @@
 import { ActiveComponent, utils } from 'domr-a';
-import callApi from './tv-shows-call-api';
+import makeTvShowCards from './makeTvShowCards';
+import loadApi from '../utils/load-api';
 
 const hashLocation = utils.hashLocation;
 
@@ -24,7 +25,8 @@ export default class extends ActiveComponent {
     target.addEventListener('input', () => {
       clearTimeout(typeTimer);
       typeTimer = setTimeout(() => {
-        callApi(target.value, cardHolder);
+        const api = `https://api.tvmaze.com/search/shows?q=${target.value}`;
+        loadApi(api, cardHolder, makeTvShowCards);
       }, timeInterval);
     });
 
