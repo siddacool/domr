@@ -1,6 +1,4 @@
 import createElement from './helpers/create-element';
-import lookup from './helpers/lookup';
-import randomizer from './helpers/randomizer';
 import Logger from './Logger';
 
 const logger = new Logger();
@@ -15,20 +13,9 @@ const defaults = {
 };
 
 export default class {
-  constructor(domrid = 'component', random = false) {
-    this.makeId = () => {
-      let thisId = domrid;
-      if (random) {
-        thisId = `${domrid}-${randomizer(7)}`;
-      }
-      return thisId;
-    };
-    this.domrid = this.makeId();
+  constructor() {
     this.parentDefault = defaults.parent;
     this.domContent = defaults.dom;
-    this.lookup = () => {
-      return lookup(this.domrid);
-    };
     this.createElement = createElement;
   }
 
