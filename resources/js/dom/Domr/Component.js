@@ -27,9 +27,7 @@ export default class {
     return this.createElement(this.dom());
   }
 
-  fireEventAfterTimeout() {
-    return '';
-  }
+  fireEventAfterTimeout() {}
 
   addTo(parent = this.parentDefault) {
     parent.insertAdjacentHTML('beforeend', this.renderNodes());
