@@ -1,11 +1,19 @@
 import { ActiveComponent } from 'domr-a';
-import callApi from './tv-shows-call-episode-api';
+import TvShowEpisode from './TvShowEpisode';
+import loadApi from '../utils/load-api';
+
+function getLatestEpisode(obj, target) {
+  const tvShowLatestEpisodeHolder = target;
+  const tvShowEpisode = new TvShowEpisode(obj);
+
+  tvShowEpisode.addTo(tvShowLatestEpisodeHolder);
+}
 
 export default class extends ActiveComponent {
   constructor(episodeId) {
     super('tv-show-latest-episode');
     this.http = episodeId.replace('http:', 'https:');
-    this.episodeId = this.http;
+    this.api = this.http;
   }
 
   dom() {
@@ -17,6 +25,6 @@ export default class extends ActiveComponent {
 
   events() {
     const target = this.target();
-    callApi(this.episodeId, target);
+    loadApi(this.api, target, getLatestEpisode);
   }
 }

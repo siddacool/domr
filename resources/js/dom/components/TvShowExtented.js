@@ -1,5 +1,13 @@
 import { ActiveComponent } from 'domr-a';
-import callApi from './tv-show-call-extended-api';
+import TvShowExtendedInfo from './TvShowExtendedInfo';
+import loadApi from '../utils/load-api';
+
+function makeExtendedCard(obj, target) {
+  const tvShowExtendedHolder = target;
+
+  const tvShowCard = new TvShowExtendedInfo(obj);
+  tvShowCard.replaceContentOf(tvShowExtendedHolder);
+}
 
 export default class extends ActiveComponent {
   constructor(showId) {
@@ -16,7 +24,7 @@ export default class extends ActiveComponent {
 
   events() {
     const target = this.target();
-
-    callApi(this.showId, target);
+    const api = `https://api.tvmaze.com/shows/${this.showId}?embed=cast`;
+    loadApi(api, target, makeExtendedCard);
   }
 }
