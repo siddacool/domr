@@ -3,8 +3,6 @@ function Lookup(elmId) {
 
   if (targetSelector) {
     return targetSelector;
-  } else {
-    console.log(`${elmId} does not exist`);
   }
 }
 

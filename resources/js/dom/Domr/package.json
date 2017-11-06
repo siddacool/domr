@@ -1,6 +1,6 @@
 {
   "name": "domr-a",
-  "version": "0.1.3",
+  "version": "0.1.36",
   "description": "a Component Based JavaScript Micro-Framework equipped with a static Router",
   "main": "index.js",
   "scripts": {

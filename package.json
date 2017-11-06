@@ -43,6 +43,6 @@
     "webpack": "3.0.0"
   },
   "dependencies": {
-    "domr-a": "^0.1.3"
+    "domr-a": "^0.1.36"
   }
 }
