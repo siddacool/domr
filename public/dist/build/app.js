@@ -632,6 +632,9 @@ var routes = [{
   path: '/404',
   view: _Error2.default,
   isDefault: true
+}, {
+  name: 'External',
+  href: 'https://siddacool.github.io/tv-shows/'
 }];
 
 exports.default = routes;
@@ -996,6 +999,7 @@ var router = new _domrA.Router(_routes2.default, {
   redirectDefault: true
 });
 
+router.showRoutes();
 router.start();
 
 /***/ }),
@@ -1109,6 +1113,16 @@ function randomizer(stringLength = 7) {
 
 
 const logger = new __WEBPACK_IMPORTED_MODULE_0__Logger__["a" /* default */]();
+const filterRoutes = (routes) => {
+  const arr = [];
+  routes.forEach((route) => {
+    if (route.path && route.view) {
+      arr.push(route);
+    }
+  });
+
+  return arr;
+};
 const defaults = {
   routes: [],
   config: {
@@ -1120,11 +1134,15 @@ const defaults = {
 
 /* harmony default export */ __webpack_exports__["a"] = (class {
   constructor(routes = defaults.routes, config = defaults.config) {
-    this.routes = routes;
+    this.routes = filterRoutes(routes);
     this.redirectDefault = config.redirectDefault || false;
     this.refreshPage = config.refreshPage || false;
     this.clearLog = config.clearLog || false;
     this.addView = __WEBPACK_IMPORTED_MODULE_1__helpers_add_view__["a" /* default */];
+  }
+
+  showRoutes() {
+    console.log(this.routes);
   }
 
   reloadOnHashChange() {
@@ -1464,8 +1482,10 @@ Object.defineProperty(exports, "__esModule", {
 var _domrA = __webpack_require__(0);
 
 function makeList(list) {
-  if (!list.isDefault && list.name) {
+  if (!list.isDefault && list.name && list.path) {
     return '\n      <li>\n        <a href="#' + (list.psudoPath ? '' + list.psudoPath : '' + list.path) + '" >' + list.name + '</a>\n      </li>\n    ';
+  } else if (!list.path && list.name && list.href) {
+    return '\n      <li>\n        <a href="' + list.href + '" >' + list.name + '</a>\n      </li>\n    ';
   }
 
   return '';
@@ -3373,6 +3393,16 @@ var _hashLocation2 = _interopRequireDefault(_hashLocation);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var logger = new _Logger2.default();
+var filterRoutes = function filterRoutes(routes) {
+  var arr = [];
+  routes.forEach(function (route) {
+    if (route.path && route.view) {
+      arr.push(route);
+    }
+  });
+
+  return arr;
+};
 var defaults = {
   routes: [],
   config: {
@@ -3387,11 +3417,15 @@ exports.default = class {
     var routes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaults.routes;
     var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaults.config;
 
-    this.routes = routes;
+    this.routes = filterRoutes(routes);
     this.redirectDefault = config.redirectDefault || false;
     this.refreshPage = config.refreshPage || false;
     this.clearLog = config.clearLog || false;
     this.addView = _addView2.default;
+  }
+
+  showRoutes() {
+    console.log(this.routes);
   }
 
   reloadOnHashChange() {
