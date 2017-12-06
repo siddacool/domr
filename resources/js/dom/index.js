@@ -5,5 +5,6 @@ const router = new Router(routes, {
   redirectDefault: true,
 });
 
+router.showRoutes();
 router.start();
 
