@@ -50,6 +50,10 @@ const routes = [
     view: Error404,
     isDefault: true,
   },
+  {
+    name: 'External',
+    href: 'https://siddacool.github.io/tv-shows/',
+  },
 ];
 
 export default routes;
