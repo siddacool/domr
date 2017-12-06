@@ -1,10 +1,16 @@
 import { Component } from 'domr-a';
 
 function makeList(list) {
-  if (!list.isDefault && list.name) {
+  if (!list.isDefault && list.name && list.path) {
     return `
       <li>
         <a href="#${list.psudoPath ? `${list.psudoPath}` : `${list.path}`}" >${list.name}</a>
+      </li>
+    `;
+  } else if (!list.path && list.name && list.href) {
+    return `
+      <li>
+        <a href="${list.href}" >${list.name}</a>
       </li>
     `;
   }

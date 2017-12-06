@@ -1881,9 +1881,9 @@ domhandler@^2.3.0:
   dependencies:
     domelementtype "1"
 
-domr-a@^0.1.36:
-  version "0.1.36"
-  resolved "https://registry.yarnpkg.com/domr-a/-/domr-a-0.1.36.tgz#b5236240ba3ce235f054cfa449488d5cc3f6e289"
+domr-a@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/domr-a/-/domr-a-0.1.4.tgz#3ee31509facd2775005fa445f41f2cc47ab7ba03"
 
 domutils@1.5.1, domutils@^1.5.1:
   version "1.5.1"
