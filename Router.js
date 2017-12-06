@@ -3,6 +3,16 @@ import addView from './helpers/add-view';
 import hashLocation from './helpers/hash-location';
 
 const logger = new Logger();
+const filterRoutes = (routes) => {
+  const arr = [];
+  routes.forEach((route) => {
+    if (route.path && route.view) {
+      arr.push(route);
+    }
+  });
+
+  return arr;
+};
 const defaults = {
   routes: [],
   config: {
@@ -14,11 +24,15 @@ const defaults = {
 
 export default class {
   constructor(routes = defaults.routes, config = defaults.config) {
-    this.routes = routes;
+    this.routes = filterRoutes(routes);
     this.redirectDefault = config.redirectDefault || false;
     this.refreshPage = config.refreshPage || false;
     this.clearLog = config.clearLog || false;
     this.addView = addView;
+  }
+
+  showRoutes() {
+    console.log(this.routes);
   }
 
   reloadOnHashChange() {
