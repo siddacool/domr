@@ -2,7 +2,7 @@ const path = require('path');
 const AssetsPlugin = require('assets-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-const MinifyPlugin = require('babel-minify-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const env = require('./env');
 const clc = require('cli-color');
 
@@ -27,7 +27,7 @@ const plugins = [
 ];
 
 if (buildForProduction) {
-  plugins.push(new MinifyPlugin());
+  plugins.push(new UglifyJSPlugin());
   console.log(clc.redBright.bgGreenBright('This is a Production Version'));
   console.log(clc.red('Check env.js'));
 }
