@@ -1,4 +1,5 @@
-import { ActiveComponent, utils } from 'domr-a';
+/*import { ActiveComponent, utils } from 'domr-a';*/
+import { ActiveComponent, utils } from '../Domr2/source/';
 
 const hashLocation = utils.hashLocation;
 
@@ -15,9 +16,7 @@ export default class extends ActiveComponent {
   }
 
   events() {
-    const target = this.target();
-
-    target.addEventListener('click', (e) => {
+    this.addEvent('click', (e) => {
       e.preventDefault();
       const name = document.querySelector('.say-my-name-text--name').textContent.replace(/\s+/g, '_') || '_';
       const house = document.querySelector('.say-my-name-text--house').textContent.replace(/\s+/g, '_') || '_';

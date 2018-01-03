@@ -1,4 +1,5 @@
-import { Component } from 'domr-a';
+/*import { Component } from 'domr-a';*/
+import { Component } from '../Domr2/source/';
 import SearchTvShow from '../components/SearchTvShow';
 import TvShowCardsHolder from '../components/TvShowCardsHolder';
 import TvShowExtented from '../components/TvShowExtented';

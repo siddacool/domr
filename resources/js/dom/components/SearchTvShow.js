@@ -1,4 +1,5 @@
-import { ActiveComponent, utils } from 'domr-a';
+/*import { ActiveComponent, utils } from 'domr-a';*/
+import { ActiveComponent, utils } from '../Domr2/source/';
 import makeTvShowCards from './makeTvShowCards';
 import loadApi from '../utils/load-api';
 
@@ -17,24 +18,23 @@ export default class extends ActiveComponent {
   }
 
   events() {
-    const target = this.target();
-    const cardHolder = document.getElementById('tv-show-card-holder');
     const timeInterval = 1000;
     let typeTimer;
 
-    target.addEventListener('input', () => {
+    this.addEvent('input', (e) => {
       clearTimeout(typeTimer);
       typeTimer = setTimeout(() => {
-        const api = `https://api.tvmaze.com/search/shows?q=${target.value}`;
+        const cardHolder = document.getElementById('tv-show-card-holder');
+        const api = `https://api.tvmaze.com/search/shows?q=${e.target.value}`;
         loadApi(api, cardHolder, makeTvShowCards);
       }, timeInterval);
     });
 
-    target.addEventListener('keydown', (e) => {
+    this.addEvent('keydown', (e) => {
       clearTimeout(typeTimer);
       typeTimer = setTimeout(() => {
         const code = (e.keyCode ? e.keyCode : e.which);
-        const search = target.value.replace(/ /g, '_');
+        const search = e.target.value.replace(/ /g, '_');
         const loc = hashLocation();
 
         if (code === 13) {

@@ -1,4 +1,4 @@
-import { Component } from 'domr-a';
+import { Component } from '../Domr2/source/';
 import SayMyNameText from '../components/SayMyNameText';
 
 export default class extends Component {

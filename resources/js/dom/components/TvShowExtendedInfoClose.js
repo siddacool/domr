@@ -1,4 +1,5 @@
-import { ActiveComponent } from 'domr-a';
+/*import { ActiveComponent } from 'domr-a';*/
+import { ActiveComponent } from '../Domr2/source/';
 
 export default class extends ActiveComponent {
   constructor() {
@@ -14,8 +15,7 @@ export default class extends ActiveComponent {
   }
 
   events() {
-    const target = this.target();
-    target.addEventListener('click', (e) => {
+    this.addEvent('click', (e) => {
       e.preventDefault();
       history.back();
     });

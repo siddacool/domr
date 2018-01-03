@@ -1,6 +1,6 @@
-import { Component } from 'domr-a';
-import CounterBtnIncrement from './CounterBtnIncrement';
-import CounterBtnDecrement from './CounterBtnDecrement';
+/*import { Component } from 'domr-a';*/
+import { Component } from '../Domr2/source/';
+import CounterBtn from './CounterBtn';
 import CounterInput from './CounterInput';
 
 export default class extends Component {
@@ -10,8 +10,8 @@ export default class extends Component {
   }
 
   dom() {
-    const counterBtnIncrement = new CounterBtnIncrement();
-    const counterBtnDecrement = new CounterBtnDecrement();
+    const counterBtnIncrement = new CounterBtn('inc');
+    const counterBtnDecrement = new CounterBtn('dec');
     const counterInput = new CounterInput(this.startValue);
 
     const BtnIncrement = counterBtnIncrement.render();

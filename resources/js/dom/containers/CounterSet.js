@@ -1,4 +1,5 @@
-import { Component } from 'domr-a';
+/*import { Component } from 'domr-a';*/
+import { Component } from '../Domr2/source/';
 import CounterElm from '../components/CounterElm';
 
 function makeCounters(val) {

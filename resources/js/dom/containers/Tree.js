@@ -1,4 +1,5 @@
-import { Component } from 'domr-a';
+/*import { Component } from 'domr-a';*/
+import { Component } from '../Domr2/source/';
 import TreeLi from '../components/TreeLi';
 import TreeFolder from '../components/TreeFolder';
 

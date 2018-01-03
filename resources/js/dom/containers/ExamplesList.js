@@ -1,4 +1,5 @@
-import { Component } from 'domr-a';
+/*import { Component } from 'domr-a';*/
+import { Component } from '../Domr2/source/';
 
 function makeList(list) {
   if (!list.isDefault && list.name && list.path) {
