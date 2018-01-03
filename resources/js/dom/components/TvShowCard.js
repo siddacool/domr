@@ -1,7 +1,6 @@
-import { ActiveComponent, utils } from 'domr-a';
+/*import { ActiveComponent, utils } from 'domr-a';*/
+import { Component } from '../Domr2/source/';
 import TvShowCardImg from './TvShowCardImg';
-
-const hashLocation = utils.hashLocation;
 
 function Network(network) {
   return `
@@ -41,7 +40,7 @@ function Image(img) {
   `;
 }
 
-export default class extends ActiveComponent {
+export default class extends Component {
   constructor(show) {
     super('tv-show-card');
     this.show = show.show;
@@ -56,7 +55,7 @@ export default class extends ActiveComponent {
 
   dom() {
     return `
-      <a class="tv-show-card" data-id="${this.tvid}">
+      <a class="tv-show-card" href="#/tvshows/?id=${this.tvid}">
         <div class="tv-show-card-side tv-show-card-side--a">
           ${Image(this.image)}
         </div>
@@ -69,19 +68,5 @@ export default class extends ActiveComponent {
         </div>
       </a>
     `;
-  }
-
-  events() {
-    const target = this.target();
-
-    target.addEventListener('click', (e) => {
-      e.preventDefault();
-      const thisId = target.getAttribute('data-id');
-      const loc = hashLocation();
-
-      loc.set('query', {
-        id: thisId,
-      });
-    });
   }
 }

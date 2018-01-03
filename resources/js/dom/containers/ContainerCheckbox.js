@@ -1,4 +1,5 @@
-import { Component } from 'domr-a';
+/*import { Component } from 'domr-a';*/
+import { Component } from '../Domr2/source/';
 import CheckListUl from '../components/CheckListUl';
 import AddNewListItem from '../components/AddNewListItem';
 

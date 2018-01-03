@@ -1,4 +1,5 @@
-import { ActiveComponent } from 'domr-a';
+/*import { ActiveComponent } from 'domr-a';*/
+import { ActiveComponent } from '../Domr2/source/';
 import TreeFolder from './TreeFolder';
 
 export default class extends ActiveComponent {
@@ -15,10 +16,9 @@ export default class extends ActiveComponent {
   }
 
   events() {
-    const target = this.target();
-    target.addEventListener('click', (e) => {
+    this.addEvent('click', (e) => {
       e.preventDefault();
-      const li = target.parentElement;
+      const li = e.target.parentElement;
       const ul = li.parentElement;
       const text = li.querySelector('.tree-item--title').textContent;
       const folderContent = '';

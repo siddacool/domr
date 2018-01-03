@@ -1,4 +1,5 @@
-import { ActiveComponent } from 'domr-a';
+/*import { ActiveComponent } from 'domr-a';*/
+import { ActiveComponent } from '../Domr2/source/';
 import TvShowExtendedInfo from './TvShowExtendedInfo';
 import loadApi from '../utils/load-api';
 
@@ -22,8 +23,9 @@ export default class extends ActiveComponent {
     `;
   }
 
-  events() {
+  delay() {
     const target = this.target();
+    console.log(target);
     const api = `https://api.tvmaze.com/shows/${this.showId}?embed=cast`;
     loadApi(api, target, makeExtendedCard);
   }

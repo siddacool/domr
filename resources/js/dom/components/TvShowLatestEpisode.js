@@ -1,4 +1,5 @@
-import { ActiveComponent } from 'domr-a';
+/*import { ActiveComponent } from 'domr-a';*/
+import { ActiveComponent } from '../Domr2/source/';
 import TvShowEpisode from './TvShowEpisode';
 import loadApi from '../utils/load-api';
 
@@ -23,7 +24,7 @@ export default class extends ActiveComponent {
     `;
   }
 
-  events() {
+  delay() {
     const target = this.target();
     loadApi(this.api, target, getLatestEpisode);
   }

@@ -1,4 +1,5 @@
-import { ActiveComponent } from 'domr-a';
+/*import { ActiveComponent } from 'domr-a';*/
+import { ActiveComponent } from '../Domr2/source/';
 import saveListSnapshot from '../utils/save-list-snapshot';
 
 const clearContentEditable = () => {
@@ -23,9 +24,9 @@ export default class extends ActiveComponent {
   }
 
   events() {
-    const target = this.target();
+    this.addEvent('click', (e) => {
+      const target = e.target;
 
-    target.addEventListener('click', () => {
       if (!target.classList.contains('checklist-text--strike')) {
         clearContentEditable();
         target.setAttribute('contenteditable', 'true');
@@ -33,13 +34,13 @@ export default class extends ActiveComponent {
       }
     });
 
-    target.addEventListener('keypress', (e) => {
+    this.addEvent('keypress', (e) => {
       if (e.keyCode === 13) {
-        target.blur();
+        e.target.blur();
       }
     });
 
-    target.addEventListener('focusout', () => {
+    this.addEvent('focusout', () => {
       clearContentEditable();
       saveListSnapshot();
     });

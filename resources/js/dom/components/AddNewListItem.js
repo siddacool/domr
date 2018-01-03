@@ -1,4 +1,5 @@
-import { ActiveComponent } from 'domr-a';
+/*import { ActiveComponent } from 'domr-a';*/
+import { ActiveComponent } from '../Domr2/source/';
 import CheckListLi from './CheckListLi';
 import saveListSnapshot from '../utils/save-list-snapshot';
 
@@ -14,9 +15,9 @@ export default class extends ActiveComponent {
   }
 
   events() {
-    const target = this.target();
-    target.addEventListener('keypress', (e) => {
+    this.addEvent('keypress', (e) => {
       if (e.keyCode === 13) {
+        const target = e.target;
         const checkListLi = new CheckListLi(target.value);
         const checkListUl = document.getElementById('checklist-ul');
 

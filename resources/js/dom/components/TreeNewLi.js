@@ -1,4 +1,5 @@
-import { ActiveComponent } from 'domr-a';
+/*import { ActiveComponent } from 'domr-a';*/
+import { ActiveComponent } from '../Domr2/source/';
 import TreeLi from './TreeLi';
 
 export default class extends ActiveComponent {
@@ -9,17 +10,13 @@ export default class extends ActiveComponent {
 
   dom() {
     return `
-      <input type="text" placeholder="New List" class="tree-new-list"/>
+      <input type="text" placeholder="New List" class="tree-new-list" ${this.focus ? 'autofocus' : ''}/>
     `;
   }
 
   events() {
-    const target = this.target();
-    if (this.focus) {
-      target.focus();
-    }
-
-    target.addEventListener('keypress', (e) => {
+    this.addEvent('keypress', (e) => {
+      const target = e.target;
       if (e.keyCode === 13) {
         const val = target.value.trim();
         const treeLi = new TreeLi(val);

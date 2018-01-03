@@ -1,4 +1,5 @@
-import { Component } from 'domr-a';
+/*import { Component } from 'domr-a';*/
+import { Component } from '../Domr2/source/';
 import ChecklistText from './ChecklistText';
 import ChecklistCheck from './ChecklistCheck';
 import ChecklistDeleteItem from './ChecklistDeleteItem';
