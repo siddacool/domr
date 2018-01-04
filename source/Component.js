@@ -27,6 +27,33 @@ export default class {
     return this.domContent;
   }
 
+  events() {
+  }
+
+  deligateEvents(childen, eventName, eventAction) {
+    this.handlingParent.addEventListener(eventName, (e) => {
+      if (e.target && e.target.matches(childen)) {
+        eventAction(e);
+      }
+    });
+  }
+
+  addEvent(eventName, eventAction) {
+    this.addEventOn(`[data-domr-id="${this.domrid}"]`, eventName, eventAction);
+  }
+
+  addEventOn(childen, eventName, eventAction) {
+    if (eventName instanceof Array && !eventAction) {
+      const eventList = eventName;
+
+      eventList.forEach((eventConfig) => {
+        this.deligateEvents(childen, eventConfig[0], eventConfig[1]);
+      });
+    } else {
+      this.deligateEvents(childen, eventName, eventAction);
+    }
+  }
+
   delay() {
   }
 
@@ -36,19 +63,10 @@ export default class {
     }, 50);
   }
 
-  addEvent(eventName, eventAction) {
-    this.addEventOn(`[data-domr-id="${this.domrid}"]`, eventName, eventAction);
-  }
-
-  addEventOn(childen, eventName, eventAction) {
-    this.handlingParent.addEventListener(eventName, (e) => {
-      if (e.target && e.target.matches(childen)) {
-        eventAction(e);
-      }
-    });
-  }
-
-  events() {
+  render() {
+    this.delayedContent();
+    this.events();
+    return this.createElement(this.dom(), this.domrid);
   }
 
   addTo(parent = this.parentDefault) {
@@ -98,11 +116,5 @@ export default class {
   replaceContentOf(parent = this.parentDefault) {
     parent.innerHTML = this.render();
     this.delayedContent();
-  }
-
-  render() {
-    this.delayedContent();
-    this.events();
-    return this.createElement(this.dom(), this.domrid);
   }
 }
