@@ -1,9 +1,9 @@
-/*import { ActiveComponent, utils } from 'domr-a';*/
-import { ActiveComponent, utils } from '../Domr2/source/';
+/*import { Component, utils } from 'domr-a';*/
+import { Component, utils } from '../Domr2/source/';
 
 const hashLocation = utils.hashLocation;
 
-export default class extends ActiveComponent {
+export default class extends Component {
   constructor() {
     super('say-my-name-save');
     this.id = 'say-my-name-save';

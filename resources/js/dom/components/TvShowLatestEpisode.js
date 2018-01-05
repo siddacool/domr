@@ -1,5 +1,5 @@
-/*import { ActiveComponent } from 'domr-a';*/
-import { ActiveComponent } from '../Domr2/source/';
+/*import { Component } from 'domr-a';*/
+import { Component } from '../Domr2/source/';
 import TvShowEpisode from './TvShowEpisode';
 import loadApi from '../utils/load-api';
 
@@ -10,7 +10,7 @@ function getLatestEpisode(obj, target) {
   tvShowEpisode.addTo(tvShowLatestEpisodeHolder);
 }
 
-export default class extends ActiveComponent {
+export default class extends Component {
   constructor(episodeId) {
     super('tv-show-latest-episode');
     this.http = episodeId.replace('http:', 'https:');

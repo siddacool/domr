@@ -1,7 +1,4 @@
 import hashLocation from './hash-location';
-import Logger from '../Logger';
-
-const logger = new Logger();
 
 function setHash(option) {
   let hash = option;
@@ -95,7 +92,7 @@ function hashLocationSet(field, opt) {
   if (link) {
     redirectTo(link);
   } else {
-    logger.error('incorrect set location params');
+    console.error('incorrect set location params');
   }
 }
 

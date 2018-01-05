@@ -1,4 +1,4 @@
-/*import { ActiveComponent, utils } from 'domr-a';*/
+/*import { Component, utils } from 'domr-a';*/
 import { Component } from '../Domr2/source/';
 import TvShowCardImg from './TvShowCardImg';
 
