@@ -1,8 +1,8 @@
-/*import { ActiveComponent } from 'domr-a';*/
-import { ActiveComponent } from '../Domr2/source/';
+/*import { Component } from 'domr-a';*/
+import { Component } from '../Domr2/source/';
 import TreeFolder from './TreeFolder';
 
-export default class extends ActiveComponent {
+export default class extends Component {
   constructor() {
     super('tree-make-folder');
   }

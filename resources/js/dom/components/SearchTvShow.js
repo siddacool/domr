@@ -1,11 +1,11 @@
-/*import { ActiveComponent, utils } from 'domr-a';*/
-import { ActiveComponent, utils } from '../Domr2/source/';
+/*import { Component, utils } from 'domr-a';*/
+import { Component, utils } from '../Domr2/source/';
 import makeTvShowCards from './makeTvShowCards';
 import loadApi from '../utils/load-api';
 
 const hashLocation = utils.hashLocation;
 
-export default class extends ActiveComponent {
+export default class extends Component {
   constructor(defaultShow = '') {
     super('search-tv-show');
     this.show = defaultShow;

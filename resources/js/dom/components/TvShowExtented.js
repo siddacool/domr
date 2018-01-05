@@ -1,5 +1,5 @@
-/*import { ActiveComponent } from 'domr-a';*/
-import { ActiveComponent } from '../Domr2/source/';
+/*import { Component } from 'domr-a';*/
+import { Component } from '../Domr2/source/';
 import TvShowExtendedInfo from './TvShowExtendedInfo';
 import loadApi from '../utils/load-api';
 
@@ -10,7 +10,7 @@ function makeExtendedCard(obj, target) {
   tvShowCard.replaceContentOf(tvShowExtendedHolder);
 }
 
-export default class extends ActiveComponent {
+export default class extends Component {
   constructor(showId) {
     super();
     this.showId = showId;
