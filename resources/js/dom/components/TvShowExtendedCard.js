@@ -1,5 +1,5 @@
 /*import { Component } from 'domr-a';*/
-import { Component } from '../Domr2/source/';
+import { AjaxGetter } from '../Domr2/source/';
 import TvShowExtendedInfoClose from './TvShowExtendedInfoClose';
 import TvShowBackgroundImg from './TvShowBackgroundImg';
 import TvShowLatestEpisode from './TvShowLatestEpisode';
@@ -14,28 +14,6 @@ function Status(status) {
   const showStatus = status;
   return `
     ${showStatus === 'Ended' ? `<span class="wee-lozenge wee-lozenge--bold--danger"> <span>${status}</span></span>` : ''}
-  `;
-}
-
-function makeEpisode(episodeId) {
-  const tvShowLatestEpisode = new TvShowLatestEpisode(episodeId);
-
-  return `
-    ${episodeId ? `${tvShowLatestEpisode.render()}` : ''}
-  `;
-}
-
-function LastEpisode(previousepisode) {
-  let epId;
-
-  if (previousepisode) {
-    epId = previousepisode.href;
-  }
-
-  return `
-    <div class="tv-show-card--status-holder">
-      ${makeEpisode(epId)}
-    </div>
   `;
 }
 
@@ -111,51 +89,47 @@ function Cast(casts) {
   `;
 }
 
-export default class extends Component {
-  constructor(show) {
-    super();
-    this.show = show;
-    this.img = this.show.image;
-    this.name = this.show.name;
-    this.genre = this.show.genres;
-    this.summary = this.show.summary;
-    this.network = this.show.network;
-    this.cast = this.show._embedded.cast;
-    this.status = this.show.status;
-    this.previousepisode = this.show._links.previousepisode;
+export default class extends AjaxGetter {
+  constructor(api) {
+    super(api);
   }
 
-  dom() {
+  dom(show) {
     const Close = new TvShowExtendedInfoClose();
     let image = '';
-    if (this.img) {
-      image = this.img.original;
+    if (show.image) {
+      image = show.image.original;
     }
     const SideA = new TvShowBackgroundImg(image, 'tv-show-extended-side tv-show-extended-side--a');
-
     return `
       <div class="tv-show-extended-info" id="tv-show-extended-info">
         ${SideA.render()}
         <div class="tv-show-extended-side tv-show-extended-side--b">
           ${Close.render()}
           <div class="tv-show-extended--name">
-            <h1>${this.name} ${Status(this.status)}</h1>
-            ${Network(this.network)}
+            <h1>${show.name} ${Status(show.status)}</h1>
+            ${Network(show.network)}
           </div>
           <div class="tv-show-extended--scrollable">
-              ${Genres(this.genre)}
-              ${LastEpisode(this.previousepisode)}
-              ${Summary(this.summary)}
-              ${OfficalLinks(this.show)}
+              ${Genres(show.genres)}
+              ${Summary(show.summary)}
+              ${OfficalLinks(show)}
               <div class="tv-show-extended--cast">
                 <table>
                   <p><strong>Cast:</strong></p>
-                  ${Cast(this.cast)}
+                  ${Cast(show._embedded.cast)}
                 </table>
               </div>
           </div>
         </div>
       </div>
     `;
+  }
+
+  delay(elm) {
+    const target = this.target();
+    const genresHolder = target.querySelector('.tv-show-extended--genres-holder');
+    const tvShowLatestEpisode = new TvShowLatestEpisode(elm._links.previousepisode.href);
+    tvShowLatestEpisode.addAfter(genresHolder);
   }
 }

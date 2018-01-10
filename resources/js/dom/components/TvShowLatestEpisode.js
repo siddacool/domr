@@ -1,31 +1,28 @@
 /*import { Component } from 'domr-a';*/
-import { Component } from '../Domr2/source/';
-import TvShowEpisode from './TvShowEpisode';
-import loadApi from '../utils/load-api';
+import { AjaxGetter } from '../Domr2/source/';
 
-function getLatestEpisode(obj, target) {
-  const tvShowLatestEpisodeHolder = target;
-  const tvShowEpisode = new TvShowEpisode(obj);
+function Time(timestamp) {
+  const d = new Date(timestamp);
+  const localDate = d.toLocaleDateString();
 
-  tvShowEpisode.addTo(tvShowLatestEpisodeHolder);
+  return `<span class="tv-show-ep-time wee-lozenge wee-lozenge--info">${localDate}</span>`;
 }
 
-export default class extends Component {
-  constructor(episodeId) {
-    super('tv-show-latest-episode');
-    this.http = episodeId.replace('http:', 'https:');
-    this.api = this.http;
+
+export default class extends AjaxGetter {
+  constructor(api) {
+    super(api);
   }
 
-  dom() {
+  dom(element) {
     return `
       <div class="tv-show-latest-episode-holder">
+         <div>
+          <span class="tv-show-ep-season wee-badge wee-badge--primary"> S${element.season} E${element.episode}</span>
+          ${Time(element.timestamp)}
+          <span class="">${element.name}</span>
+        </div>
       </div>
     `;
-  }
-
-  delay() {
-    const target = this.target();
-    loadApi(this.api, target, getLatestEpisode);
   }
 }

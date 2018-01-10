@@ -1,18 +1,10 @@
 /*import { Component } from 'domr-a';*/
 import { Component } from '../Domr2/source/';
-import TvShowExtendedInfo from './TvShowExtendedInfo';
-import loadApi from '../utils/load-api';
-
-function makeExtendedCard(obj, target) {
-  const tvShowExtendedHolder = target;
-
-  const tvShowCard = new TvShowExtendedInfo(obj);
-  tvShowCard.replaceContentOf(tvShowExtendedHolder);
-}
+import TvShowExtendedCard from './TvShowExtendedCard';
 
 export default class extends Component {
   constructor(showId) {
-    super();
+    super('tv-show-extended-holder');
     this.showId = showId;
   }
 
@@ -25,8 +17,8 @@ export default class extends Component {
 
   delay() {
     const target = this.target();
-    console.log(target);
     const api = `https://api.tvmaze.com/shows/${this.showId}?embed=cast`;
-    loadApi(api, target, makeExtendedCard);
+    const tvShowExtendedCard = new TvShowExtendedCard(api);
+    tvShowExtendedCard.replaceContentOf(target);
   }
 }

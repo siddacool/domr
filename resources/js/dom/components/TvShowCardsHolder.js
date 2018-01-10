@@ -1,7 +1,6 @@
 /*import { Component } from 'domr-a';*/
 import { Component } from '../Domr2/source/';
-import makeTvShowCards from './makeTvShowCards';
-import loadApi from '../utils/load-api';
+import TvShowCard from './TvShowCard';
 
 export default class extends Component {
   constructor(defaultShow = '', id) {
@@ -19,6 +18,7 @@ export default class extends Component {
   delay() {
     const self = this.target();
     const api = `https://api.tvmaze.com/search/shows?q=${this.show}`;
-    loadApi(api, self, makeTvShowCards);
+    const tvShowCard = new TvShowCard(api);
+    tvShowCard.replaceContentOf(self);
   }
 }
