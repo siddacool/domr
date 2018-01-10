@@ -1,5 +1,5 @@
-/*import { Component, utils } from 'domr-a';*/
-import { Component } from '../Domr2/source/';
+/*import { Component } from 'domr-a';*/
+import { AjaxGetter } from '../Domr2/source/';
 import TvShowCardImg from './TvShowCardImg';
 
 function Network(network) {
@@ -40,31 +40,24 @@ function Image(img) {
   `;
 }
 
-export default class extends Component {
-  constructor(show) {
-    super('tv-show-card');
-    this.show = show.show;
-    this.tvid = this.show.id;
-    this.name = this.show.name;
-    this.network = this.show.network;
-    this.genres = this.show.genres;
-    this.image = this.show.image;
-    this.imdb = this.show.externals.imdb;
-    this.officialSite = this.show.officialSite;
+export default class extends AjaxGetter {
+  constructor(api) {
+    super(api, 'tv-show-card');
   }
 
-  dom() {
+  dom(element) {
+    console.log(element);
     return `
-      <a class="tv-show-card" href="#/tvshows/?id=${this.tvid}">
+      <a class="tv-show-card" href="#/tvshows/?id=${element.show.id}">
         <div class="tv-show-card-side tv-show-card-side--a">
-          ${Image(this.image)}
+          ${Image(element.show.image)}
         </div>
         <div class="tv-show-card-side tv-show-card-side--b">
           <div class="tv-show-card--name">
-            <h3>${this.name}</h3>
+            <h3>${element.show.name}</h3>
           </div>
-          ${Network(this.network)}
-          ${Genres(this.genres)}
+          ${Network(element.show.network)}
+          ${Genres(element.show.genres)}
         </div>
       </a>
     `;

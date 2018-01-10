@@ -1,7 +1,6 @@
 /*import { Component, utils } from 'domr-a';*/
 import { Component, utils } from '../Domr2/source/';
-import makeTvShowCards from './makeTvShowCards';
-import loadApi from '../utils/load-api';
+import TvShowCard from './TvShowCard';
 
 const hashLocation = utils.hashLocation;
 
@@ -26,7 +25,8 @@ export default class extends Component {
       typeTimer = setTimeout(() => {
         const cardHolder = document.getElementById('tv-show-card-holder');
         const api = `https://api.tvmaze.com/search/shows?q=${e.target.value}`;
-        loadApi(api, cardHolder, makeTvShowCards);
+        const tvShowCard = new TvShowCard(api);
+        tvShowCard.replaceContentOf(cardHolder);
       }, timeInterval);
     });
 

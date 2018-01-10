@@ -2,7 +2,7 @@
 import { Component } from '../Domr2/source/';
 import SearchTvShow from '../components/SearchTvShow';
 import TvShowCardsHolder from '../components/TvShowCardsHolder';
-import TvShowExtented from '../components/TvShowExtented';
+import TvShowExtentedHolder from '../components/TvShowExtentedHolder';
 
 export default class extends Component {
   constructor(defaultShow, id) {
@@ -14,14 +14,15 @@ export default class extends Component {
   dom() {
     const searchTvShow = new SearchTvShow(this.show);
     const tvShowCardsHolder = new TvShowCardsHolder(this.show);
-    const tvShowExtented = new TvShowExtented(this.id);
+    const tvShowExtentedHolder = new TvShowExtentedHolder(this.id);
+    console.log(this.id);
     return `
       <div class="tv-show-container">
         <div class="tv-show-search-container">
           ${searchTvShow.render()}
         </div>
         ${tvShowCardsHolder.render()}
-        ${this.id ? `${tvShowExtented.render()}` : ''}
+        ${this.id ? `${tvShowExtentedHolder.render()}` : ''}
       </div>
     `;
   }
