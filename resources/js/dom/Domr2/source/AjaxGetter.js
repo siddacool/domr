@@ -96,4 +96,19 @@ export default class {
       console.error('sibling not found');
     }
   }
+
+  replaceWith(sibling) {
+    if (sibling) {
+      const parent = sibling.parentElement;
+
+      if (parent) {
+        this.addAfter(sibling);
+        parent.removeChild(sibling);
+      } else {
+        console.warn('sibling has no parentElement');
+      }
+    } else {
+      console.error('sibling not found');
+    }
+  }
 }
