@@ -49,6 +49,7 @@ export default class {
             console.log(obj);
           }
 
+          this.events();
           this.delayedContent(obj);
         }
       }
@@ -63,6 +64,44 @@ export default class {
     setTimeout(() => {
       this.delay(obj);
     }, 50);
+  }
+
+  events() {
+
+  }
+
+  eventMain(parent, childen, eventName, eventAction) {
+    const child = parent.querySelectorAll(childen);
+
+    for (let i = 0; i < child.length; i++) {
+      child[i].addEventListener(eventName, (e) => {
+        eventAction(child[i], e);
+      });
+    }
+  }
+
+  eventGrouping(parent, childen, eventName, eventAction) {
+    if (eventName instanceof Array && !eventAction) {
+      const eventList = eventName;
+
+      eventList.forEach((eventConfig) => {
+        this.eventMain(parent, childen, eventConfig[0], eventConfig[1]);
+      });
+    } else {
+      this.eventMain(parent, childen, eventName, eventAction);
+    }
+  }
+
+  addEvent(eventName, eventAction) {
+    this.eventGrouping(document, `[data-domr-id="${this.domrid}"]`, eventName, eventAction);
+  }
+
+  addEventOn(childen, eventName, eventAction) {
+    const allObj = document.querySelectorAll(`[data-domr-id="${this.domrid}"]`);
+
+    for (let i = 0; i < allObj.length; i++) {
+      this.eventGrouping(allObj[i], childen, eventName, eventAction);
+    }
   }
 
   logData() {
@@ -92,6 +131,21 @@ export default class {
   addAfter(sibling) {
     if (sibling) {
       this.loadApi(sibling, 'addAfter');
+    } else {
+      console.error('sibling not found');
+    }
+  }
+
+  replaceWith(sibling) {
+    if (sibling) {
+      const parent = sibling.parentElement;
+
+      if (parent) {
+        this.addAfter(sibling);
+        parent.removeChild(sibling);
+      } else {
+        console.warn('sibling has no parentElement');
+      }
     } else {
       console.error('sibling not found');
     }

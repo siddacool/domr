@@ -15,11 +15,12 @@ export default class extends AjaxGetter {
   }
 
   dom(element) {
+    console.log(element);
     return `
       <div class="tv-show-latest-episode-holder">
          <div>
-          <span class="tv-show-ep-season wee-badge wee-badge--primary"> S${element.season} E${element.episode}</span>
-          ${Time(element.timestamp)}
+          <span class="tv-show-ep-season wee-badge wee-badge--primary"> S${element.season} E${element.number}</span>
+          ${Time(element.airstamp)}
           <span class="">${element.name}</span>
         </div>
       </div>
