@@ -62,4 +62,25 @@ export default class extends AjaxGetter {
       </a>
     `;
   }
+
+  events() {
+    this.addEvent([
+      [
+        'click',
+        (target, e) => {
+          console.log('ff');
+        },
+      ],
+      [
+        'mouseover',
+        (target, e) => {
+          console.log('bla');
+        },
+      ],
+    ]);
+
+    this.addEventOn('.tv-show-card--name', 'mouseover', (target, e) => {
+      console.log(target);
+    });
+  }
 }

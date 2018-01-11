@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "domr-a": "^0.2.1",
-    "domr-b": "^0.2.1",
+    "domr-b": "^0.2.2",
     "uglify-js": "^3.3.2",
     "uglifyjs-webpack-plugin": "^1.1.5"
   }

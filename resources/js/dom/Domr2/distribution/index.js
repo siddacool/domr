@@ -27,4 +27,3 @@ exports.Component = _Component2.default;
 exports.AjaxGetter = _AjaxGetter2.default;
 exports.Router = _Router2.default;
 exports.utils = _utils2.default;
-/*import Logger from './Logger';*/
