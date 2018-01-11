@@ -49,6 +49,7 @@ export default class {
             console.log(obj);
           }
 
+          this.events();
           this.delayedContent(obj);
         }
       }
@@ -63,6 +64,32 @@ export default class {
     setTimeout(() => {
       this.delay(obj);
     }, 50);
+  }
+
+  events() {
+
+  }
+
+  eventMain(parent, childen, eventName, eventAction) {
+    const child = parent.querySelectorAll(childen);
+
+    for (let i = 0; i < child.length; i++) {
+      child[i].addEventListener(eventName, (e) => {
+        eventAction(child[i], e);
+      });
+    }
+  }
+
+  addEvent(eventName, eventAction) {
+    this.eventMain(document, `[data-domr-id="${this.domrid}"]`, eventName, eventAction);
+  }
+
+  addEventOn(childen, eventName, eventAction) {
+    const allObj = document.querySelectorAll(`[data-domr-id="${this.domrid}"]`);
+
+    for (let i = 0; i < allObj.length; i++) {
+      this.eventMain(allObj[i], childen, eventName, eventAction);
+    }
   }
 
   logData() {
