@@ -80,15 +80,27 @@ export default class {
     }
   }
 
+  eventGrouping(parent, childen, eventName, eventAction) {
+    if (eventName instanceof Array && !eventAction) {
+      const eventList = eventName;
+
+      eventList.forEach((eventConfig) => {
+        this.eventMain(parent, childen, eventConfig[0], eventConfig[1]);
+      });
+    } else {
+      this.eventMain(parent, childen, eventName, eventAction);
+    }
+  }
+
   addEvent(eventName, eventAction) {
-    this.eventMain(document, `[data-domr-id="${this.domrid}"]`, eventName, eventAction);
+    this.eventGrouping(document, `[data-domr-id="${this.domrid}"]`, eventName, eventAction);
   }
 
   addEventOn(childen, eventName, eventAction) {
     const allObj = document.querySelectorAll(`[data-domr-id="${this.domrid}"]`);
 
     for (let i = 0; i < allObj.length; i++) {
-      this.eventMain(allObj[i], childen, eventName, eventAction);
+      this.eventGrouping(allObj[i], childen, eventName, eventAction);
     }
   }
 
