@@ -61,9 +61,7 @@ export default class {
   }
 
   delayedContent(obj) {
-    setTimeout(() => {
-      this.delay(obj);
-    }, 50);
+    this.delay(obj);
   }
 
   events() {

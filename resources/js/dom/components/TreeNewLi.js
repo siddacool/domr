@@ -15,8 +15,7 @@ export default class extends Component {
   }
 
   events() {
-    this.addEvent('keypress', (e) => {
-      const target = e.target;
+    this.addEvent('keypress', (target, e) => {
       if (e.keyCode === 13) {
         const val = target.value.trim();
         const treeLi = new TreeLi(val);

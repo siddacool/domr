@@ -32,8 +32,7 @@ export default class extends Component {
   }
 
   events() {
-    this.addEventOn(`${this.self} .checklist-check`, 'click', (e) => {
-      const target = e.target;
+    this.addEventOn(`${this.self} .checklist-check`, 'click', (target) => {
       const checklistText = target.parentElement.querySelector('.checklist-text');
 
       checklistText.classList.toggle('checklist-text--strike');
@@ -42,9 +41,7 @@ export default class extends Component {
 
     this.addEventOn(`${this.self} .checklist-text`, [
       [
-        'click', (e) => {
-          const target = e.target;
-
+        'click', (target,e) => {
           if (!target.classList.contains('checklist-text--strike')) {
             clearContentEditable();
             target.setAttribute('contenteditable', 'true');
@@ -53,7 +50,7 @@ export default class extends Component {
         },
       ],
       [
-        'keypress', (e) => {
+        'keypress', (target, e) => {
           if (e.keyCode === 13) {
             e.target.blur();
           }
@@ -67,9 +64,8 @@ export default class extends Component {
       ],
     ]);
 
-    this.addEventOn(`${this.self} .checklist-delete-item`, 'click', (e) => {
+    this.addEventOn(`${this.self} .checklist-delete-item`, 'click', (target, e) => {
       e.preventDefault();
-      const target = e.target;
       const parent = target.parentElement;
       const grandParent = parent.parentElement;
 

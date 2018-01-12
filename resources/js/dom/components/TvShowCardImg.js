@@ -26,7 +26,7 @@ export default class extends Component {
   }
 
   events() {
-    this.addEvent('mouseover', (e) => {
+    this.addEvent('mouseover', () => {
       console.log('yipee');
     });
   }

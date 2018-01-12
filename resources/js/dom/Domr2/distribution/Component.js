@@ -58,7 +58,7 @@ var _class = function () {
     value: function deligateEvents(childen, eventName, eventAction) {
       this.handlingParent.addEventListener(eventName, function (e) {
         if (e.target && e.target.matches(childen)) {
-          eventAction(e);
+          eventAction(e.target, e);
         }
       });
     }
@@ -95,18 +95,23 @@ var _class = function () {
       }, 50);
     }
   }, {
+    key: 'optimizedDom',
+    value: function optimizedDom() {
+      this.events();
+      return this.createElement(this.dom(), this.domrid);
+    }
+  }, {
     key: 'render',
     value: function render() {
       this.delayedContent();
-      this.events();
-      return this.createElement(this.dom(), this.domrid);
+      return this.optimizedDom();
     }
   }, {
     key: 'addTo',
     value: function addTo() {
       var parent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.parentDefault;
 
-      parent.insertAdjacentHTML('beforeend', this.render());
+      parent.insertAdjacentHTML('beforeend', this.optimizedDom());
       this.delayedContent();
     }
   }, {
@@ -114,14 +119,14 @@ var _class = function () {
     value: function addFromStartTo() {
       var parent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.parentDefault;
 
-      parent.insertAdjacentHTML('afterbegin', this.render());
+      parent.insertAdjacentHTML('afterbegin', this.optimizedDom());
       this.delayedContent();
     }
   }, {
     key: 'addBefore',
     value: function addBefore(sibling) {
       if (sibling) {
-        sibling.insertAdjacentHTML('beforebegin', this.render());
+        sibling.insertAdjacentHTML('beforebegin', this.optimizedDom());
         this.delayedContent();
       } else {
         console.error('sibling not found');
@@ -131,7 +136,7 @@ var _class = function () {
     key: 'addAfter',
     value: function addAfter(sibling) {
       if (sibling) {
-        sibling.insertAdjacentHTML('afterend', this.render());
+        sibling.insertAdjacentHTML('afterend', this.optimizedDom());
         this.delayedContent();
       } else {
         console.error('sibling not found');
@@ -144,7 +149,7 @@ var _class = function () {
         var parent = sibling.parentElement;
 
         if (parent) {
-          sibling.insertAdjacentHTML('afterend', this.render());
+          sibling.insertAdjacentHTML('afterend', this.optimizedDom());
           parent.removeChild(sibling);
           this.delayedContent();
         } else {
@@ -159,7 +164,7 @@ var _class = function () {
     value: function replaceContentOf() {
       var parent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.parentDefault;
 
-      parent.innerHTML = this.render();
+      parent.innerHTML = this.optimizedDom();
       this.delayedContent();
     }
   }]);

@@ -16,19 +16,18 @@ export default class extends Component {
   }
 
   events() {
-    this.addEvent('click', (e) => {
-      const target = e.target;
+    this.addEvent('click', (target) => {
       target.setAttribute('contenteditable', true);
       target.focus();
     });
 
-    this.addEvent('focusout', (e) => {
-      e.target.removeAttribute('contenteditable');
+    this.addEvent('focusout', (target) => {
+      target.removeAttribute('contenteditable');
     });
 
-    this.addEvent('input', (e) => {
+    this.addEvent('input', (target) => {
       const save = document.getElementById('say-my-name-save');
-      const parent = e.target.parentElement.parentElement;
+      const parent = target.parentElement.parentElement;
 
       if (!save) {
         const sayMyNameSave = new SayMyNameSave();
@@ -37,7 +36,7 @@ export default class extends Component {
       }
     });
 
-    this.addEvent('keydown', (e) => {
+    this.addEvent('keydown', (target, e) => {
       const code = (e.keyCode ? e.keyCode : e.which);
       const save = document.getElementById('say-my-name-save');
 

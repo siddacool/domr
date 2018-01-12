@@ -16,7 +16,7 @@ export default class extends Component {
   }
 
   events() {
-    this.addEvent('click', (e) => {
+    this.addEvent('click', (target, e) => {
       e.preventDefault();
       const name = document.querySelector('.say-my-name-text--name').textContent.replace(/\s+/g, '_') || '_';
       const house = document.querySelector('.say-my-name-text--house').textContent.replace(/\s+/g, '_') || '_';
