@@ -16,9 +16,9 @@ export default class extends Component {
   }
 
   events() {
-    this.addEvent('click', (e) => {
+    this.addEvent('click', (target, e) => {
       e.preventDefault();
-      const li = e.target.parentElement;
+      const li = target.parentElement;
       const ul = li.parentElement;
       const text = li.querySelector('.tree-item--title').textContent;
       const folderContent = '';

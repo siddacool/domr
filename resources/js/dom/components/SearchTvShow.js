@@ -20,21 +20,21 @@ export default class extends Component {
     const timeInterval = 1000;
     let typeTimer;
 
-    this.addEvent('input', (e) => {
+    this.addEvent('input', (target) => {
       clearTimeout(typeTimer);
       typeTimer = setTimeout(() => {
         const cardHolder = document.getElementById('tv-show-card-holder');
-        const api = `https://api.tvmaze.com/search/shows?q=${e.target.value}`;
+        const api = `https://api.tvmaze.com/search/shows?q=${target.value}`;
         const tvShowCard = new TvShowCard(api);
         tvShowCard.replaceContentOf(cardHolder);
       }, timeInterval);
     });
 
-    this.addEvent('keydown', (e) => {
+    this.addEvent('keydown', (target, e) => {
       clearTimeout(typeTimer);
       typeTimer = setTimeout(() => {
         const code = (e.keyCode ? e.keyCode : e.which);
-        const search = e.target.value.replace(/ /g, '_');
+        const search = target.value.replace(/ /g, '_');
         const loc = hashLocation();
 
         if (code === 13) {

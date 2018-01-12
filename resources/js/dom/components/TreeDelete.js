@@ -15,9 +15,8 @@ export default class extends Component {
   }
 
   events() {
-    this.addEvent('click', (e) => {
+    this.addEvent('click', (target, e) => {
       e.preventDefault();
-      const target = e.target;
       let parent = target.parentElement;
       let grandParent = parent.parentElement;
 

@@ -16,9 +16,9 @@ export default class extends Component {
   }
 
   events() {
-    this.addEvent('click', (e) => {
+    this.addEvent('click', (target, e) => {
       e.preventDefault();
-      const parent = e.target.parentElement;
+      const parent = target.parentElement;
 
       parent.classList.toggle('expanded');
     });

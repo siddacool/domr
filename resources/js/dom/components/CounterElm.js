@@ -24,9 +24,8 @@ export default class extends Component {
   }
 
   events() {
-    this.addEventOn(`${this.self} .counter-btn`, 'click', (e) => {
+    this.addEventOn(`${this.self} .counter-btn`, 'click', (target, e) => {
       e.preventDefault();
-      const target = e.target;
       const counter = target.parentElement.querySelector('input');
       const counterValue = Number(counter.value);
 
@@ -38,8 +37,7 @@ export default class extends Component {
       counter.style.color = changeColor(counter.value);
     });
 
-    this.addEventOn(`${this.self} input`, 'input', (e) => {
-      const target = e.target;
+    this.addEventOn(`${this.self} input`, 'input', (target) => {
       const value = target.value.replace(/[^\d.-]/g, '');
       target.style.color = changeColor(value);
       target.value = value;
