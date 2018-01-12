@@ -33,7 +33,7 @@ export default class {
   deligateEvents(childen, eventName, eventAction) {
     this.handlingParent.addEventListener(eventName, (e) => {
       if (e.target && e.target.matches(childen)) {
-        eventAction(e);
+        eventAction(e.target, e);
       }
     });
   }
@@ -63,25 +63,29 @@ export default class {
     }, 50);
   }
 
-  render() {
-    this.delayedContent();
+  optimizedDom() {
     this.events();
     return this.createElement(this.dom(), this.domrid);
   }
 
+  render() {
+    this.delayedContent();
+    return this.optimizedDom();
+  }
+
   addTo(parent = this.parentDefault) {
-    parent.insertAdjacentHTML('beforeend', this.render());
+    parent.insertAdjacentHTML('beforeend', this.optimizedDom());
     this.delayedContent();
   }
 
   addFromStartTo(parent = this.parentDefault) {
-    parent.insertAdjacentHTML('afterbegin', this.render());
+    parent.insertAdjacentHTML('afterbegin', this.optimizedDom());
     this.delayedContent();
   }
 
   addBefore(sibling) {
     if (sibling) {
-      sibling.insertAdjacentHTML('beforebegin', this.render());
+      sibling.insertAdjacentHTML('beforebegin', this.optimizedDom());
       this.delayedContent();
     } else {
       console.error('sibling not found');
@@ -90,7 +94,7 @@ export default class {
 
   addAfter(sibling) {
     if (sibling) {
-      sibling.insertAdjacentHTML('afterend', this.render());
+      sibling.insertAdjacentHTML('afterend', this.optimizedDom());
       this.delayedContent();
     } else {
       console.error('sibling not found');
@@ -102,7 +106,7 @@ export default class {
       const parent = sibling.parentElement;
 
       if (parent) {
-        sibling.insertAdjacentHTML('afterend', this.render());
+        sibling.insertAdjacentHTML('afterend', this.optimizedDom());
         parent.removeChild(sibling);
         this.delayedContent();
       } else {
@@ -114,7 +118,7 @@ export default class {
   }
 
   replaceContentOf(parent = this.parentDefault) {
-    parent.innerHTML = this.render();
+    parent.innerHTML = this.optimizedDom();
     this.delayedContent();
   }
 }
