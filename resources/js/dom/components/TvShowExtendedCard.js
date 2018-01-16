@@ -1,5 +1,5 @@
 /*import { Component } from 'domr-a';*/
-import { AjaxGetter } from '../Domr2/source/';
+import { DataComponent } from '../Domr2/source/';
 import TvShowExtendedInfoClose from './TvShowExtendedInfoClose';
 import TvShowBackgroundImg from './TvShowBackgroundImg';
 import TvShowLatestEpisode from './TvShowLatestEpisode';
@@ -89,7 +89,7 @@ function Cast(casts) {
   `;
 }
 
-export default class extends AjaxGetter {
+export default class extends DataComponent {
   constructor(api) {
     super(api);
   }

@@ -23,7 +23,7 @@ const defaults = {
 export default class {
   constructor(routes = defaults.routes, config = defaults.config) {
     this.routes = filterRoutes(routes);
-    this.redirectDefault = config.redirectDefault || false;
+    this.redirectDefault = config.redirectDefault || true;
     this.refreshPage = config.refreshPage || false;
     this.clearLog = config.clearLog || false;
     this.addView = addView;

@@ -1749,9 +1749,9 @@ domr-a@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/domr-a/-/domr-a-0.2.1.tgz#cab5b32032bdd55d356bc7384228285e7be3a2b4"
 
-domr-b@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/domr-b/-/domr-b-0.2.3.tgz#c87f0226287adb9673e0d0516a08147ae7f07ff0"
+domr-b@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/domr-b/-/domr-b-0.2.4.tgz#a973ac8851faf89c7c0f20903cd8d54f6b8c974d"
 
 domutils@1.5.1, domutils@^1.5.1:
   version "1.5.1"

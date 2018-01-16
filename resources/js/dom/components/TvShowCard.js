@@ -1,5 +1,5 @@
 /*import { Component } from 'domr-a';*/
-import { AjaxGetter } from '../Domr2/source/';
+import { DataComponent } from '../Domr2/source/';
 import TvShowCardImg from './TvShowCardImg';
 
 function Network(network) {
@@ -40,7 +40,7 @@ function Image(img) {
   `;
 }
 
-export default class extends AjaxGetter {
+export default class extends DataComponent {
   constructor(api) {
     super(api, 'tv-show-card');
   }

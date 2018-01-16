@@ -45,7 +45,7 @@ var _class = function () {
     _classCallCheck(this, _class);
 
     this.routes = filterRoutes(routes);
-    this.redirectDefault = config.redirectDefault || false;
+    this.redirectDefault = config.redirectDefault || true;
     this.refreshPage = config.refreshPage || false;
     this.clearLog = config.clearLog || false;
     this.addView = _addView2.default;
