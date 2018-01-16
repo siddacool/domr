@@ -4,9 +4,6 @@ Component Based JavaScript Micro-Framework equipped with a static Router.
 Made for modern web, it is powered by ES6 iteration of JavaScript and has a very little footprint.
 
 
-**Detailed Setup Can Be Found On following Link**
-https://github.com/siddacool/domr/wiki
-
 ## Getting Started
 
 Install Domr from npm.
