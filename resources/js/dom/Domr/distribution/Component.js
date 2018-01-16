@@ -10,15 +10,17 @@ var _createElement = require('./helpers/create-element');
 
 var _createElement2 = _interopRequireDefault(_createElement);
 
-var _Logger = require('./Logger');
+var _lookup = require('./helpers/lookup');
 
-var _Logger2 = _interopRequireDefault(_Logger);
+var _lookup2 = _interopRequireDefault(_lookup);
+
+var _randomizer = require('./helpers/randomizer');
+
+var _randomizer2 = _interopRequireDefault(_randomizer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var logger = new _Logger2.default();
 
 var defaults = {
   parent: document.getElementById('wrapper'),
@@ -27,11 +29,20 @@ var defaults = {
 
 var _class = function () {
   function _class() {
+    var _this = this;
+
+    var domrid = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'domr-component';
+
     _classCallCheck(this, _class);
 
     this.parentDefault = defaults.parent;
     this.domContent = defaults.dom;
     this.createElement = _createElement2.default;
+    this.domrid = domrid + '-' + (0, _randomizer2.default)(7);
+    this.target = function () {
+      return (0, _lookup2.default)(_this.domrid);
+    };
+    this.handlingParent = this.parentDefault || document.querySelector('body');
   }
 
   _createClass(_class, [{
@@ -40,47 +51,95 @@ var _class = function () {
       return this.domContent;
     }
   }, {
-    key: 'renderNodes',
-    value: function renderNodes() {
-      return this.createElement(this.dom());
+    key: 'events',
+    value: function events() {}
+  }, {
+    key: 'deligateEvents',
+    value: function deligateEvents(childen, eventName, eventAction) {
+      this.handlingParent.addEventListener(eventName, function (e) {
+        if (e.target && e.target.matches(childen)) {
+          eventAction(e.target, e);
+        }
+      });
     }
   }, {
-    key: 'fireEventAfterTimeout',
-    value: function fireEventAfterTimeout() {}
+    key: 'addEvent',
+    value: function addEvent(eventName, eventAction) {
+      this.addEventOn('[data-domr-id="' + this.domrid + '"]', eventName, eventAction);
+    }
+  }, {
+    key: 'addEventOn',
+    value: function addEventOn(childen, eventName, eventAction) {
+      var _this2 = this;
+
+      if (eventName instanceof Array && !eventAction) {
+        var eventList = eventName;
+
+        eventList.forEach(function (eventConfig) {
+          _this2.deligateEvents(childen, eventConfig[0], eventConfig[1]);
+        });
+      } else {
+        this.deligateEvents(childen, eventName, eventAction);
+      }
+    }
+  }, {
+    key: 'delay',
+    value: function delay() {}
+  }, {
+    key: 'delayedContent',
+    value: function delayedContent() {
+      var _this3 = this;
+
+      setTimeout(function () {
+        _this3.delay();
+      }, 50);
+    }
+  }, {
+    key: 'optimizedDom',
+    value: function optimizedDom() {
+      this.events();
+      return this.createElement(this.dom(), this.domrid);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      this.delayedContent();
+      return this.optimizedDom();
+    }
   }, {
     key: 'addTo',
     value: function addTo() {
       var parent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.parentDefault;
 
-      parent.insertAdjacentHTML('beforeend', this.renderNodes());
-      this.fireEventAfterTimeout();
+      parent.insertAdjacentHTML('beforeend', this.optimizedDom());
+      this.delayedContent();
     }
   }, {
     key: 'addFromStartTo',
     value: function addFromStartTo() {
       var parent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.parentDefault;
 
-      parent.insertAdjacentHTML('afterbegin', this.renderNodes());
-      this.fireEventAfterTimeout();
+      parent.insertAdjacentHTML('afterbegin', this.optimizedDom());
+      this.delayedContent();
     }
   }, {
     key: 'addBefore',
     value: function addBefore(sibling) {
       if (sibling) {
-        sibling.insertAdjacentHTML('beforebegin', this.renderNodes());
-        this.fireEventAfterTimeout();
+        sibling.insertAdjacentHTML('beforebegin', this.optimizedDom());
+        this.delayedContent();
       } else {
-        logger.error('sibling not found');
+        console.error('sibling not found');
       }
     }
   }, {
     key: 'addAfter',
     value: function addAfter(sibling) {
       if (sibling) {
-        sibling.insertAdjacentHTML('afterend', this.renderNodes());
-        this.fireEventAfterTimeout();
+        sibling.insertAdjacentHTML('afterend', this.optimizedDom());
+        this.delayedContent();
       } else {
-        logger.error('sibling not found');
+        console.error('sibling not found');
       }
     }
   }, {
@@ -90,14 +149,14 @@ var _class = function () {
         var parent = sibling.parentElement;
 
         if (parent) {
-          sibling.insertAdjacentHTML('afterend', this.renderNodes());
+          sibling.insertAdjacentHTML('afterend', this.optimizedDom());
           parent.removeChild(sibling);
-          this.fireEventAfterTimeout();
+          this.delayedContent();
         } else {
-          logger.warn('sibling has no parentElement');
+          console.warn('sibling has no parentElement');
         }
       } else {
-        logger.error('sibling not found');
+        console.error('sibling not found');
       }
     }
   }, {
@@ -105,14 +164,8 @@ var _class = function () {
     value: function replaceContentOf() {
       var parent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.parentDefault;
 
-      parent.innerHTML = this.renderNodes();
-      this.fireEventAfterTimeout();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      this.fireEventAfterTimeout();
-      return this.renderNodes();
+      parent.innerHTML = this.optimizedDom();
+      this.delayedContent();
     }
   }]);
 
