@@ -1,5 +1,5 @@
 /*import { Component } from 'domr-a';*/
-import { AjaxGetter } from '../Domr2/source/';
+import { DataComponent } from '../Domr2/source/';
 
 function Time(timestamp) {
   const d = new Date(timestamp);
@@ -9,7 +9,7 @@ function Time(timestamp) {
 }
 
 
-export default class extends AjaxGetter {
+export default class extends DataComponent {
   constructor(api) {
     super(api);
   }

@@ -1,6 +1,6 @@
 import Component from './Component';
-import AjaxGetter from './AjaxGetter';
+import DataComponent from './DataComponent';
 import Router from './Router';
 import utils from './utils';
 
-export { Component, AjaxGetter, Router, utils };
+export { Component, DataComponent, Router, utils };
