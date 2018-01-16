@@ -3,7 +3,7 @@ import createElement from './helpers/create-element';
 import lookup from './helpers/lookup';
 
 export default class {
-  constructor(api, domrid = 'ajax-component') {
+  constructor(api, domrid = 'data-component') {
     this.api = api;
     this.domrid = `${domrid}-${randomizer(7)}`;
     this.createElement = createElement;
