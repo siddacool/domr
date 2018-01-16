@@ -1,8 +1,6 @@
-import Logger from './Logger';
 import addView from './helpers/add-view';
 import hashLocation from './helpers/hash-location';
 
-const logger = new Logger();
 const filterRoutes = (routes) => {
   const arr = [];
   routes.forEach((route) => {
@@ -25,7 +23,7 @@ const defaults = {
 export default class {
   constructor(routes = defaults.routes, config = defaults.config) {
     this.routes = filterRoutes(routes);
-    this.redirectDefault = config.redirectDefault || false;
+    this.redirectDefault = config.redirectDefault || true;
     this.refreshPage = config.refreshPage || false;
     this.clearLog = config.clearLog || false;
     this.addView = addView;
@@ -103,7 +101,7 @@ export default class {
       if (this.redirectDefault && routeDefault) {
         this.addView(routeDefault);
       } else {
-        logger.error('Page Not Found');
+        console.error('Page Not Found');
       }
     }
 
