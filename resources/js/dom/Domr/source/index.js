@@ -1,7 +1,6 @@
 import Component from './Component';
-import ActiveComponent from './ActiveComponent';
+import DataComponent from './DataComponent';
 import Router from './Router';
-import Logger from './Logger';
 import utils from './utils';
 
-export { Component, ActiveComponent, Router, Logger, utils };
+export { Component, DataComponent, Router, utils };

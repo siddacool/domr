@@ -1,7 +1,4 @@
 import hashLocation from './hash-location';
-import Logger from '../Logger';
-
-const logger = new Logger();
 
 function hashLocationGet(field) {
   const loc = hashLocation();
@@ -10,7 +7,7 @@ function hashLocationGet(field) {
   if (thisField) {
     return thisField;
   } else {
-    logger.error('incorrect get location params');
+    console.error('incorrect get location params');
   }
 }
 

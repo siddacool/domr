@@ -6,10 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Logger = require('./Logger');
-
-var _Logger2 = _interopRequireDefault(_Logger);
-
 var _addView = require('./helpers/add-view');
 
 var _addView2 = _interopRequireDefault(_addView);
@@ -22,7 +18,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var logger = new _Logger2.default();
 var filterRoutes = function filterRoutes(routes) {
   var arr = [];
   routes.forEach(function (route) {
@@ -50,7 +45,7 @@ var _class = function () {
     _classCallCheck(this, _class);
 
     this.routes = filterRoutes(routes);
-    this.redirectDefault = config.redirectDefault || false;
+    this.redirectDefault = config.redirectDefault || true;
     this.refreshPage = config.refreshPage || false;
     this.clearLog = config.clearLog || false;
     this.addView = _addView2.default;
@@ -134,7 +129,7 @@ var _class = function () {
         if (this.redirectDefault && routeDefault) {
           this.addView(routeDefault);
         } else {
-          logger.error('Page Not Found');
+          console.error('Page Not Found');
         }
       }
 

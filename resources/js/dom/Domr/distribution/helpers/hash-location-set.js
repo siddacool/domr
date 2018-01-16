@@ -8,13 +8,7 @@ var _hashLocation = require('./hash-location');
 
 var _hashLocation2 = _interopRequireDefault(_hashLocation);
 
-var _Logger = require('../Logger');
-
-var _Logger2 = _interopRequireDefault(_Logger);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var logger = new _Logger2.default();
 
 function setHash(option) {
   var hash = option;
@@ -107,7 +101,7 @@ function hashLocationSet(field, opt) {
   if (link) {
     redirectTo(link);
   } else {
-    logger.error('incorrect set location params');
+    console.error('incorrect set location params');
   }
 }
 
