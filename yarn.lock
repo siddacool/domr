@@ -1945,8 +1945,8 @@ domhandler@^2.3.0:
     domelementtype "1"
 
 domr-a@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/domr-a/-/domr-a-1.0.0.tgz#c2a237a3e090a0762fefd218abe3a9ba88e6c37a"
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/domr-a/-/domr-a-1.0.1.tgz#940d773f8faf37f690bed54b74a551331c174104"
 
 domr-b@^0.2.4:
   version "0.2.4"
