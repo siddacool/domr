@@ -18,4 +18,4 @@ copy 'env.js.sample' and rename it to 'env.js'
 Repeat `yarn run build` or `npm run build`
 
 #### Step 6:
-`yarn run buildw` or `npm run buildw`
+`yarn run buildw` or `npm run buildw` or `npm start`
