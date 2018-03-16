@@ -6,7 +6,8 @@
   "scripts": {
     "svgmake": "gulp svg-make",
     "build": "webpack --config webpack.config.js && gulp favicon && gulp html-templates",
-    "buildw": "webpack --config webpack.config.js --watch"
+    "buildw": "webpack --config webpack.config.js --watch",
+    "start": "npm run buildw"
   },
   "engines": {
     "node": ">=6"
