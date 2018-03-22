@@ -23,34 +23,42 @@ export default class {
       if (xmlhttp.readyState === 4) {
         if (xmlhttp.status === 200) {
           const responseText = xmlhttp.responseText.trim();
-          const obj = JSON.parse(responseText);
-          const makeElement = (elm) => {
-            return this.createElement(this.dom(elm), this.domrid);
-          };
-          let ajaxContent = '';
+          if (responseText.length) {
+            if (responseText.charAt(0) === '[' || responseText.charAt(0) === '{') {
+              const obj = JSON.parse(responseText);
+              const makeElement = (elm) => {
+                return this.createElement(this.dom(elm), this.domrid);
+              };
+              let ajaxContent = '';
 
-          if (responseText.charAt(0) === '[') {
-            ajaxContent = `${obj.map(elm => `${makeElement(elm)}`).join('')}`;
-          } else if (responseText.charAt(0) === '{') {
-            ajaxContent = makeElement(obj);
-          }
+              if (responseText.charAt(0) === '[') {
+                ajaxContent = `${obj.map(elm => `${makeElement(elm)}`).join('')}`;
+              } else if (responseText.charAt(0) === '{') {
+                ajaxContent = makeElement(obj);
+              }
 
-          if (param === 'replaceContentOf') {
-            parent.innerHTML = ajaxContent;
-          } else if (param === 'addTo') {
-            parent.insertAdjacentHTML('beforeend', ajaxContent);
-          } else if (param === 'addFromStartTo') {
-            parent.insertAdjacentHTML('afterbegin', ajaxContent);
-          } else if (param === 'addBefore') {
-            parent.insertAdjacentHTML('beforebegin', ajaxContent);
-          } else if (param === 'addAfter') {
-            parent.insertAdjacentHTML('afterend', ajaxContent);
+              if (param === 'replaceContentOf') {
+                parent.innerHTML = ajaxContent;
+              } else if (param === 'addTo') {
+                parent.insertAdjacentHTML('beforeend', ajaxContent);
+              } else if (param === 'addFromStartTo') {
+                parent.insertAdjacentHTML('afterbegin', ajaxContent);
+              } else if (param === 'addBefore') {
+                parent.insertAdjacentHTML('beforebegin', ajaxContent);
+              } else if (param === 'addAfter') {
+                parent.insertAdjacentHTML('afterend', ajaxContent);
+              } else {
+                console.log(obj);
+              }
+
+              this.events();
+              this.delayedContent(obj);
+            } else {
+              console.warn('not a suitable API');
+            }
           } else {
-            console.log(obj);
+            console.warn('Empty API');
           }
-
-          this.events();
-          this.delayedContent(obj);
         }
       }
     };
