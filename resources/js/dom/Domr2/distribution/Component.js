@@ -48,7 +48,7 @@ var _class = function () {
   _createClass(_class, [{
     key: 'dom',
     value: function dom() {
-      return this.domContent;
+      return '';
     }
   }, {
     key: 'events',
@@ -65,7 +65,9 @@ var _class = function () {
   }, {
     key: 'addEvent',
     value: function addEvent(eventName, eventAction) {
-      this.addEventOn('[data-domr-id="' + this.domrid + '"]', eventName, eventAction);
+      if (this.target()) {
+        this.addEventOn('[data-domr-id="' + this.domrid + '"]', eventName, eventAction);
+      }
     }
   }, {
     key: 'addEventOn',
@@ -91,7 +93,9 @@ var _class = function () {
       var _this3 = this;
 
       setTimeout(function () {
-        _this3.delay();
+        if (_this3.target()) {
+          _this3.delay();
+        }
       }, 50);
     }
   }, {
@@ -108,19 +112,23 @@ var _class = function () {
     }
   }, {
     key: 'addTo',
-    value: function addTo() {
-      var parent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.parentDefault;
-
-      parent.insertAdjacentHTML('beforeend', this.optimizedDom());
-      this.delayedContent();
+    value: function addTo(parent) {
+      if (parent) {
+        parent.insertAdjacentHTML('beforeend', this.optimizedDom());
+        this.delayedContent();
+      } else {
+        console.warn('parent not found');
+      }
     }
   }, {
     key: 'addFromStartTo',
-    value: function addFromStartTo() {
-      var parent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.parentDefault;
-
-      parent.insertAdjacentHTML('afterbegin', this.optimizedDom());
-      this.delayedContent();
+    value: function addFromStartTo(parent) {
+      if (parent) {
+        parent.insertAdjacentHTML('afterbegin', this.optimizedDom());
+        this.delayedContent();
+      } else {
+        console.warn('parent not found');
+      }
     }
   }, {
     key: 'addBefore',
@@ -156,16 +164,19 @@ var _class = function () {
           console.warn('sibling has no parentElement');
         }
       } else {
-        console.error('sibling not found');
+        console.warn('sibling not found');
       }
     }
   }, {
     key: 'replaceContentOf',
-    value: function replaceContentOf() {
-      var parent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.parentDefault;
-
-      parent.innerHTML = this.optimizedDom();
-      this.delayedContent();
+    value: function replaceContentOf(parent) {
+      if (parent) {
+        var thisParent = parent;
+        thisParent.innerHTML = this.optimizedDom();
+        this.delayedContent();
+      } else {
+        console.warn('parent not found');
+      }
     }
   }]);
 
