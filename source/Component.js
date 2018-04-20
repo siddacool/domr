@@ -1,26 +1,16 @@
 import createElement from './helpers/create-element';
 import lookup from './helpers/lookup';
 import randomizer from './helpers/randomizer';
-
-const defaults = {
-  parent: document.getElementById('wrapper'),
-  dom: `
-    <div>
-      Domr Component
-    </div>
-  `,
-};
+import Event from './Event';
 
 export default class {
   constructor(domrid = 'domr-component') {
-    this.parentDefault = defaults.parent;
-    this.domContent = defaults.dom;
     this.createElement = createElement;
     this.domrid = `${domrid}-${randomizer(7)}`;
     this.target = () => {
       return lookup(this.domrid);
     };
-    this.handlingParent = this.parentDefault || document.querySelector('body');
+    this.handlingParent = document.querySelector('body');
   }
 
   dom() {
@@ -39,9 +29,7 @@ export default class {
   }
 
   addEvent(eventName, eventAction) {
-    if (this.target()) {
-      this.addEventOn(`[data-domr-id="${this.domrid}"]`, eventName, eventAction);
-    }
+    this.addEventOn(`[data-domr-id="${this.domrid}"]`, eventName, eventAction);
   }
 
   addEventOn(childen, eventName, eventAction) {
@@ -59,10 +47,25 @@ export default class {
   delay() {
   }
 
+  debug(err) {
+  }
+
+  newEvent(elm) {
+    const newEvent = new Event(elm);
+
+    return newEvent;
+  }
+
+  afterRender(elm) {
+  }
+
   delayedContent() {
     setTimeout(() => {
       if (this.target()) {
+        this.afterRender(this.target());
         this.delay();
+      } else {
+        this.debug('delayedContent: target not found');
       }
     }, 50);
   }
@@ -82,7 +85,7 @@ export default class {
       parent.insertAdjacentHTML('beforeend', this.optimizedDom());
       this.delayedContent();
     } else {
-      console.warn('parent not found');
+      this.debug('addTo: parent not found');
     }
   }
 
@@ -91,7 +94,7 @@ export default class {
       parent.insertAdjacentHTML('afterbegin', this.optimizedDom());
       this.delayedContent();
     } else {
-      console.warn('parent not found');
+      this.debug('addFromStartTo: parent not found');
     }
   }
 
@@ -100,7 +103,7 @@ export default class {
       sibling.insertAdjacentHTML('beforebegin', this.optimizedDom());
       this.delayedContent();
     } else {
-      console.error('sibling not found');
+      this.debug('addBefore: sibling not found');
     }
   }
 
@@ -109,23 +112,22 @@ export default class {
       sibling.insertAdjacentHTML('afterend', this.optimizedDom());
       this.delayedContent();
     } else {
-      console.error('sibling not found');
+      this.debug('addAfter: sibling not found');
     }
   }
 
   replaceWith(sibling) {
     if (sibling) {
-      const parent = sibling.parentElement;
-
-      if (parent) {
+      if (sibling.parentElement) {
+        const parent = sibling.parentElement;
         sibling.insertAdjacentHTML('afterend', this.optimizedDom());
         parent.removeChild(sibling);
         this.delayedContent();
       } else {
-        console.warn('sibling has no parentElement');
+        this.debug('replaceWith: sibling has no parentElement');
       }
     } else {
-      console.warn('sibling not found');
+      this.debug('replaceWith: sibling not found');
     }
   }
 
@@ -135,7 +137,7 @@ export default class {
       thisParent.innerHTML = this.optimizedDom();
       this.delayedContent();
     } else {
-      console.warn('parent not found');
+      this.debug('replaceContentOf: parent not found');
     }
   }
 }
