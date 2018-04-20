@@ -14,8 +14,10 @@ export default class extends Component {
     `;
   }
 
-  events() {
-    this.addEvent('click', (target, e) => {
+  afterRender(elm) {
+    const thisElm = elm;
+
+    thisElm.addEventListener('click', (e) => {
       e.preventDefault();
       history.back();
     });

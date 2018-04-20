@@ -31,17 +31,21 @@ export default class extends Component {
     `;
   }
 
-  events() {
-    this.addEventOn(`${this.self} .checklist-check`, 'click', (target) => {
+  afterRender(elm) {
+    const thisElm = elm;
+    const check = this.newEvent(thisElm.querySelectorAll('.checklist-check'));
+    const text = this.newEvent(thisElm.querySelectorAll('.checklist-text'));
+    const deleteItem = this.newEvent(thisElm.querySelectorAll('.checklist-delete-item'));
+    check.onEvent('click', (target) => {
       const checklistText = target.parentElement.querySelector('.checklist-text');
 
       checklistText.classList.toggle('checklist-text--strike');
       saveListSnapshot();
     });
 
-    this.addEventOn(`${this.self} .checklist-text`, [
+    text.onEvent([
       [
-        'click', (target,e) => {
+        'click', (target, e) => {
           if (!target.classList.contains('checklist-text--strike')) {
             clearContentEditable();
             target.setAttribute('contenteditable', 'true');
@@ -64,7 +68,7 @@ export default class extends Component {
       ],
     ]);
 
-    this.addEventOn(`${this.self} .checklist-delete-item`, 'click', (target, e) => {
+    deleteItem.onEvent('click', (target, e) => {
       e.preventDefault();
       const parent = target.parentElement;
       const grandParent = parent.parentElement;

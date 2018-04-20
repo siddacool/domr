@@ -1,5 +1,3 @@
-/*import { Component } from 'domr-a';*/
-import { DataComponent } from '../Domr2/source/';
 import TvShowCardImg from './TvShowCardImg';
 
 function Network(network) {
@@ -40,47 +38,19 @@ function Image(img) {
   `;
 }
 
-export default class extends DataComponent {
-  constructor(api) {
-    super(api, 'tv-show-card');
-  }
-
-  dom(element) {
-    console.log(element);
-    return `
-      <a class="tv-show-card" href="#/tvshows/?id=${element.show.id}">
-        <div class="tv-show-card-side tv-show-card-side--a">
-          ${Image(element.show.image)}
+export default function (show) {
+  return `
+    <a class="tv-show-card" href="#/tvshows/?id=${show.show.id}">
+      <div class="tv-show-card-side tv-show-card-side--a">
+        ${Image(show.show.image)}
+      </div>
+      <div class="tv-show-card-side tv-show-card-side--b">
+        <div class="tv-show-card--name">
+          <h3>${show.show.name}</h3>
         </div>
-        <div class="tv-show-card-side tv-show-card-side--b">
-          <div class="tv-show-card--name">
-            <h3>${element.show.name}</h3>
-          </div>
-          ${Network(element.show.network)}
-          ${Genres(element.show.genres)}
-        </div>
-      </a>
-    `;
-  }
-
-  events() {
-    this.addEvent([
-      [
-        'click',
-        (target, e) => {
-          console.log('ff');
-        },
-      ],
-      [
-        'mouseover',
-        (target, e) => {
-          console.log('bla');
-        },
-      ],
-    ]);
-
-    this.addEventOn('.tv-show-card--name', 'mouseover', (target, e) => {
-      console.log(target);
-    });
-  }
+        ${Network(show.show.network)}
+        ${Genres(show.show.genres)}
+      </div>
+    </a>
+  `;
 }

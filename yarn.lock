@@ -1948,9 +1948,9 @@ domr-a@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/domr-a/-/domr-a-1.1.0.tgz#3d7456bd2e8bc2c42c67a8dc278f3a7411bd2481"
 
-domr-b@^0.2.5:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/domr-b/-/domr-b-0.2.5.tgz#ebf1bfc436f79ac0c61f76bd5ee60af9b9c6d7d7"
+domr-b@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/domr-b/-/domr-b-0.2.6.tgz#1933df95cc56a8186909655b60257febebace0a6"
 
 domutils@1.5.1:
   version "1.5.1"

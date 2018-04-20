@@ -1,5 +1,6 @@
 /*import { Component } from 'domr-a';*/
-import { DataComponent } from '../Domr2/source/';
+import { Component } from '../Domr2/source/';
+import goodOlAjax from '../utils/good-ol-ajax-promise';
 import TvShowExtendedInfoClose from './TvShowExtendedInfoClose';
 import TvShowBackgroundImg from './TvShowBackgroundImg';
 import TvShowLatestEpisode from './TvShowLatestEpisode';
@@ -89,16 +90,17 @@ function Cast(casts) {
   `;
 }
 
-export default class extends DataComponent {
-  constructor(api) {
-    super(api);
+export default class extends Component {
+  constructor(showApi) {
+    super();
+    this.show = showApi;
   }
 
-  dom(show) {
+  dom() {
     const Close = new TvShowExtendedInfoClose();
     let image = '';
-    if (show.image) {
-      image = show.image.original;
+    if (this.show.image) {
+      image = this.show.image.original;
     }
     const SideA = new TvShowBackgroundImg(image, 'tv-show-extended-side tv-show-extended-side--a');
     return `
@@ -107,17 +109,17 @@ export default class extends DataComponent {
         <div class="tv-show-extended-side tv-show-extended-side--b">
           ${Close.render()}
           <div class="tv-show-extended--name">
-            <h1>${show.name} ${Status(show.status)}</h1>
-            ${Network(show.network)}
+            <h1>${this.show.name} ${Status(this.show.status)}</h1>
+            ${Network(this.show.network)}
           </div>
           <div class="tv-show-extended--scrollable">
-              ${Genres(show.genres)}
-              ${Summary(show.summary)}
-              ${OfficalLinks(show)}
+              ${Genres(this.show.genres)}
+              ${Summary(this.show.summary)}
+              ${OfficalLinks(this.show)}
               <div class="tv-show-extended--cast">
                 <table>
                   <p><strong>Cast:</strong></p>
-                  ${Cast(show._embedded.cast)}
+                  ${Cast(this.show._embedded.cast)}
                 </table>
               </div>
           </div>
@@ -126,10 +128,16 @@ export default class extends DataComponent {
     `;
   }
 
-  delay(elm) {
-    const target = this.target();
+  afterRender(elm) {
+    const target = elm;
     const genresHolder = target.querySelector('.tv-show-extended--genres-holder');
-    const tvShowLatestEpisode = new TvShowLatestEpisode(elm._links.previousepisode.href);
-    tvShowLatestEpisode.addAfter(genresHolder);
+    const api = this.show._links.previousepisode.href;
+
+    goodOlAjax(api)
+    .then((response) => {
+      const tvShowLatestEpisode = new TvShowLatestEpisode(response);
+
+      tvShowLatestEpisode.addAfter(genresHolder);
+    });
   }
 }
