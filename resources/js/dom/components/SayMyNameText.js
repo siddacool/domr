@@ -45,4 +45,36 @@ export default class extends Component {
       }
     });
   }
+
+  afterRender(elm) {
+    const thisElm = this.newEvent(elm);
+    thisElm.onEvent('click', (target) => {
+      target.setAttribute('contenteditable', true);
+      target.focus();
+    });
+
+    thisElm.onEvent('focusout', (target) => {
+      target.removeAttribute('contenteditable');
+    });
+
+    thisElm.onEvent('input', (target) => {
+      const save = document.getElementById('say-my-name-save');
+      const parent = target.parentElement.parentElement;
+
+      if (!save) {
+        const sayMyNameSave = new SayMyNameSave();
+
+        sayMyNameSave.addTo(parent);
+      }
+    });
+
+    thisElm.onEvent('keydown', (target, e) => {
+      const code = (e.keyCode ? e.keyCode : e.which);
+      const save = document.getElementById('say-my-name-save');
+
+      if (code === 13 && save) {
+        save.click();
+      }
+    });
+  }
 }

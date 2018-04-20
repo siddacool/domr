@@ -1,5 +1,6 @@
 /*import { Component } from 'domr-a';*/
 import { Component } from '../Domr2/source/';
+import goodOlAjax from '../utils/good-ol-ajax-promise';
 import TvShowExtendedCard from './TvShowExtendedCard';
 
 export default class extends Component {
@@ -15,10 +16,16 @@ export default class extends Component {
     `;
   }
 
-  delay() {
-    const target = this.target();
+  afterRender(elm) {
+    const target = elm;
     const api = `https://api.tvmaze.com/shows/${this.showId}?embed=cast`;
-    const tvShowExtendedCard = new TvShowExtendedCard(api);
-    tvShowExtendedCard.replaceContentOf(target);
+
+    goodOlAjax(api)
+    .then((response) => {
+      const tvShowExtendedCard = new TvShowExtendedCard(response);
+
+      target.innerHTML = '';
+      tvShowExtendedCard.addTo(target);
+    });
   }
 }

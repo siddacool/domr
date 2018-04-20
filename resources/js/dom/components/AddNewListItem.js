@@ -14,8 +14,9 @@ export default class extends Component {
     `;
   }
 
-  events() {
-    this.addEvent('keypress', (target, e) => {
+  afterRender(elm) {
+    const thisElm = this.newEvent(elm);
+    thisElm.onEvent('keypress', (target, e) => {
       if (e.keyCode === 13) {
         const checkListLi = CheckListLi(target.value);
         const checkListUl = document.getElementById('checklist-ul');

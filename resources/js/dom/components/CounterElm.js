@@ -23,11 +23,17 @@ export default class extends Component {
     `;
   }
 
-  events() {
-    this.addEventOn(`${this.self} .counter-btn`, 'click', (target, e) => {
+  afterRender(elm) {
+    const thisElm = elm;
+    const counterBtn = this.newEvent(thisElm.querySelectorAll('.counter-btn'));
+    const input = this.newEvent(thisElm.querySelector('input'));
+
+    counterBtn.onEvent('click', (target, e) => {
       e.preventDefault();
       const counter = target.parentElement.querySelector('input');
       const counterValue = Number(counter.value);
+
+      console.log('called');
 
       if (target.classList.contains('counter-btn--inc')) {
         counter.value = counterValue + 1;
@@ -37,7 +43,7 @@ export default class extends Component {
       counter.style.color = changeColor(counter.value);
     });
 
-    this.addEventOn(`${this.self} input`, 'input', (target) => {
+    input.onEvent('input', (target) => {
       const value = target.value.replace(/[^\d.-]/g, '');
       target.style.color = changeColor(value);
       target.value = value;

@@ -1,5 +1,5 @@
 /*import { Component } from 'domr-a';*/
-import { DataComponent } from '../Domr2/source/';
+import { Component } from '../Domr2/source/';
 
 function Time(timestamp) {
   const d = new Date(timestamp);
@@ -9,19 +9,19 @@ function Time(timestamp) {
 }
 
 
-export default class extends DataComponent {
-  constructor(api) {
-    super(api);
+export default class extends Component {
+  constructor(showApi) {
+    super();
+    this.show = showApi;
   }
 
-  dom(element) {
-    console.log(element);
+  dom() {
     return `
       <div class="tv-show-latest-episode-holder">
          <div>
-          <span class="tv-show-ep-season wee-badge wee-badge--primary"> S${element.season} E${element.number}</span>
-          ${Time(element.airstamp)}
-          <span class="">${element.name}</span>
+          <span class="tv-show-ep-season wee-badge wee-badge--primary"> S${this.show.season} E${this.show.number}</span>
+          ${Time(this.show.airstamp)}
+          <span class="">${this.show.name}</span>
         </div>
       </div>
     `;

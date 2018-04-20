@@ -39,9 +39,7 @@ export default class {
   }
 
   addEvent(eventName, eventAction) {
-    if (this.target()) {
-      this.addEventOn(`[data-domr-id="${this.domrid}"]`, eventName, eventAction);
-    }
+    this.addEventOn(`[data-domr-id="${this.domrid}"]`, eventName, eventAction);
   }
 
   addEventOn(childen, eventName, eventAction) {

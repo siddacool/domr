@@ -1,6 +1,6 @@
 import Component from './Component';
-import DataComponent from './DataComponent';
 import Router from './Router';
+import Event from './Event';
 import utils from './utils';
 
-export { Component, DataComponent, Router, utils };
+export { Component, Router, Event, utils };

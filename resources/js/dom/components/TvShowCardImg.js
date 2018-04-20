@@ -17,17 +17,20 @@ export default class extends Component {
     `;
   }
 
-  delay() {
-    const target = this.target();
+  debug(err) {
+    console.log(`tv-show-card--img ${err}`);
+  }
+
+  afterRender(elm) {
+    const target = elm;
+    const thisSelf = this.newEvent(elm);
     const dataSrc = target.getAttribute('data-src');
     const img = target.querySelector('img');
 
     img.setAttribute('src', dataSrc);
-  }
 
-  events() {
-    this.addEvent('mouseover', () => {
-      console.log('yipee');
+    thisSelf.onEvent('mouseover', (self, e) => {
+      console.log(self);
     });
   }
 }
