@@ -2,34 +2,35 @@ import createElement from './helpers/create-element';
 import lookup from './helpers/lookup';
 import randomizer from './helpers/randomizer';
 
-const defaults = {
-  parent: document.getElementById('wrapper'),
-  dom: `
-    <div>
-      Domr Component
-    </div>
-  `,
-};
-
 export default class {
   constructor(domrid = 'domr-component') {
-    this.parentDefault = defaults.parent;
-    this.domContent = defaults.dom;
     this.createElement = createElement;
     this.domrid = `${domrid}-${randomizer(7)}`;
     this.target = () => {
       return lookup(this.domrid);
     };
-    this.handlingParent = this.parentDefault || document.querySelector('body');
+    this.GetThisComponent = this.target;
+    this.GetDomrID = this.domrid;
+    this.handlingParent = document.querySelector('body');
   }
 
-  dom() {
+  // debug
+  errorHandler(field, error) {
+    const err = `_ ${field}: ${error}`;
+    this.ErrorLog(err);
+  }
+  // OnError
+  ErrorLog(err) {
+
+  }
+
+  // Markup
+  Markup() {
+    // HTML DOM/Markup goes here
     return '';
   }
 
-  events() {
-  }
-
+  // Events
   deligateEvents(childen, eventName, eventAction) {
     this.handlingParent.addEventListener(eventName, (e) => {
       if (e.target && e.target.matches(childen)) {
@@ -38,31 +39,55 @@ export default class {
     });
   }
 
-  addEvent(eventName, eventAction) {
-    if (this.target()) {
-      this.addEventOn(`[data-domr-id="${this.domrid}"]`, eventName, eventAction);
-    }
+  On(eventName, eventAction) {
+    this.deligateEvents(`[data-domr-id="${this.domrid}"]`, eventName, eventAction);
   }
 
-  addEventOn(childen, eventName, eventAction) {
-    if (eventName instanceof Array && !eventAction) {
-      const eventList = eventName;
-
-      eventList.forEach((eventConfig) => {
-        this.deligateEvents(childen, eventConfig[0], eventConfig[1]);
-      });
-    } else {
-      this.deligateEvents(childen, eventName, eventAction);
-    }
+  Click(eventAction) {
+    this.On('click', eventAction);
   }
 
-  delay() {
+  Mouseover(eventAction) {
+    this.On('mouseover', eventAction);
+  }
+
+  Mouseout(eventAction) {
+    this.On('mouseout', eventAction);
+  }
+
+  Input(eventAction) {
+    this.On('input', eventAction);
+  }
+
+  Blur(eventAction) {
+    this.On('blur', eventAction);
+  }
+
+  Keydown(eventAction) {
+    this.On('keydown', eventAction);
+  }
+
+  Keypress(eventAction) {
+    this.On('keypress', eventAction);
+  }
+
+  Keyup(eventAction) {
+    this.On('keyup', eventAction);
+  }
+
+  Events() {
+    // This one will house the events
+  }
+
+  // AfterRender
+  AfterRenderDone() {
+
   }
 
   delayedContent() {
     setTimeout(() => {
       if (this.target()) {
-        this.delay();
+        this.AfterRenderDone();
       }
     }, 50);
   }
@@ -72,48 +97,50 @@ export default class {
     return this.createElement(this.dom(), this.domrid);
   }
 
-  render() {
+  // Add Events
+  // Render
+  Render() {
     this.delayedContent();
     return this.optimizedDom();
   }
 
-  addTo(parent) {
+  AddTo(parent) {
     if (parent) {
       parent.insertAdjacentHTML('beforeend', this.optimizedDom());
       this.delayedContent();
     } else {
-      console.warn('parent not found');
+      this.errorHandler('AddTo', 'parent not found');
     }
   }
 
-  addFromStartTo(parent) {
+  AddFromStartTo(parent) {
     if (parent) {
       parent.insertAdjacentHTML('afterbegin', this.optimizedDom());
       this.delayedContent();
     } else {
-      console.warn('parent not found');
+      this.errorHandler('AddFromStartTo', 'parent not found');
     }
   }
 
-  addBefore(sibling) {
+  Before(sibling) {
     if (sibling) {
       sibling.insertAdjacentHTML('beforebegin', this.optimizedDom());
       this.delayedContent();
     } else {
-      console.error('sibling not found');
+      this.errorHandler('Before', 'sibling not found');
     }
   }
 
-  addAfter(sibling) {
+  After(sibling) {
     if (sibling) {
       sibling.insertAdjacentHTML('afterend', this.optimizedDom());
       this.delayedContent();
     } else {
-      console.error('sibling not found');
+      this.errorHandler('After', 'sibling not found');
     }
   }
 
-  replaceWith(sibling) {
+  Replace(sibling) {
     if (sibling) {
       const parent = sibling.parentElement;
 
@@ -122,20 +149,10 @@ export default class {
         parent.removeChild(sibling);
         this.delayedContent();
       } else {
-        console.warn('sibling has no parentElement');
+        this.errorHandler('Replace', 'sibling has no parentElement');
       }
     } else {
-      console.warn('sibling not found');
-    }
-  }
-
-  replaceContentOf(parent) {
-    if (parent) {
-      const thisParent = parent;
-      thisParent.innerHTML = this.optimizedDom();
-      this.delayedContent();
-    } else {
-      console.warn('parent not found');
+      this.errorHandler('Replace', 'sibling not found');
     }
   }
 }

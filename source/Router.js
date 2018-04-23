@@ -14,40 +14,23 @@ const filterRoutes = (routes) => {
 const defaults = {
   routes: [],
   config: {
-    redirectDefault: false,
     refreshPage: false,
-    clearLog: false,
   },
 };
 
 export default class {
   constructor(routes = defaults.routes, config = defaults.config) {
     this.routes = filterRoutes(routes);
-    this.redirectDefault = config.redirectDefault || true;
     this.refreshPage = config.refreshPage || false;
-    this.clearLog = config.clearLog || false;
     this.addView = addView;
   }
 
-  showRoutes() {
+  ShowRoutes() {
     console.log(this.routes);
   }
 
   reloadOnHashChange() {
     addEventListener('hashchange', (e) => {
-      if (this.clearLog) {
-        console.API;
-        if (typeof console._commandLineAPI !== 'undefined') {
-            console.API = console._commandLineAPI;
-        } else if (typeof console._inspectorCommandLineAPI !== 'undefined') {
-            console.API = console._inspectorCommandLineAPI;
-        } else if (typeof console.clear !== 'undefined') {
-            console.API = console;
-        }
-
-        console.API.clear();
-      }
-
       if (this.refreshPage) {
         location.reload();
       } else {
@@ -57,7 +40,7 @@ export default class {
     });
   }
 
-  start() {
+  Start() {
     const loc = hashLocation();
     const locPath = loc.path;
     let candidate;
@@ -98,7 +81,7 @@ export default class {
       this.addView(candidate);
     } else {
       const routeDefault = this.routes.find(o => o.isDefault === true);
-      if (this.redirectDefault && routeDefault) {
+      if (routeDefault) {
         this.addView(routeDefault);
       } else {
         console.error('Page Not Found');
